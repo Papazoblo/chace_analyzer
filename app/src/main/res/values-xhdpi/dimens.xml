@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="verySmallPadding">4dp</dimen>
+    <dimen name="smallPadding">8dp</dimen>
+
+    <dimen name="headHeight">38dp</dimen>
+    <dimen name="logoWidth">114dp</dimen>
+    <dimen name="headTextSize">14sp</dimen>
+    <dimen name="headSecondTextSize">12sp</dimen>
+    <dimen name="headThirdTextSize">10sp</dimen>
+    <dimen name="selectCardBlockHeight">44dp</dimen>
+    <dimen name="checkSize">16dp</dimen>
+    <dimen name="spinnerHeight">24dp</dimen>
+    <dimen name="triangleSize">12dp</dimen>
+
+    <dimen name="bigAppNameSize">56sp</dimen>
+    <dimen name="appNameTextSize">40sp</dimen>
+    <dimen name="underAppNameTextSize">22sp</dimen>
+    <dimen name="textInBox">14sp</dimen>
+    <dimen name="paddingInBox">8dp</dimen>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#4286f5</color>
+    <color name="opacityBlack">#EB000000</color>
+
+    <color name="orange">#FF6433</color>
+    <color name="darkBlue">#104AAA</color>
+    <color name="blue">#4286f5</color>
+    <color name="yellow">#fcff02</color>
+    <color name="darkYellow">#FFC800</color>
+    <color name="gray">#717171</color>
+    <color name="grayBlue">#445a65</color>
+    <color name="lightGrayBlue">#6f838c</color>
+    <color name="textLightGrayBlue">#c0bec1</color>
+    <color name="lightGreen">#deefe5</color>
+    <color name="darkGreen">#56e122</color>
+    <color name="green">#268C00</color>
+    <color name="opacityGreen">#E80D1500</color>
+    <color name="mediumOpacityGreen">#213500</color>
+
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+
+    <color name="ld1">#f00</color>
+    <color name="ld2">#FF6F6F</color>
+    <color name="td1">#00f</color>
+    <color name="td2">#5B5BFF</color>
+    <color name="tld1">#007A00</color>
+    <color name="tld2">#57FF57</color>
+    <color name="bld1">#FF6600</color>
+    <color name="bld2">#FFE500</color>
+    <color name="intersection">#00FFEA</color>
+</resources>

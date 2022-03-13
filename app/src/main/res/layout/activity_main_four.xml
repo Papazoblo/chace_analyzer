@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.main_activity.view.MainActivity">
+
+    <TextView
+        android:id="@+id/textAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/opacityGreen"
+        android:textSize="@dimen/bigAppNameSize"
+        android:gravity="center"
+        android:paddingLeft="@dimen/smallPadding"
+        android:paddingRight="@dimen/smallPadding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/textSelectCards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_by_type_without_space"
+        android:textSize="@dimen/underAppNameTextSize"
+        android:gravity="center"
+        android:textColor="@color/green"
+        app:layout_constraintTop_toTopOf="parent"/>
+    
+    <LinearLayout
+        android:id="@+id/blockSelectCard"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/verySmallPadding"
+        android:paddingLeft="@dimen/verySmallPadding"
+        android:paddingRight="@dimen/verySmallPadding"
+        android:layout_marginTop="@dimen/verySmallPadding"
+        app:layout_constraintTop_toBottomOf="@id/textSelectCards">
+
+        <TextView
+            android:id="@+id/btnReset"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/reset"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headSecondTextSize"
+            android:gravity="center"
+            android:background="@drawable/blue_radius_border"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/smallPadding"/>
+
+        <TextView
+            android:id="@+id/btnCountGames"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/count_game"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headThirdTextSize"
+            android:gravity="center"
+            android:background="@drawable/blue_radius_border"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/verySmallPadding"
+            android:paddingRight="@dimen/verySmallPadding"
+            android:layout_marginRight="@dimen/verySmallPadding"/>
+
+        <TextView
+            android:id="@+id/btnByDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/by_date"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headSecondTextSize"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:background="@drawable/blue_radius_border"
+            android:paddingLeft="@dimen/verySmallPadding"
+            android:paddingRight="@dimen/verySmallPadding"/>
+
+        <TextView
+            android:id="@+id/btnSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/launch"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headSecondTextSize"
+            android:gravity="center"
+            android:background="@drawable/blue_radius_border"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/smallPadding"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mainBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/blockSelectCard"
+        android:background="@color/grayBlue">
+
+        <LinearLayout
+            android:id="@+id/blockCountGames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingBottom="@dimen/verySmallPadding">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_number"
+                android:textSize="@dimen/headTextSize"
+                android:textColor="@color/white"
+                android:paddingTop="@dimen/smallPadding"
+                android:paddingBottom="@dimen/smallPadding"
+                android:gravity="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/verySmallPadding"
+                android:paddingRight="@dimen/verySmallPadding">
+
+                <EditText
+                    android:id="@+id/editCount1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/headTextSize"
+                    android:textColor="@color/yellow"
+                    android:background="@drawable/bottom_left_right_border"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/verySmallPadding"
+                    android:layout_marginLeft="@dimen/verySmallPadding"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:maxLength="7"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/blockByDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/btnResetDateFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reset"
+                        android:textSize="@dimen/headThirdTextSize"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal|bottom"
+                        android:padding="@dimen/verySmallPadding"
+                        android:background="@drawable/blue_radius_border"/>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_date"
+                    android:textSize="@dimen/headTextSize"
+                    android:textColor="@color/white"
+                    android:paddingTop="@dimen/smallPadding"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:gravity="center"/>
+
+                <FrameLayout
+                    android:id="@+id/btnResetDateTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reset"
+                        android:textSize="@dimen/headThirdTextSize"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal|bottom"
+                        android:padding="@dimen/verySmallPadding"
+                        android:background="@drawable/blue_radius_border"/>
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/verySmallPadding"
+                android:paddingRight="@dimen/verySmallPadding"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/btnFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:paddingTop="@dimen/smallPadding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/from"
+                        android:textSize="@dimen/headThirdTextSize"
+                        android:textColor="@color/textLightGrayBlue"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="@dimen/verySmallPadding"/>
+
+                    <TextView
+                        android:id="@+id/textDateFrom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/dateFormat"
+                        android:textColorHint="@color/textLightGrayBlue"
+                        android:textSize="@dimen/headSecondTextSize"
+                        android:textColor="@color/yellow"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/bottom_left_right_border"
+                        android:paddingLeft="@dimen/verySmallPadding"
+                        android:paddingRight="@dimen/verySmallPadding"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/select_date"
+                    android:textSize="@dimen/headTextSize"
+                    android:visibility="invisible"/>
+
+                <LinearLayout
+                    android:id="@+id/btnTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:paddingBottom="@dimen/smallPadding"
+                    android:paddingTop="@dimen/smallPadding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/to"
+                        android:textSize="@dimen/headThirdTextSize"
+                        android:textColor="@color/textLightGrayBlue"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="@dimen/verySmallPadding"/>
+
+                    <TextView
+                        android:id="@+id/textDateTo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/dateFormat"
+                        android:textColorHint="@color/textLightGrayBlue"
+                        android:textSize="@dimen/headSecondTextSize"
+                        android:textColor="@color/yellow"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/bottom_left_right_border"
+                        android:paddingLeft="@dimen/verySmallPadding"
+                        android:paddingRight="@dimen/verySmallPadding"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/blockArrow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/verySmallPadding"
+        app:layout_constraintTop_toBottomOf="@id/mainBlock">
+
+        <ImageView
+            android:id="@+id/btnTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/top_white"
+            android:layout_weight="4"
+            android:layout_marginLeft="@dimen/verySmallPadding"
+            android:padding="@dimen/verySmallPadding"
+            android:background="@drawable/blue_radius_border"/>
+
+        <TextView
+            android:id="@+id/btnAddRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/add_row"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headTextSize"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:background="@drawable/blue_radius_border"
+            android:layout_marginLeft="@dimen/verySmallPadding"
+            android:layout_marginRight="@dimen/verySmallPadding"/>
+
+        <ImageView
+            android:id="@+id/btnBottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bottom_white"
+            android:layout_weight="4"
+            android:layout_marginRight="@dimen/verySmallPadding"
+            android:padding="@dimen/verySmallPadding"
+            android:background="@drawable/blue_radius_border"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/blockArrow"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerResult"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/recyclerRow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/smallPadding"/>
+
+    <TextView
+        android:id="@+id/textNotMatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/selectCardBlockHeight"
+        android:text="@string/not_match"
+        android:textColor="@color/green"
+        android:textSize="@dimen/underAppNameTextSize"
+        app:layout_constraintTop_toBottomOf="@id/recyclerRow"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/blockWait"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/opacityBlack"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <ProgressBar
+                android:layout_width="@dimen/selectCardBlockHeight"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="@dimen/smallPadding"
+                android:text="@string/pls_wait"
+                android:textColor="@color/green"
+                android:textSize="@dimen/underAppNameTextSize"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/blockAskExit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/centerBlockExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="@dimen/smallPadding"
+            android:paddingLeft="@dimen/smallPadding"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/textAskExit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/exit_ask"
+                android:textColor="@color/green"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/smallPadding"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/verySmallPadding">
+
+                <TextView
+                    android:id="@+id/btnYes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:layout_marginRight="@dimen/verySmallPadding"
+                    android:layout_marginTop="@dimen/verySmallPadding"
+                    android:text="@string/download"
+                    android:textSize="@dimen/textInBox"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingInBox"
+                    android:breakStrategy="high_quality"/>
+
+                <TextView
+                    android:id="@+id/btnNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:layout_marginLeft="@dimen/verySmallPadding"
+                    android:layout_marginTop="@dimen/verySmallPadding"
+                    android:text="@string/storage"
+                    android:textSize="@dimen/textInBox"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingInBox"
+                    android:breakStrategy="high_quality"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

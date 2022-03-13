@@ -1,0 +1,100 @@
+<resources>
+    <array name="months">
+        <item>январь</item>
+        <item>февраль</item>
+        <item>март</item>
+        <item>апрель</item>
+        <item>май</item>
+        <item>июнь</item>
+        <item>июль</item>
+        <item>август</item>
+        <item>сентябрь</item>
+        <item>октябрь</item>
+        <item>ноябрь</item>
+        <item>декабрь</item>
+    </array>
+    <array name="cards">
+        <item>-</item>
+        <item>@string/seven</item>
+        <item>@string/eight</item>
+        <item>@string/nine</item>
+        <item>@string/ten</item>
+        <item>J</item>
+        <item>Q</item>
+        <item>K</item>
+        <item>A</item>
+    </array>
+    <string name="welcome_app_name">Welcome\nChance Analyzer</string>
+    <string name="app_name">Chance Analyzer</string>
+    <string name="add_row">Добавить строку</string>
+    <string name="enter_csv_path">Необходимо указать путь к CSV файлу</string>
+    <string name="incorrect_link">Укажите корректную ссылку</string>
+    <string name="short_app_name">Analyzer</string>
+    <string name="select_card">Выберите карты</string>
+    <string name="reset">Очистить</string>
+    <string name="launch">Поиск</string>
+    <string name="count_game">Количество розыгрышей</string>
+    <string name="enter_number">Введите число</string>
+    <string name="search_type">Тип поиска</string>
+    <string name="select_search_type">Выберите тип поиска</string>
+    <string name="one">Одиночный</string>
+    <string name="two">Парный</string>
+    <string name="three">Тройной</string>
+    <string name="four">Четверной</string>
+    <string name="by_date">По дате</string>
+    <string name="select_date">Выберите даты</string>
+    <string name="day">День</string>
+    <string name="month">Месяц</string>
+    <string name="year">Год</string>
+    <string name="all_year">Все года</string>
+    <string name="from">от</string>
+    <string name="to">до</string>
+    <string name="setting">Настройка</string>
+    <string name="dateFormat">дд.мм.гггг</string>
+    <string name="csv_link">Ссылка на файл CSV</string>
+    <string name="update">Изменить</string>
+    <string name="enter_all_fields">Необходимо заполнить все поля</string>
+
+    <string name="close_other_option">Отмените другой вариант поиска</string>
+
+    <string name="csv_folder">Папка хранения CSV файлов</string>
+    <string name="pdf_folder">Папка хранения PDF файлов</string>
+
+    <string name="select_algorithm">Выберите алгоритм поиска</string>
+
+    <string name="exit_ask">Вы действительно хотите выйти?</string>
+    <string name="download_or_storage">Скачать файл CSV</string>
+    <string name="download">Да</string>
+    <string name="storage">Нет</string>
+    <string name="csv_not_found">CSV файл не найден</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
+    <string name="clear">Очистить</string>
+    <string name="delete">Удалить</string>
+    <string name="download_file">Скачиваю файл CSV</string>
+    <string name="pls_wait">Пожалуйста, подождите…</string>
+    <string name="not_match">Нет совпадений</string>
+
+    <string name="exact_sequence">Точный порядок</string>
+    <string name="error_select_card_one">Необхдимо выбрать четыре карты</string>
+    <string name="error_select_card">Необхдимо выбрать минимум первые две карты</string>
+    <string name="error_card_order">Карты необходимо указать по порядку</string>
+    <string name="error_max_limit_rows">Возможно добавить максимум 7 строк</string>
+    <string name="error_min_limit_rows">Необходимо добавить минимум две строки</string>
+    <string name="error_select_card_position">Необходимо выбрать карты в одинаковых позициях во всех строках</string>
+    <string name="error_row_is_empty">В каждой строке необходимо выбрать минимум одну карту</string>
+    <string name="error_select_year">Необходимо выбрать год (один или несколько)</string>
+    <string name="error_select_date">Необходимо указать дату</string>
+
+    <string name="download_complete">Загрузка завершена</string>
+    <string name="search_by_date_and_direction">Поиск по \nнаправлениям</string>
+    <string name="search_dropped_after_the_given">Поиск карт \nвыпавших \nпосле \nзаданных</string>
+    <string name="search_dropped_after_the_given_without_enter">Поиск карт выпавших \nпосле заданных</string>
+    <string name="search_coincidences_by_year">Поиск \nсовпадений по годам</string>
+    <string name="search_by_type">Поиск по\nтипу</string>
+    <string name="search_by_type_without_space">Поиск по типу</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="ten">10</string>
+</resources>

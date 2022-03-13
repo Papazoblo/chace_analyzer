@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/blockSelectCard"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/selectCardBlockHeight"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/verySmallPadding"
+    android:paddingRight="@dimen/verySmallPadding"
+    android:paddingBottom="@dimen/verySmallPadding"
+    app:layout_constraintTop_toBottomOf="@id/textSelectCards"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8">
+
+        <TextView
+            android:id="@+id/btnClear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headThirdTextSize"
+            android:background="@drawable/blue_radius_border"
+            android:gravity="center"
+            android:layout_gravity="bottom"
+            android:paddingTop="@dimen/smallPadding"
+            android:paddingBottom="@dimen/smallPadding"
+            android:layout_marginLeft="@dimen/verySmallPadding"
+            android:layout_marginRight="@dimen/verySmallPadding"/>
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:paddingRight="@dimen/verySmallPadding">
+
+        <Spinner
+            android:id="@+id/spinnerOne"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bottom_border"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/triangleOne"
+            android:layout_width="@dimen/triangleSize"
+            android:layout_height="@dimen/triangleSize"
+            android:src="@drawable/triangle"
+            app:layout_constraintRight_toRightOf="@id/spinnerOne"
+            app:layout_constraintBottom_toBottomOf="@id/spinnerOne"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:paddingRight="@dimen/verySmallPadding">
+
+        <Spinner
+            android:id="@+id/spinnerTwo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bottom_border"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/triangleTwo"
+            android:layout_width="@dimen/triangleSize"
+            android:layout_height="@dimen/triangleSize"
+            android:src="@drawable/triangle"
+            app:layout_constraintRight_toRightOf="@id/spinnerTwo"
+            app:layout_constraintBottom_toBottomOf="@id/spinnerTwo"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:paddingRight="@dimen/verySmallPadding">
+
+        <Spinner
+            android:id="@+id/spinnerThree"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bottom_border"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/triangleThree"
+            android:layout_width="@dimen/triangleSize"
+            android:layout_height="@dimen/triangleSize"
+            android:src="@drawable/triangle"
+            app:layout_constraintRight_toRightOf="@id/spinnerThree"
+            app:layout_constraintBottom_toBottomOf="@id/spinnerThree"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9">
+
+        <Spinner
+            android:id="@+id/spinnerFour"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bottom_border"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/triangleFour"
+            android:layout_width="@dimen/triangleSize"
+            android:layout_height="@dimen/triangleSize"
+            android:src="@drawable/triangle"
+            app:layout_constraintRight_toRightOf="@id/spinnerFour"
+            app:layout_constraintBottom_toBottomOf="@id/spinnerFour"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8">
+
+        <TextView
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headThirdTextSize"
+            android:gravity="center"
+            android:background="@drawable/blue_radius_border"
+            android:layout_gravity="bottom"
+            android:paddingTop="@dimen/smallPadding"
+            android:paddingBottom="@dimen/smallPadding"
+            android:layout_marginLeft="@dimen/verySmallPadding"
+            android:layout_marginRight="@dimen/verySmallPadding"/>
+    </FrameLayout>
+</LinearLayout>

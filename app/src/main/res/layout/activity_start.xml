@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.StartActivity"
+    android:padding="@dimen/smallPadding">
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/green"
+        android:textSize="@dimen/appNameTextSize"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/smallPadding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textSelectAlgorithm"/>
+
+    <TextView
+        android:id="@+id/textSelectAlgorithm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_algorithm"
+        android:textColor="@color/green"
+        android:textSize="@dimen/underAppNameTextSize"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/blockButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="@dimen/smallPadding"/>
+
+    <LinearLayout
+        android:id="@+id/blockButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textSelectAlgorithm"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/smallPadding"
+        app:layout_constraintLeft_toLeftOf="@id/textSelectAlgorithm"
+        app:layout_constraintRight_toRightOf="@id/textSelectAlgorithm"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/blockBtnTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/btnAlgorithmOne"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/blue_radius_top_left_border"
+                android:layout_marginRight="@dimen/verySmallPadding"
+                android:layout_marginBottom="@dimen/verySmallPadding"
+                android:text="@string/search_by_date_and_direction"
+                android:textSize="@dimen/textInBox"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/paddingInBox"
+                android:breakStrategy="high_quality"/>
+
+            <TextView
+                android:id="@+id/btnAlgorithmTwo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/blue_radius_top_right_border"
+                android:layout_marginLeft="@dimen/verySmallPadding"
+                android:layout_marginBottom="@dimen/verySmallPadding"
+                android:text="@string/search_dropped_after_the_given"
+                android:textSize="@dimen/textInBox"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/paddingInBox"
+                android:breakStrategy="high_quality"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/blockBtnBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/verySmallPadding">
+
+            <TextView
+                android:id="@+id/btnAlgorithmThree"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/darkBlue"
+                android:layout_marginRight="@dimen/verySmallPadding"
+                android:layout_marginTop="@dimen/verySmallPadding"
+                android:text="@string/search_coincidences_by_year"
+                android:textSize="@dimen/textInBox"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/paddingInBox"
+                android:breakStrategy="high_quality"/>
+
+            <TextView
+                android:id="@+id/btnAlgorithmFour"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/darkBlue"
+                android:layout_marginLeft="@dimen/verySmallPadding"
+                android:layout_marginTop="@dimen/verySmallPadding"
+                android:text="@string/search_by_type"
+                android:textSize="@dimen/textInBox"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/paddingInBox"
+                android:breakStrategy="high_quality"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting"
+            android:textColor="@color/white"
+            android:textSize="@dimen/underAppNameTextSize"
+            android:background="@drawable/green_radius_bottom_border"
+            android:gravity="center"
+            android:padding="@dimen/verySmallPadding"
+            android:layout_marginTop="@dimen/verySmallPadding"
+            app:layout_constraintTop_toBottomOf="@id/blockButton" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/blockAsk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_app_name"
+            android:textColor="@color/green"
+            android:textSize="@dimen/appNameTextSize"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/smallPadding"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/centerBlock"/>
+
+        <LinearLayout
+            android:id="@+id/centerBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="@dimen/smallPadding"
+            android:paddingLeft="@dimen/smallPadding"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/textAsk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/download_or_storage"
+                android:textColor="@color/green"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/smallPadding"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/verySmallPadding">
+
+                <TextView
+                    android:id="@+id/btnDowndload"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:layout_marginRight="@dimen/verySmallPadding"
+                    android:layout_marginTop="@dimen/verySmallPadding"
+                    android:text="@string/download"
+                    android:textSize="@dimen/textInBox"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingInBox"
+                    android:breakStrategy="high_quality"/>
+
+                <TextView
+                    android:id="@+id/btnStorage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:layout_marginLeft="@dimen/verySmallPadding"
+                    android:layout_marginTop="@dimen/verySmallPadding"
+                    android:text="@string/storage"
+                    android:textSize="@dimen/textInBox"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingInBox"
+                    android:breakStrategy="high_quality"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/blockAskExit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/centerBlockExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="@dimen/smallPadding"
+            android:paddingLeft="@dimen/smallPadding"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/textAskExit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/exit_ask"
+                android:textColor="@color/green"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/smallPadding"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/verySmallPadding">
+
+                <TextView
+                    android:id="@+id/btnYes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:layout_marginRight="@dimen/verySmallPadding"
+                    android:layout_marginTop="@dimen/verySmallPadding"
+                    android:text="@string/download"
+                    android:textSize="@dimen/textInBox"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingInBox"
+                    android:breakStrategy="high_quality"/>
+
+                <TextView
+                    android:id="@+id/btnNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:layout_marginLeft="@dimen/verySmallPadding"
+                    android:layout_marginTop="@dimen/verySmallPadding"
+                    android:text="@string/storage"
+                    android:textSize="@dimen/textInBox"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:padding="@dimen/paddingInBox"
+                    android:breakStrategy="high_quality"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/blockProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+
+            <ProgressBar
+                android:layout_width="@dimen/selectCardBlockHeight"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/download_file"
+                android:textColor="@color/green"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:layout_gravity="bottom|center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pls_wait"
+                android:textColor="@color/green"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="@dimen/headHeight"/>
+        </LinearLayout>
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
