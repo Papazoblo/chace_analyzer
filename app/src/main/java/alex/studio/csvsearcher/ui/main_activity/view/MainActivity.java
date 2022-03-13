@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if (changeVisible(mainBlock)) {
             btn.setTextColor(colorYellow);
-            btn.setBackground(getResources().getDrawable(R.drawable.blue_radius_border));
+            btn.setBackground(getResources().getDrawable(R.drawable.blue_dark_radius_border));
         } else {
             boolean isEmpty;
 
@@ -354,7 +354,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
 
             btn.setTextColor(colorWhite);
-            btn.setBackground(isEmpty ? getResources().getDrawable(R.drawable.blue_radius_border) :
+            btn.setBackground(isEmpty ? getResources().getDrawable(R.drawable.blue_dark_radius_border) :
                     getResources().getDrawable(R.drawable.blue_radius_active_border));
         }
     }

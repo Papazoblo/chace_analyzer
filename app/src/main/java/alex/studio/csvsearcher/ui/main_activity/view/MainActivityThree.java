@@ -194,7 +194,7 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
         if(!stateAllYear) {
             stateAllYear = true;
             yearAdapter.clearAll();
-            btnAllYear.setBackground(getResources().getDrawable(R.drawable.blue_radius_border));
+            btnAllYear.setBackground(getResources().getDrawable(R.drawable.blue_dark_radius_border));
         } else {
             stateAllYear = false;
             yearAdapter.selectAll();

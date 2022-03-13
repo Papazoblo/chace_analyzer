@@ -172,14 +172,14 @@
                 android:textColor="@color/green"
                 android:textSize="@dimen/underAppNameTextSize"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/smallPadding"/>
+                android:layout_marginBottom="@dimen/smallPadding"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="1"
-                android:layout_marginBottom="@dimen/verySmallPadding">
+                android:layout_marginTop="@dimen/smallPadding">
 
                 <TextView
                     android:id="@+id/btnDowndload"
@@ -239,14 +239,14 @@
                 android:textColor="@color/green"
                 android:textSize="@dimen/underAppNameTextSize"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/smallPadding"/>
+                android:layout_marginBottom="@dimen/smallPadding"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="1"
-                android:layout_marginBottom="@dimen/verySmallPadding">
+                android:layout_marginTop="@dimen/smallPadding">
 
                 <TextView
                     android:id="@+id/btnYes"

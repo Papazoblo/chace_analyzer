@@ -118,7 +118,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/headThirdTextSize"
                     android:gravity="center"
-                    android:background="@drawable/blue_radius_border"
+                    android:background="@drawable/blue_dark_radius_border"
                     android:layout_weight="10"
                     android:layout_marginLeft="@dimen/verySmallPadding"/>
 
@@ -183,7 +183,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/headTextSize"
         android:gravity="center"
-        android:background="@drawable/blue_radius_border"
+        android:background="@drawable/blue_dark_radius_border"
         android:padding="@dimen/smallPadding"
         app:layout_constraintTop_toBottomOf="@id/mainBlock"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -200,7 +200,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/headTextSize"
         android:gravity="center"
-        android:background="@drawable/blue_radius_active_border"
+        android:background="@drawable/blue_dark_radius_border"
         android:padding="@dimen/smallPadding"
         app:layout_constraintTop_toTopOf="@id/btnCancel"
         app:layout_constraintRight_toRightOf="parent"

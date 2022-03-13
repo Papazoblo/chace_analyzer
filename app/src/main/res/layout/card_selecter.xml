@@ -48,7 +48,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/headSecondTextSize"
             android:gravity="center"
-            android:background="@drawable/blue_radius_border"
+            android:background="@drawable/blue_dark_radius_border"
             android:layout_weight="8"
             android:layout_marginRight="@dimen/verySmallPadding"/>
 
@@ -151,7 +151,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/headSecondTextSize"
             android:gravity="center"
-            android:background="@drawable/blue_radius_border"
+            android:background="@drawable/blue_dark_radius_border"
             android:layout_weight="8"
             android:layout_marginLeft="@dimen/verySmallPadding"/>
     </LinearLayout>
@@ -179,7 +179,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/headThirdTextSize"
                 android:gravity="center"
-                android:background="@drawable/blue_radius_border"
+                android:background="@drawable/blue_dark_radius_border"
                 android:paddingLeft="@dimen/verySmallPadding"
                 android:paddingRight="@dimen/verySmallPadding"/>
 
@@ -204,7 +204,7 @@
                 android:textSize="@dimen/headSecondTextSize"
                 android:gravity="center"
                 android:layout_gravity="right"
-                android:background="@drawable/blue_radius_border"
+                android:background="@drawable/blue_dark_radius_border"
                 android:paddingLeft="@dimen/verySmallPadding"
                 android:paddingRight="@dimen/verySmallPadding"/>
         </FrameLayout>
@@ -525,7 +525,7 @@
                         android:layout_gravity="center"
                         android:gravity="center_horizontal|bottom"
                         android:padding="@dimen/verySmallPadding"
-                        android:background="@drawable/blue_radius_border"/>
+                        android:background="@drawable/blue_dark_radius_border"/>
                 </FrameLayout>
 
                 <TextView
@@ -553,7 +553,7 @@
                         android:layout_gravity="center"
                         android:gravity="center_horizontal|bottom"
                         android:padding="@dimen/verySmallPadding"
-                        android:background="@drawable/blue_radius_border"/>
+                        android:background="@drawable/blue_dark_radius_border"/>
                 </FrameLayout>
             </LinearLayout>
 
