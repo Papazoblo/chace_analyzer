@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void initEquipmentOne() {
-        textAppNameSmall.setText(getResources().getString(R.string.app_name));
+        textAppNameSmall.setText("");
         toVisible(textAppNameSmall);
     }
 
