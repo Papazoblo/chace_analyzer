@@ -60,6 +60,10 @@ public class ViewUtils {
         return true;
     }
 
+    public static String getTextFrom(View view) {
+        return getTextFrom((TextView) view);
+    }
+
     public static String getTextFrom(TextView text) {
         return text.getText().toString();
     }

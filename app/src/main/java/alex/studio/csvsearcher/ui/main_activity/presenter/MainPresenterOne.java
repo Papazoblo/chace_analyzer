@@ -22,28 +22,28 @@ public class MainPresenterOne extends MainPresenter {
         List<CardGroup> result = new ArrayList<>();
 
         switch (view.getDirection()) {
-            case "right":
+            case RIGHT:
                 result = searchRightDirection(workListCard, dates, selectCards);
                 break;
-            case "left":
+            case LEFT:
                 result = searchLeftDirection(workListCard, dates, selectCards);
                 break;
-            case "top":
+            case TOP:
                 result = searchTopDirection(workListCard, dates, selectCards);
                 break;
-            case "bottom":
+            case BOTTOM:
                 result = searchBottomDirection(workListCard, dates, selectCards);
                 break;
-            case "topRight":
+            case TOP_RIGHT:
                 result = searchTopRightDirection(workListCard, dates, selectCards);
                 break;
-            case "topLeft":
+            case TOP_LEFT:
                 result = searchTopLeftDirection(workListCard, dates, selectCards);
                 break;
-            case "bottomRight":
+            case BOTTOM_RIGHT:
                 result = searchBottomRightDirection(workListCard, dates, selectCards);
                 break;
-            case "bottomLeft":
+            case BOTTOM_LEFT:
                 result = searchBottomLeftDirection(workListCard, dates, selectCards);
                 break;
             default:

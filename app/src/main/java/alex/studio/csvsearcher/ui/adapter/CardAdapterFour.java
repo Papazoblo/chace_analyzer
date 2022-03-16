@@ -1,12 +1,16 @@
 package alex.studio.csvsearcher.ui.adapter;
 
+import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
+import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
+import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,12 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import alex.studio.csvsearcher.R;
+import alex.studio.csvsearcher.enums.CardPosition;
 
 public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.ResultViewHolder> {
 
     private final int MAX_ROW_COUNT = 7;
 
     private List<String[]> listGroupCards = new ArrayList<>();
+    private List<CardPosition> curPositions = new ArrayList<>();
+    private List<View> cardSelectPanels = new ArrayList<>();
     private String[] cardArray;
     private Context context;
     private int colorYellow;
@@ -47,81 +54,86 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
 
         String[] cards = listGroupCards.get(pos);
 
-        h.spinnerOne.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                cards[0] = cardArray[i];
-                changeSpinnerColor((TextView) parent.getChildAt(0), i);
-            }
+        cardSelectPanels.add(h.cardSelectorBlock);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-        h.spinnerTwo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                cards[1] = cardArray[i];
-                changeSpinnerColor((TextView) parent.getChildAt(0), i);
-            }
+        h.textOne.setOnClickListener(v -> selectCardClick(h, v, pos));
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+        h.textTwo.setOnClickListener(v -> selectCardClick(h, v, pos));
 
+        h.textThree.setOnClickListener(v -> selectCardClick(h, v, pos));
+
+        h.textFour.setOnClickListener(v -> selectCardClick(h, v, pos));
+
+        h.textOne.setText(cards[0]);
+        changeColor(cards[0], h.textOne);
+        h.textTwo.setText(cards[1]);
+        changeColor(cards[1], h.textTwo);
+        h.textThree.setText(cards[2]);
+        changeColor(cards[2], h.textThree);
+        h.textFour.setText(cards[3]);
+        changeColor(cards[3], h.textFour);
+
+        h.cardSelectorBlock.removeAllViews();
+        for (int i = 0; i < cardArray.length; i++) {
+            TextView textView = (TextView) LayoutInflater.from(context)
+                    .inflate(R.layout.card_selecter, null);
+            textView.setText(cardArray[i]);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+            );
+            params.weight = 1;
+            if (i != cardArray.length - 1) {
+                params.rightMargin = 1;
             }
-        });
-        h.spinnerThree.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                cards[2] = cardArray[i];
-                changeSpinnerColor((TextView) parent.getChildAt(0), i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        h.spinnerFour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-                cards[3] = cardArray[i];
-                changeSpinnerColor((TextView) parent.getChildAt(0), i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        h.spinnerOne.setSelection(getPosArrayByChar(cards[0]));
-        h.spinnerTwo.setSelection(getPosArrayByChar(cards[1]));
-        h.spinnerThree.setSelection(getPosArrayByChar(cards[2]));
-        h.spinnerFour.setSelection(getPosArrayByChar(cards[3]));
+            textView.setLayoutParams(params);
+            textView.setOnClickListener(v -> {
+                TextView selectTextView = null;
+                switch (curPositions.get(pos)) {
+                    case ONE:
+                        selectTextView = h.textOne;
+                        cards[0] = getTextFrom(v);
+                        break;
+                    case TWO:
+                        selectTextView = h.textTwo;
+                        cards[1] = getTextFrom(v);
+                        break;
+                    case THREE:
+                        selectTextView = h.textThree;
+                        cards[2] = getTextFrom(v);
+                        break;
+                    case FOUR:
+                        selectTextView = h.textFour;
+                        cards[3] = getTextFrom(v);
+                        break;
+                }
+                String curText = getTextFrom(v);
+                selectTextView.setText(curText);
+                changeColor(curText, selectTextView);
+                toGone(h.cardSelectorBlock);
+                curPositions.set(pos, null);
+            });
+            h.cardSelectorBlock.addView(textView);
+        }
 
         h.btnDelete.setOnClickListener(v -> deleteRow(pos));
         h.btnClear.setOnClickListener(v -> clearRow(pos));
     }
 
-    private int getPosArrayByChar(String s) {
-        for (int i = 0; i < cardArray.length; i++) {
-            if (cardArray[i].equals(s)) {
-                return i;
-            }
+    private void changeColor(String curText, TextView textView) {
+        if (curText.equals(cardArray[0])) {
+            textView.setTextColor(colorLightGray);
+        } else {
+            textView.setTextColor(colorYellow);
         }
-        return 0;
     }
 
-    private void changeSpinnerColor(TextView currentText, int position) {
-        if (currentText == null) {
-            return;
+    private void selectCardClick(ResultViewHolder h, View view, int pos) {
+        for(View panel : cardSelectPanels) {
+            toGone(panel);
         }
-        if (position != 0) {
-            currentText.setTextColor(colorYellow);
-        } else {
-            currentText.setTextColor(colorLightGray);
-        }
+        curPositions.set(pos, CardPosition.of((String) view.getTag()));
+        toVisible(h.cardSelectorBlock);
     }
 
     @Override
@@ -137,8 +149,10 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
         if (listGroupCards.size() < MAX_ROW_COUNT) {
             if(listGroupCards.isEmpty()) {
                 listGroupCards.add(new String[]{"-", "-", "-", "-"});
+                curPositions.add(null);
             }
             listGroupCards.add(new String[]{"-", "-", "-", "-"});
+            curPositions.add(null);
             notifyDataSetChanged();
         } else {
             Toast.makeText(context, context.getResources().getString(R.string.error_max_limit_rows),
@@ -149,9 +163,8 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
     public boolean isHasCardInRow() {
         String[] pattern = listGroupCards.get(0);
 
-        boolean flag = false;
         for(String card : pattern) {
-            if(!card.equals("-")) {
+            if(!card.equals(cardArray[0])) {
                 return true;
             }
         }
@@ -163,8 +176,8 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
 
         for (int i = 1; i < listGroupCards.size(); i++) {
             for(int j = 0 ; j < pattern.length ; j++) {
-                if(pattern[j].equals("-") && !listGroupCards.get(i)[j].equals("-") ||
-                        !pattern[j].equals("-") && listGroupCards.get(i)[j].equals("-")) {
+                if(pattern[j].equals(cardArray[0]) && !listGroupCards.get(i)[j].equals(cardArray[0]) ||
+                        !pattern[j].equals(cardArray[0]) && listGroupCards.get(i)[j].equals(cardArray[0])) {
                     return false;
                 }
             }
@@ -174,6 +187,8 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
 
     private void deleteRow(int pos) {
         listGroupCards.remove(pos);
+        curPositions.remove(pos);
+        cardSelectPanels.remove(pos);
         notifyDataSetChanged();
     }
 
@@ -184,12 +199,14 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
         notifyDataSetChanged();
     }
 
-    public class ResultViewHolder extends RecyclerView.ViewHolder {
+    public static class ResultViewHolder extends RecyclerView.ViewHolder {
 
-        private Spinner spinnerOne;
-        private Spinner spinnerTwo;
-        private Spinner spinnerThree;
-        private Spinner spinnerFour;
+        private TextView textOne;
+        private TextView textTwo;
+        private TextView textThree;
+        private TextView textFour;
+
+        private LinearLayout cardSelectorBlock;
 
         private View btnDelete;
         private View btnClear;
@@ -197,22 +214,15 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
         public ResultViewHolder(@NonNull View v) {
             super(v);
 
-            spinnerOne = v.findViewById(R.id.spinnerOne);
-            spinnerTwo = v.findViewById(R.id.spinnerTwo);
-            spinnerThree = v.findViewById(R.id.spinnerThree);
-            spinnerFour = v.findViewById(R.id.spinnerFour);
+            textOne = v.findViewById(R.id.textOne);
+            textTwo = v.findViewById(R.id.textTwo);
+            textThree = v.findViewById(R.id.textThree);
+            textFour = v.findViewById(R.id.textFour);
+
+            cardSelectorBlock = v.findViewById(R.id.cardSelectorBlock);
 
             btnDelete = v.findViewById(R.id.btnDelete);
             btnClear = v.findViewById(R.id.btnClear);
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
-                    R.layout.item_spinner_style, cardArray);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-            spinnerOne.setAdapter(adapter);
-            spinnerTwo.setAdapter(adapter);
-            spinnerThree.setAdapter(adapter);
-            spinnerFour.setAdapter(adapter);
         }
     }
 }

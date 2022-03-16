@@ -32,12 +32,12 @@ public class MainPresenterFour extends MainPresenter {
         }
 
         switch (view.getDirection()) {
-            case "top":
+            case TOP:
                 searchTopDirection(workListCard, dates, selectCards);
                 searchTopLeftDirection(workListCard, dates, selectCards);
                 searchTopRightDirection(workListCard, dates, selectCards);
                 break;
-            case "bottom":
+            case BOTTOM:
                 searchBottomDirection(workListCard, dates, selectCards);
                 searchBottomLeftDirection(workListCard, dates, selectCards);
                 searchBottomRightDirection(workListCard, dates, selectCards);

@@ -8,6 +8,7 @@ import java.util.Map;
 import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
+import alex.studio.csvsearcher.enums.Direction;
 
 public interface Main {
 
@@ -17,7 +18,7 @@ public interface Main {
 
         void clearData();
 
-        String getDirection();
+        Direction getDirection();
         String[] getCards();
         List<String[]> getCardsList();
         String[] getActiveDate();

@@ -23,11 +23,13 @@ import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
+import alex.studio.csvsearcher.enums.Direction;
 import alex.studio.csvsearcher.ui.adapter.CardAdapterFour;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapterFour;
 import alex.studio.csvsearcher.ui.main_activity.Main;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterFour;
 
+import static alex.studio.csvsearcher.enums.Direction.TOP;
 import static alex.studio.csvsearcher.utils.StringUtils.generateDateString;
 import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
 import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
@@ -72,7 +74,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     private int colorYellow;
     private int colorWhite;
 
-    private String curDirection;
+    private Direction curDirection;
     int yearCur;
     int monthCur;
     int dayCur;
@@ -92,7 +94,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     private void initConstant() {
         presenter = new MainPresenterFour();
 
-        curDirection = "top";
+        curDirection = TOP;
 
         colorYellow = getResources().getColor(R.color.yellow);
         colorWhite = getResources().getColor(R.color.white);
@@ -161,7 +163,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
         btnReset.setOnClickListener(v -> clearData());
 
         btnSearch.setOnClickListener(v -> {
-            if(!curDirection.isEmpty()) {
+            if(curDirection != null) {
                 toGone(textNotMatch);
                 presenter.launchSearch();
             }
@@ -177,19 +179,19 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
 
         btnTo.setOnClickListener(v -> initDatePickerDialog(false));
 
-        btnTop.setOnClickListener(v -> launchSearch("top"));
+        btnTop.setOnClickListener(v -> launchSearch(TOP));
 
-        btnBottom.setOnClickListener(v -> launchSearch("bottom"));
+        btnBottom.setOnClickListener(v -> launchSearch(Direction.BOTTOM));
 
         blockWait.setOnClickListener(v -> {
         });
     }
 
-    private void launchSearch(String type) {
+    private void launchSearch(Direction type) {
         curDirection = type;
         unselectArrows((ImageView) btnBottom, (ImageView) btnTop);
 
-        if (type.equals("top")) {
+        if (type == TOP) {
             changeColor((ImageView) btnTop, colorYellow);
         } else {
             changeColor((ImageView) btnBottom, colorYellow);
@@ -303,7 +305,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     }
 
     @Override
-    public String getDirection() {
+    public Direction getDirection() {
         return curDirection;
     }
 
@@ -344,7 +346,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     public void clearData() {
         toGone(textNotMatch);
         resultAdapterFour.setData(new ArrayList<>());
-        launchSearch("top");
+        launchSearch(TOP);
     }
 
     @Override

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,159 +11,75 @@
         android:id="@+id/textAppName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/opacityGreen"
-        android:textSize="@dimen/bigAppNameSize"
         android:gravity="center"
         android:paddingLeft="@dimen/smallPadding"
         android:paddingRight="@dimen/smallPadding"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:text="@string/app_name"
+        android:textColor="@color/opacityGreen"
+        android:textSize="@dimen/bigAppNameSize"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/textSelectCards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_card"
-        android:textSize="@dimen/headTextSize"
         android:gravity="center"
+        android:paddingTop="@dimen/smallPadding"
+        android:text="@string/select_card"
         android:textColor="@color/textLightGrayBlue"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingTop="@dimen/smallPadding"/>
-    
+        android:textSize="@dimen/headTextSize"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/blockSelectCard"
         android:layout_width="match_parent"
         android:layout_height="@dimen/selectCardBlockHeight"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/smallPadding"
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
+        android:paddingBottom="@dimen/smallPadding"
         app:layout_constraintTop_toBottomOf="@id/textSelectCards">
 
         <TextView
             android:id="@+id/btnReset"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/verySmallPadding"
+            android:layout_weight="8"
+            android:background="@drawable/blue_dark_radius_border"
+            android:gravity="center"
             android:text="@string/reset"
             android:textColor="@color/white"
-            android:textSize="@dimen/headSecondTextSize"
-            android:gravity="center"
-            android:background="@drawable/blue_dark_radius_border"
-            android:layout_weight="8"
-            android:layout_marginRight="@dimen/verySmallPadding"/>
+            android:textSize="@dimen/headSecondTextSize" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include
+            android:id="@+id/cardSelectPanel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:paddingRight="@dimen/verySmallPadding">
-
-            <Spinner
-                android:id="@+id/spinnerOne"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bottom_border"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-            
-            <ImageView
-                android:id="@+id/triangleOne"
-                android:layout_width="@dimen/triangleSize"
-                android:layout_height="@dimen/triangleSize"
-                android:src="@drawable/triangle"
-                app:layout_constraintRight_toRightOf="@id/spinnerOne"
-                app:layout_constraintBottom_toBottomOf="@id/spinnerOne"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:paddingRight="@dimen/verySmallPadding">
-
-            <Spinner
-                android:id="@+id/spinnerTwo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bottom_border"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/triangleTwo"
-                android:layout_width="@dimen/triangleSize"
-                android:layout_height="@dimen/triangleSize"
-                android:src="@drawable/triangle"
-                app:layout_constraintRight_toRightOf="@id/spinnerTwo"
-                app:layout_constraintBottom_toBottomOf="@id/spinnerTwo"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:paddingRight="@dimen/verySmallPadding">
-
-            <Spinner
-                android:id="@+id/spinnerThree"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bottom_border"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/triangleThree"
-                android:layout_width="@dimen/triangleSize"
-                android:layout_height="@dimen/triangleSize"
-                android:src="@drawable/triangle"
-                app:layout_constraintRight_toRightOf="@id/spinnerThree"
-                app:layout_constraintBottom_toBottomOf="@id/spinnerThree"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="9">
-
-            <Spinner
-                android:id="@+id/spinnerFour"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bottom_border"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/triangleFour"
-                android:layout_width="@dimen/triangleSize"
-                android:layout_height="@dimen/triangleSize"
-                android:src="@drawable/triangle"
-                app:layout_constraintRight_toRightOf="@id/spinnerFour"
-                app:layout_constraintBottom_toBottomOf="@id/spinnerFour"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_weight="4"
+            layout="@layout/card_select_panel"/>
 
         <TextView
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/verySmallPadding"
+            android:layout_weight="8"
+            android:background="@drawable/blue_dark_radius_border"
+            android:gravity="center"
             android:text="@string/launch"
             android:textColor="@color/white"
-            android:textSize="@dimen/headSecondTextSize"
-            android:gravity="center"
-            android:background="@drawable/blue_dark_radius_border"
-            android:layout_weight="8"
-            android:layout_marginLeft="@dimen/verySmallPadding"/>
+            android:textSize="@dimen/headSecondTextSize" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/mainBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/blockSelectCard"
         android:layout_marginTop="@dimen/verySmallPadding"
-        android:background="@color/grayBlue">
+        android:background="@color/grayBlue"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/blockSelectCard">
 
         <LinearLayout
             android:id="@+id/blockByDate"
@@ -176,26 +91,26 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/select_date"
-                android:textSize="@dimen/headTextSize"
                 android:textColor="@color/white"
-                android:gravity="center"/>
+                android:textSize="@dimen/headTextSize" />
 
             <TextView
                 android:id="@+id/textDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/dateFormat"
-                android:textColorHint="@color/textLightGrayBlue"
-                android:textSize="@dimen/headTextSize"
-                android:textColor="@color/yellow"
-                android:gravity="center"
-                android:singleLine="true"
-                android:ellipsize="end"
+                android:layout_marginBottom="@dimen/smallPadding"
                 android:background="@drawable/bottom_left_right_border"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hint="@string/dateFormat"
                 android:paddingLeft="@dimen/smallPadding"
                 android:paddingRight="@dimen/smallPadding"
-                android:layout_marginBottom="@dimen/smallPadding"/>
+                android:singleLine="true"
+                android:textColor="@color/yellow"
+                android:textColorHint="@color/textLightGrayBlue"
+                android:textSize="@dimen/headTextSize" />
         </LinearLayout>
 
     </LinearLayout>
@@ -204,9 +119,19 @@
         android:id="@+id/recyclerResult"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/mainBlock"
+        android:layout_marginTop="@dimen/smallPadding"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/smallPadding"/>
+        app:layout_constraintTop_toBottomOf="@id/mainBlock" />
+
+    <LinearLayout
+        android:id="@+id/cardSelectorBlock"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:layout_marginBottom="1px"
+        android:background="@color/textLightGrayBlue"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/blockSelectCard" />
 
     <FrameLayout
         android:id="@+id/blockSelectDate"
@@ -218,10 +143,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/blockSelectCard"
             android:background="@color/grayBlue"
-            android:paddingTop="@dimen/smallPadding">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/smallPadding"
+            app:layout_constraintTop_toBottomOf="@id/blockSelectCard">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -232,10 +157,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="@string/select_date"
-                    android:textSize="@dimen/headTextSize"
                     android:textColor="@color/white"
-                    android:gravity="center"/>
+                    android:textSize="@dimen/headTextSize" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -246,64 +171,65 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:text="@string/day"
                             android:gravity="center_horizontal"
-                            android:textSize="@dimen/headSecondTextSize"
-                            android:paddingBottom="@dimen/verySmallPadding"/>
+                            android:paddingBottom="@dimen/verySmallPadding"
+                            android:text="@string/day"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headSecondTextSize" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="@dimen/selectCardBlockHeight"
                             android:layout_height="@dimen/selectCardBlockHeight"
-                            android:paddingRight="@dimen/verySmallPadding"
-                            android:layout_gravity="center">
+                            android:layout_gravity="center"
+                            android:paddingRight="@dimen/verySmallPadding">
 
                             <Spinner
                                 android:id="@+id/spinnerDay"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/spinner_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"/>
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
                                 android:id="@+id/triangleDay"
                                 android:layout_width="@dimen/triangleSize"
                                 android:layout_height="@dimen/triangleSize"
                                 android:src="@drawable/triangle"
-                                app:layout_constraintRight_toRightOf="@id/spinnerDay"
-                                app:layout_constraintBottom_toBottomOf="@id/spinnerDay"/>
+                                app:layout_constraintBottom_toBottomOf="@id/spinnerDay"
+                                app:layout_constraintRight_toRightOf="@id/spinnerDay" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_gravity="center_vertical">
+                                android:layout_gravity="center_vertical"
+                                android:orientation="vertical">
 
                                 <Switch
                                     android:id="@+id/switchOrder"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:layout_gravity="center"/>
+                                    android:layout_gravity="center" />
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/white"
-                                    android:text="@string/exact_sequence"
                                     android:gravity="center_horizontal"
-                                    android:textSize="@dimen/headSecondTextSize"
-                                    android:paddingBottom="@dimen/verySmallPadding"/>
+                                    android:paddingBottom="@dimen/verySmallPadding"
+                                    android:text="@string/exact_sequence"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/headSecondTextSize" />
                             </LinearLayout>
                         </FrameLayout>
                     </LinearLayout>
@@ -311,40 +237,40 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:text="@string/month"
                             android:gravity="center_horizontal"
-                            android:textSize="@dimen/headSecondTextSize"
-                            android:paddingBottom="@dimen/verySmallPadding"/>
+                            android:paddingBottom="@dimen/verySmallPadding"
+                            android:text="@string/month"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headSecondTextSize" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/selectCardBlockHeight"
-                            android:paddingRight="@dimen/smallPadding"
+                            android:layout_gravity="center"
                             android:paddingLeft="@dimen/smallPadding"
-                            android:layout_gravity="center">
+                            android:paddingRight="@dimen/smallPadding">
 
                             <Spinner
                                 android:id="@+id/spinnerMonth"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/spinner_border"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"/>
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <ImageView
                                 android:id="@+id/triangleMonth"
                                 android:layout_width="@dimen/triangleSize"
                                 android:layout_height="@dimen/triangleSize"
                                 android:src="@drawable/triangle"
-                                app:layout_constraintRight_toRightOf="@id/spinnerMonth"
-                                app:layout_constraintBottom_toBottomOf="@id/spinnerMonth"/>
+                                app:layout_constraintBottom_toBottomOf="@id/spinnerMonth"
+                                app:layout_constraintRight_toRightOf="@id/spinnerMonth" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <FrameLayout
@@ -355,76 +281,76 @@
                                 android:id="@+id/btnAllYear"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/all_year"
-                                android:gravity="center"
-                                android:textSize="@dimen/headTextSize"
-                                android:textColor="@color/white"
-                                android:background="@drawable/blue_dark_radius_border"
+                                android:layout_gravity="center_vertical"
                                 android:layout_margin="@dimen/smallPadding"
+                                android:background="@drawable/blue_dark_radius_border"
+                                android:gravity="center"
                                 android:padding="@dimen/smallPadding"
-                                android:layout_gravity="center_vertical"/>
+                                android:text="@string/all_year"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/headTextSize" />
                         </FrameLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:text="@string/year"
                             android:gravity="center_horizontal"
-                            android:textSize="@dimen/headSecondTextSize"
-                            android:paddingBottom="@dimen/verySmallPadding"/>
+                            android:paddingBottom="@dimen/verySmallPadding"
+                            android:text="@string/year"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headSecondTextSize" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerYear"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/logoWidth"
-                            android:background="@drawable/around_border"
-                            android:layout_marginRight="@dimen/smallPadding"
                             android:layout_marginLeft="@dimen/smallPadding"
-                            android:layout_marginBottom="@dimen/smallPadding"/>
+                            android:layout_marginRight="@dimen/smallPadding"
+                            android:layout_marginBottom="@dimen/smallPadding"
+                            android:background="@drawable/around_border" />
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/smallPadding">
+                    android:layout_marginBottom="@dimen/smallPadding"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/btnCancel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/cancel"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/headTextSize"
-                        android:gravity="center"
+                        android:layout_marginLeft="@dimen/selectCardBlockHeight"
+                        android:layout_marginRight="@dimen/smallPadding"
                         android:layout_weight="1"
                         android:background="@drawable/blue_dark_radius_border"
+                        android:gravity="center"
                         android:padding="@dimen/smallPadding"
-                        android:layout_marginRight="@dimen/smallPadding"
-                        android:layout_marginLeft="@dimen/selectCardBlockHeight"/>
+                        android:text="@string/cancel"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/headTextSize" />
 
                     <TextView
                         android:id="@+id/btnSave"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/save"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/headTextSize"
-                        android:gravity="center"
+                        android:layout_marginLeft="@dimen/smallPadding"
+                        android:layout_marginRight="@dimen/selectCardBlockHeight"
                         android:layout_weight="1"
                         android:background="@drawable/blue_radius_active_border"
+                        android:gravity="center"
                         android:padding="@dimen/smallPadding"
-                        android:layout_marginLeft="@dimen/smallPadding"
-                        android:layout_marginRight="@dimen/selectCardBlockHeight"/>
+                        android:text="@string/save"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/headTextSize" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -440,13 +366,13 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
             <ProgressBar
                 android:layout_width="@dimen/selectCardBlockHeight"
                 android:layout_height="@dimen/selectCardBlockHeight"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -455,75 +381,14 @@
                 android:layout_marginTop="@dimen/smallPadding"
                 android:text="@string/pls_wait"
                 android:textColor="@color/green"
-                android:textSize="@dimen/underAppNameTextSize"/>
+                android:textSize="@dimen/underAppNameTextSize" />
         </LinearLayout>
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
         android:id="@+id/blockAskExit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:id="@+id/centerBlockExit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingRight="@dimen/smallPadding"
-            android:paddingLeft="@dimen/smallPadding"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/textAskExit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/exit_ask"
-                android:textColor="@color/green"
-                android:textSize="@dimen/underAppNameTextSize"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/smallPadding"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_marginBottom="@dimen/verySmallPadding">
-
-                <TextView
-                    android:id="@+id/btnYes"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/blue_dark_radius_border"
-                    android:layout_marginRight="@dimen/verySmallPadding"
-                    android:layout_marginTop="@dimen/verySmallPadding"
-                    android:text="@string/download"
-                    android:textSize="@dimen/textInBox"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:padding="@dimen/paddingInBox"
-                    android:breakStrategy="high_quality"/>
-
-                <TextView
-                    android:id="@+id/btnNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/blue_dark_radius_border"
-                    android:layout_marginLeft="@dimen/verySmallPadding"
-                    android:layout_marginTop="@dimen/verySmallPadding"
-                    android:text="@string/storage"
-                    android:textSize="@dimen/textInBox"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:padding="@dimen/paddingInBox"
-                    android:breakStrategy="high_quality"/>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        layout="@layout/block_exit"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

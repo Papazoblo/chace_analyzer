@@ -2,13 +2,18 @@ package alex.studio.csvsearcher.ui.main_activity.view;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +32,14 @@ import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
+import alex.studio.csvsearcher.enums.CardPosition;
+import alex.studio.csvsearcher.enums.Direction;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapter;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapterTwo;
 import alex.studio.csvsearcher.ui.main_activity.Main;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterOne;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterTwo;
+import alex.studio.csvsearcher.utils.ViewUtils;
 
 import static alex.studio.csvsearcher.utils.StringUtils.generateDateString;
 import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
@@ -41,8 +50,7 @@ import static alex.studio.csvsearcher.utils.ViewUtils.isVisible;
 import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
 import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
-        Main.View {
+public class MainActivity extends AppCompatActivity implements Main.View {
 
     private Main.Presenter presenter;
 
@@ -58,14 +66,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private View btnBottomLeft;
     private View btnTopRight;
     private View btnBottomRight;
-    private View colorRight;
-    private View colorLeft;
-    private View colorTop;
-    private View colorBottom;
-    private View colorTopLeft;
-    private View colorBottomLeft;
-    private View colorTopRight;
-    private View colorBottomRight;
+    private ImageView arrowRight;
+    private ImageView arrowLeft;
+    private ImageView arrowTop;
+    private ImageView arrowBottom;
+    private ImageView arrowTopLeft;
+    private ImageView arrowBottomLeft;
+    private ImageView arrowTopRight;
+    private ImageView arrowBottomRight;
     private View btnFrom;
     private View btnTo;
     private View btnYes;
@@ -75,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private View blockByDate;
     private View blockWait;
 
+    private LinearLayout cardSelectorBlock;
+
     private TextView textDateFrom;
     private TextView textDateTo;
     private TextView btnCountGames;
@@ -83,21 +93,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private EditText editCount1;
 
-    private Spinner spinnerOne;
-    private Spinner spinnerTwo;
-    private Spinner spinnerThree;
-    private Spinner spinnerFour;
+    private TextView textOne;
+    private TextView textTwo;
+    private TextView textThree;
+    private TextView textFour;
 
     private RecyclerView recyclerView;
     private ResultAdapter resultAdapter;
     private ResultAdapterTwo resultAdapterTwo;
 
-    private int colorGray;
+    private int colorBlack;
     private int colorYellow;
     private int colorWhite;
     private int colorLightGray;
 
-    private String curDirection;
+    private CardPosition curPosition;
+    private Direction curDirection;
     private String[] cards;
     int yearCur;
     int monthCur;
@@ -125,11 +136,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
         }
 
-        curDirection = "";
-        colorLightGray = getResources().getColor(R.color.textLightGrayBlue);
-        colorGray = getResources().getColor(R.color.gray);
+        curDirection = null;
+        curPosition = null;
         colorYellow = getResources().getColor(R.color.yellow);
         colorWhite = getResources().getColor(R.color.white);
+        colorBlack = getResources().getColor(R.color.black);
+        colorLightGray = getResources().getColor(R.color.textLightGrayBlue);
         cards = getResources().getStringArray(R.array.cards);
 
         Calendar dateAndTime = Calendar.getInstance();
@@ -151,14 +163,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnBottomLeft = findViewById(R.id.btnBottomLeft);
         btnTopRight = findViewById(R.id.btnTopRight);
         btnBottomRight = findViewById(R.id.btnBottomRight);
-        colorRight = findViewById(R.id.colorRight);
-        colorLeft = findViewById(R.id.colorLeft);
-        colorTop = findViewById(R.id.colorTop);
-        colorBottom = findViewById(R.id.colorBottom);
-        colorTopLeft = findViewById(R.id.colorTopLeft);
-        colorBottomLeft = findViewById(R.id.colorBottomLeft);
-        colorTopRight = findViewById(R.id.colorTopRight);
-        colorBottomRight = findViewById(R.id.colorBottomRight);
+        arrowRight = findViewById(R.id.arrowRight);
+        arrowLeft = findViewById(R.id.arrowLeft);
+        arrowTop = findViewById(R.id.arrowTop);
+        arrowBottom = findViewById(R.id.arrowBottom);
+        arrowTopLeft = findViewById(R.id.arrowTopLeft);
+        arrowBottomLeft = findViewById(R.id.arrowBottomLeft);
+        arrowTopRight = findViewById(R.id.arrowTopRight);
+        arrowBottomRight = findViewById(R.id.arrowBottomRight);
         btnFrom = findViewById(R.id.btnFrom);
         btnTo = findViewById(R.id.btnTo);
         btnYes = findViewById(R.id.btnYes);
@@ -167,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         blockCountGames = findViewById(R.id.blockCountGames);
         blockByDate = findViewById(R.id.blockByDate);
         blockWait = findViewById(R.id.blockWait);
+        cardSelectorBlock = findViewById(R.id.cardSelectorBlock);
 
         textAppNameSmall = findViewById(R.id.textAppNameSmall);
         textDateFrom = findViewById(R.id.textDateFrom);
@@ -176,10 +189,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         editCount1 = findViewById(R.id.editCount1);
 
-        spinnerOne = findViewById(R.id.spinnerOne);
-        spinnerTwo = findViewById(R.id.spinnerTwo);
-        spinnerThree = findViewById(R.id.spinnerThree);
-        spinnerFour = findViewById(R.id.spinnerFour);
+        textOne = findViewById(R.id.textOne);
+        textTwo = findViewById(R.id.textTwo);
+        textThree = findViewById(R.id.textThree);
+        textFour = findViewById(R.id.textFour);
 
         recyclerView = findViewById(R.id.recyclerResult);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -198,8 +211,54 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         btnByDate.post(() -> changeButtonWidth(btnSearch.getWidth(), btnCountGames, btnByDate));
 
+        textOne.setText(cards[0]);
+        textTwo.setText(cards[0]);
+        textThree.setText(cards[0]);
+        textFour.setText(cards[0]);
+
+        for (int i = 0; i < cards.length; i++) {
+            TextView textView = (TextView) LayoutInflater.from(this)
+                    .inflate(R.layout.card_selecter, null);
+            textView.setText(cards[i]);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+            );
+            params.weight = 1;
+            if (i != cards.length - 1) {
+                params.rightMargin = 1;
+            }
+            textView.setLayoutParams(params);
+            textView.setOnClickListener(v -> {
+                TextView selectTextView = null;
+                switch (curPosition) {
+                    case ONE:
+                        selectTextView = textOne;
+                        break;
+                    case TWO:
+                        selectTextView = textTwo;
+                        break;
+                    case THREE:
+                        selectTextView = textThree;
+                        break;
+                    case FOUR:
+                        selectTextView = textFour;
+                        break;
+                }
+                String curText = getTextFrom(v);
+                selectTextView.setText(curText);
+                if (curText.equals(cards[0])) {
+                    selectTextView.setTextColor(colorLightGray);
+                } else {
+                    selectTextView.setTextColor(colorYellow);
+                }
+                toGone(cardSelectorBlock);
+                curPosition = null;
+            });
+            cardSelectorBlock.addView(textView);
+        }
+
         initEquipment();
-        initSpinner();
         initAction();
     }
 
@@ -212,7 +271,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         btnNo.setOnClickListener(v -> toGone(blockAskExit));
 
-        blockAskExit.setOnClickListener(v -> {});
+        blockAskExit.setOnClickListener(v -> {
+        });
 
         btnResetDateTo.setOnClickListener(v -> textDateTo.setText(""));
 
@@ -220,15 +280,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         btnReset.setOnClickListener(v -> {
             clearData();
-            unselectAllColor(colorTop, colorBottom, colorLeft, colorRight, colorBottomLeft,
-                    colorBottomRight, colorTopLeft, colorTopRight);
+            unselectAllColor(arrowTop, arrowBottom, arrowLeft, arrowRight, arrowBottomLeft,
+                    arrowBottomRight, arrowTopLeft, arrowTopRight);
         });
 
         btnSearch.setOnClickListener(v -> {
-            curDirection = "";
+            curDirection = null;
             presenter.launchSearch();
-            unselectAllColor(colorTop, colorBottom, colorLeft, colorRight, colorBottomLeft,
-                    colorBottomRight, colorTopLeft, colorTopRight);
+            unselectAllColor(arrowTop, arrowBottom, arrowLeft, arrowRight, arrowBottomLeft,
+                    arrowBottomRight, arrowTopLeft, arrowTopRight);
         });
 
         btnCountGames.setOnClickListener(v -> changeStateOption(btnCountGames, 1,
@@ -237,36 +297,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnByDate.setOnClickListener(v -> changeStateOption(btnByDate, 3, blockByDate,
                 blockCountGames));
 
-        btnRight.setOnClickListener(v -> selectArrow(colorRight));
+        btnRight.setOnClickListener(v -> selectArrow(arrowRight));
 
-        btnLeft.setOnClickListener(v -> selectArrow(colorLeft));
+        btnLeft.setOnClickListener(v -> selectArrow(arrowLeft));
 
-        btnTop.setOnClickListener(v -> selectArrow(colorTop));
+        btnTop.setOnClickListener(v -> selectArrow(arrowTop));
 
-        btnBottom.setOnClickListener(v -> selectArrow(colorBottom));
+        btnBottom.setOnClickListener(v -> selectArrow(arrowBottom));
 
-        btnTopLeft.setOnClickListener(v -> selectArrow(colorTopLeft));
+        btnTopLeft.setOnClickListener(v -> selectArrow(arrowTopLeft));
 
-        btnBottomLeft.setOnClickListener(v -> selectArrow(colorBottomLeft));
+        btnBottomLeft.setOnClickListener(v -> selectArrow(arrowBottomLeft));
 
-        btnTopRight.setOnClickListener(v -> selectArrow(colorTopRight));
+        btnTopRight.setOnClickListener(v -> selectArrow(arrowTopRight));
 
-        btnBottomRight.setOnClickListener(v -> selectArrow(colorBottomRight));
+        btnBottomRight.setOnClickListener(v -> selectArrow(arrowBottomRight));
 
         btnFrom.setOnClickListener(v -> initDatePickerDialog(true));
 
         btnTo.setOnClickListener(v -> initDatePickerDialog(false));
 
-        spinnerOne.setOnItemSelectedListener(this);
-
-        spinnerTwo.setOnItemSelectedListener(this);
-
-        spinnerThree.setOnItemSelectedListener(this);
-
-        spinnerFour.setOnItemSelectedListener(this);
-
         blockWait.setOnClickListener(v -> {
         });
+
+        textOne.setOnClickListener(this::selectCardClick);
+
+        textTwo.setOnClickListener(this::selectCardClick);
+
+        textThree.setOnClickListener(this::selectCardClick);
+
+        textFour.setOnClickListener(this::selectCardClick);
+    }
+
+    private void selectCardClick(View view) {
+        curPosition = CardPosition.of((String) view.getTag());
+        toVisible(cardSelectorBlock);
     }
 
     private void initEquipment() {
@@ -290,28 +355,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void initEquipmentTwo() {
         textAppNameSmall.setText(getResources().getString(R.string.search_dropped_after_the_given_without_enter));
         toVisible(textAppNameSmall);
-    }
-
-    private void initSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
-                R.layout.item_spinner_style, cards);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinnerOne.setAdapter(adapter);
-        spinnerTwo.setAdapter(adapter);
-        spinnerThree.setAdapter(adapter);
-        spinnerFour.setAdapter(adapter);
-    }
-
-    private void changeSpinnerColor(TextView currentText, int position) {
-        if (currentText == null) {
-            return;
-        }
-        if (position != 0) {
-            currentText.setTextColor(colorYellow);
-        } else {
-            currentText.setTextColor(colorLightGray);
-        }
     }
 
     private void changeStateOption(TextView btn, int btnType, View mainBlock, View... blocks) {
@@ -398,22 +441,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         datePickerDialog.show();
     }
 
-    private void selectArrow(View view) {
+    private void selectArrow(ImageView view) {
         selectCurrentArrow(view);
-        curDirection = (String) view.getTag();
+        curDirection = Direction.of((String) view.getTag());
         presenter.launchSearch();
     }
 
-    private void selectCurrentArrow(View view) {
-        unselectAllColor(colorTop, colorBottom, colorLeft, colorRight, colorBottomLeft,
-                colorBottomRight, colorTopLeft, colorTopRight);
+    private void selectCurrentArrow(ImageView view) {
+        unselectAllColor(arrowTop, arrowBottom, arrowLeft, arrowRight, arrowBottomLeft,
+                arrowBottomRight, arrowTopLeft, arrowTopRight);
 
-        view.setBackgroundColor(colorYellow);
+        view.setColorFilter(colorYellow, PorterDuff.Mode.SRC_ATOP);
     }
 
-    private void unselectAllColor(View... views) {
-        for (View v : views) {
-            v.setBackgroundColor(colorGray);
+    private void unselectAllColor(ImageView... views) {
+        for (ImageView v : views) {
+            v.setColorFilter(colorBlack, PorterDuff.Mode.SRC_ATOP);
         }
     }
 
@@ -423,16 +466,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             params.width = w;
             button.setLayoutParams(params);
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-        changeSpinnerColor((TextView) parent.getChildAt(0), i);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
     @Override
@@ -448,7 +481,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public String getDirection() {
+    public Direction getDirection() {
         return curDirection;
     }
 
@@ -456,10 +489,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public String[] getCards() {
 
         return new String[]{
-                cards[spinnerOne.getSelectedItemPosition()],
-                cards[spinnerTwo.getSelectedItemPosition()],
-                cards[spinnerThree.getSelectedItemPosition()],
-                cards[spinnerFour.getSelectedItemPosition()]
+                getTextFrom(textOne),
+                getTextFrom(textTwo),
+                getTextFrom(textThree),
+                getTextFrom(textFour)
         };
     }
 
@@ -475,18 +508,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     getTextFrom(textDateFrom),
                     getTextFrom(textDateTo)
             };
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Override
     public Integer getActiveCountGames() {
-
         try {
-            return Integer.valueOf(
-                    getTextFrom(editCount1)
-            );
+            return Integer.valueOf(getTextFrom(editCount1));
         } catch (Exception ex) {
             return null;
         }
@@ -535,17 +564,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean isCardValid() {
         switch (getIntent().getStringExtra("type")) {
             case "one":
-                if (spinnerOne.getSelectedItemPosition() == 0 ||
-                        spinnerTwo.getSelectedItemPosition() == 0 ||
-                        spinnerThree.getSelectedItemPosition() == 0 ||
-                        spinnerFour.getSelectedItemPosition() == 0) {
+                if (getTextFrom(textOne).equals(cards[0]) ||
+                        getTextFrom(textTwo).equals(cards[0]) ||
+                        getTextFrom(textThree).equals(cards[0]) ||
+                        getTextFrom(textFour).equals(cards[0])) {
                     Toast.makeText(MainActivity.this, getResources()
                             .getString(R.string.error_select_card_one), Toast.LENGTH_LONG).show();
                     return false;
                 }
             case "two":
-                if (spinnerOne.getSelectedItemPosition() == 0 ||
-                        spinnerTwo.getSelectedItemPosition() == 0) {
+                if (getTextFrom(textOne).equals(cards[0]) ||
+                        getTextFrom(textTwo).equals(cards[0])) {
 
                     Toast.makeText(MainActivity.this, getResources()
                             .getString(R.string.error_select_card), Toast.LENGTH_LONG).show();
@@ -564,6 +593,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onBackPressed() {
+        if (curPosition != null) {
+            curPosition = null;
+            toGone(cardSelectorBlock);
+            return;
+        }
         changeVisible(blockAskExit);
     }
 }
