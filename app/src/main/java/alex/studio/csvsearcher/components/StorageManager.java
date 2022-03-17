@@ -6,6 +6,7 @@ import android.os.Environment;
 import com.ironz.binaryprefs.BinaryPreferencesBuilder;
 import com.ironz.binaryprefs.Preferences;
 
+import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.enums.Properties;
 
 import static alex.studio.csvsearcher.enums.Properties.*;
@@ -34,25 +35,22 @@ public class StorageManager {
     }
 
     public String read(Properties key) {
-
-        String result = decript(preference.getString(encript(key.name()), ""));
-
-        if (key == CSV_LINK) {
-            return result.isEmpty() ? "https://www.pais.co.il/chance/chance_resultsDownload.aspx"
-                    : result;
-        } else if(key == CSV_FOLDER){
-            return result.isEmpty() ? Environment.getExternalStorageDirectory() + "/Chance"
-                    : result;
+        if(key.getDefaultValue() == null && key.getResId() != 0) {
+            return read(key, context.getString(key.getResId()));
         } else {
-            return "";
+            return read(key, key.getDefaultValue());
         }
     }
 
+    public String read(Properties key, String defaultValue) {
+        String val = preference.getString(encript(key.name()), null);
+        return val == null ? defaultValue : decript(val);
+    }
 
     public void clearStorage() {
-        write(CSV_LINK, "");
-        write(CSV_FOLDER, "");
-        write(PDF_FOLDER, "");
-        write(FIRST_LAUNCH, "");
+        write(CSV_LINK, null);
+        write(CSV_FOLDER, null);
+        write(PDF_FOLDER, null);
+        write(FIRST_LAUNCH, null);
     }
 }

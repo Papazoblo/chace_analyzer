@@ -386,7 +386,7 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
             Toast.makeText(MainActivityThree.this, getResources()
                     .getString(R.string.error_select_card), Toast.LENGTH_LONG).show();
             return false;
-        } else if(getTextFrom(textThree).equals(cards[0]) ||
+        } else if(getTextFrom(textThree).equals(cards[0]) &&
                 !getTextFrom(textFour).equals(cards[0])) {
             Toast.makeText(MainActivityThree.this, getResources()
                     .getString(R.string.error_card_order), Toast.LENGTH_LONG).show();

@@ -1,211 +1,369 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".ui.SettingActivity">
+    android:layout_width="match_parent"
+    tools:context=".ui.SettingActivity"
+    android:background="@color/black">
 
     <TextView
         android:id="@+id/textAppName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="@dimen/smallPadding"
+        android:paddingRight="@dimen/smallPadding"
         android:text="@string/app_name"
         android:textColor="@color/opacityGreen"
         android:textSize="@dimen/bigAppNameSize"
-        android:gravity="center"
-        android:paddingLeft="@dimen/smallPadding"
-        android:paddingRight="@dimen/smallPadding"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <TextView
-        android:id="@+id/textSelectAlgorithm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/setting"
-        android:textColor="@color/green"
-        android:textSize="@dimen/underAppNameTextSize"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/smallPadding"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        android:layout_gravity="bottom" />
 
     <LinearLayout
-        android:id="@+id/mainBlock"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/textSelectAlgorithm"
-        android:layout_marginTop="@dimen/verySmallPadding"
-        android:paddingLeft="@dimen/smallPadding"
-        android:paddingRight="@dimen/smallPadding"
-        android:background="@color/grayBlue">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/blockCountGames"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textSelectAlgorithm"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible"
-            android:paddingBottom="@dimen/smallPadding">
+            android:layout_marginTop="@dimen/smallPadding"
+            android:layout_marginBottom="@dimen/smallPadding"
+            android:gravity="center"
+            android:text="@string/setting"
+            android:textColor="@color/green"
+            android:textSize="@dimen/underAppNameTextSize"
+            android:layout_gravity="center"/>
 
-            <TextView
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/csv_link"
-                android:textSize="@dimen/headTextSize"
-                android:textColor="@color/white"
-                android:paddingTop="@dimen/smallPadding"
-                android:paddingBottom="@dimen/smallPadding"
-                android:gravity="center_vertical|left"/>
+                android:paddingBottom="@dimen/checkSize">
 
-            <EditText
-                android:id="@+id/editCsvLink"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/headTextSize"
-                android:textColor="@color/textLightGrayBlue"
-                android:background="@drawable/bottom_left_right_border"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:gravity="left|center_vertical"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/blockSearchType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/smallPadding">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/csv_folder"
-                android:textSize="@dimen/headTextSize"
-                android:textColor="@color/white"
-                android:paddingTop="@dimen/smallPadding"
-                android:paddingBottom="@dimen/smallPadding"
-                android:gravity="center_vertical|left"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spinnerHeight"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textCsvFolder"
+                <LinearLayout
+                    android:id="@+id/mainBlock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/headTextSize"
-                    android:textColor="@color/textLightGrayBlue"
-                    android:gravity="center_vertical"
-                    android:layout_weight="3"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:background="@drawable/bottom_left_right_border"
-                    android:layout_marginRight="@dimen/verySmallPadding"/>
+                    android:background="@color/grayBlue"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/smallPadding"
+                    android:paddingRight="@dimen/smallPadding"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/blockCountGames"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/smallPadding"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:paddingTop="@dimen/smallPadding"
+                            android:paddingBottom="@dimen/smallPadding"
+                            android:text="@string/csv_link"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headTextSize" />
+
+                        <EditText
+                            android:id="@+id/editCsvLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bottom_left_right_border"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/textLightGrayBlue"
+                            android:textSize="@dimen/headTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/blockSearchType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/smallPadding">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:paddingTop="@dimen/smallPadding"
+                            android:paddingBottom="@dimen/smallPadding"
+                            android:text="@string/csv_folder"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headTextSize" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/spinnerHeight"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textCsvFolder"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/verySmallPadding"
+                                android:layout_weight="3"
+                                android:background="@drawable/bottom_left_right_border"
+                                android:ellipsize="end"
+                                android:gravity="center_vertical"
+                                android:singleLine="true"
+                                android:textColor="@color/textLightGrayBlue"
+                                android:textSize="@dimen/headTextSize" />
+
+                            <TextView
+                                android:id="@+id/btnChangeCsvFolder"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/verySmallPadding"
+                                android:layout_weight="10"
+                                android:background="@drawable/blue_dark_radius_border"
+                                android:gravity="center"
+                                android:text="@string/update"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/headThirdTextSize" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/blockFirstAlgoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/smallPadding"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:paddingTop="@dimen/smallPadding"
+                            android:paddingBottom="@dimen/smallPadding"
+                            android:text="@string/algo_name_1_set"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headTextSize" />
+
+                        <EditText
+                            android:id="@+id/editFirstAlgoName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bottom_left_right_border"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/textLightGrayBlue"
+                            android:textSize="@dimen/headTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/blockTwoAlgoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/smallPadding"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:paddingTop="@dimen/smallPadding"
+                            android:paddingBottom="@dimen/smallPadding"
+                            android:text="@string/algo_name_2_set"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headTextSize" />
+
+                        <EditText
+                            android:id="@+id/editTwoAlgoName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bottom_left_right_border"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/textLightGrayBlue"
+                            android:textSize="@dimen/headTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/blockThreeAlgoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/smallPadding"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:paddingTop="@dimen/smallPadding"
+                            android:paddingBottom="@dimen/smallPadding"
+                            android:text="@string/algo_name_3_set"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headTextSize" />
+
+                        <EditText
+                            android:id="@+id/editThreeAlgoName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bottom_left_right_border"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/textLightGrayBlue"
+                            android:textSize="@dimen/headTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/blockForAlgoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/smallPadding"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:paddingTop="@dimen/smallPadding"
+                            android:paddingBottom="@dimen/smallPadding"
+                            android:text="@string/algo_name_4_set"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headTextSize" />
+
+                        <EditText
+                            android:id="@+id/editForAlgoName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bottom_left_right_border"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/textLightGrayBlue"
+                            android:textSize="@dimen/headTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/blockFiveAlgoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/smallPadding"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:paddingTop="@dimen/smallPadding"
+                            android:paddingBottom="@dimen/smallPadding"
+                            android:text="@string/algo_name_5_set"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headTextSize" />
+
+                        <EditText
+                            android:id="@+id/editFiveAlgoName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bottom_left_right_border"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/textLightGrayBlue"
+                            android:textSize="@dimen/headTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/blockSixAlgoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/smallPadding"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|left"
+                            android:paddingTop="@dimen/smallPadding"
+                            android:paddingBottom="@dimen/smallPadding"
+                            android:text="@string/algo_name_6_set"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/headTextSize" />
+
+                        <EditText
+                            android:id="@+id/editSixAlgoName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bottom_left_right_border"
+                            android:ellipsize="end"
+                            android:gravity="left|center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/textLightGrayBlue"
+                            android:textSize="@dimen/headTextSize" />
+
+                    </LinearLayout>
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/btnChangeCsvFolder"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/update"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/headThirdTextSize"
-                    android:gravity="center"
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/selectCardBlockHeight"
+                    android:layout_marginTop="@dimen/selectCardBlockHeight"
+                    android:layout_marginRight="@dimen/verySmallPadding"
                     android:background="@drawable/blue_dark_radius_border"
-                    android:layout_weight="10"
-                    android:layout_marginLeft="@dimen/verySmallPadding"/>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/smallPadding">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/pdf_folder"
-                android:textSize="@dimen/headTextSize"
-                android:textColor="@color/white"
-                android:paddingTop="@dimen/smallPadding"
-                android:paddingBottom="@dimen/smallPadding"
-                android:gravity="center_vertical|left"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spinnerHeight"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textPdfFolder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/headThirdTextSize"
-                    android:textColor="@color/white"
-                    android:gravity="center_vertical"
-                    android:layout_weight="3"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:background="@drawable/bottom_left_right_border"
-                    android:layout_marginRight="@dimen/verySmallPadding"/>
-
-                <TextView
-                    android:id="@+id/btnChangePdfFolder"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/update"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/headThirdTextSize"
                     android:gravity="center"
-                    android:background="@drawable/blue_radius_border"
-                    android:layout_weight="10"
-                    android:layout_marginLeft="@dimen/verySmallPadding"/>
+                    android:padding="@dimen/smallPadding"
+                    android:text="@string/cancel"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headTextSize"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/btnSave"
+                    app:layout_constraintTop_toBottomOf="@id/mainBlock" />
 
-            </LinearLayout>
-        </LinearLayout>-->
+                <TextView
+                    android:id="@+id/btnSave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/selectCardBlockHeight"
+                    android:layout_marginBottom="@dimen/selectCardBlockHeight"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:gravity="center"
+                    android:padding="@dimen/smallPadding"
+                    android:text="@string/save"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headTextSize"
+                    app:layout_constraintLeft_toRightOf="@id/btnCancel"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/btnCancel" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/btnCancel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel"
-        android:textColor="@color/white"
-        android:textSize="@dimen/headTextSize"
-        android:gravity="center"
-        android:background="@drawable/blue_dark_radius_border"
-        android:padding="@dimen/smallPadding"
-        app:layout_constraintTop_toBottomOf="@id/mainBlock"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btnSave"
-        android:layout_marginTop="@dimen/selectCardBlockHeight"
-        android:layout_marginRight="@dimen/verySmallPadding"
-        android:layout_marginLeft="@dimen/selectCardBlockHeight"/>
-
-    <TextView
-        android:id="@+id/btnSave"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:textColor="@color/white"
-        android:textSize="@dimen/headTextSize"
-        android:gravity="center"
-        android:background="@drawable/blue_dark_radius_border"
-        android:padding="@dimen/smallPadding"
-        app:layout_constraintTop_toTopOf="@id/btnCancel"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/btnCancel"
-        android:layout_marginBottom="@dimen/selectCardBlockHeight"
-        android:layout_marginRight="@dimen/selectCardBlockHeight"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

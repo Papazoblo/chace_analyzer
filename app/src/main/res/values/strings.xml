@@ -52,6 +52,18 @@
     <string name="setting">Настройка</string>
     <string name="dateFormat">дд.мм.гггг</string>
     <string name="csv_link">Ссылка на файл CSV</string>
+    <string name="algo_name_1_set">Название алгоритма №1</string>
+    <string name="algo_name_2_set">Название алгоритма №2</string>
+    <string name="algo_name_3_set">Название алгоритма №3</string>
+    <string name="algo_name_4_set">Название алгоритма №4</string>
+    <string name="algo_name_5_set">Название алгоритма №5</string>
+    <string name="algo_name_6_set">Название алгоритма №6</string>
+    <string name="algo_name_1_set_val">1</string>
+    <string name="algo_name_2_set_val">2</string>
+    <string name="algo_name_3_set_val">3</string>
+    <string name="algo_name_4_set_val">4</string>
+    <string name="algo_name_5_set_val">5</string>
+    <string name="algo_name_6_set_val">6</string>
     <string name="update">Изменить</string>
     <string name="enter_all_fields">Необходимо заполнить все поля</string>
 
@@ -87,11 +99,11 @@
     <string name="error_select_date">Необходимо указать дату</string>
 
     <string name="download_complete">Загрузка завершена</string>
-    <string name="search_by_date_and_direction">Поиск по \nнаправлениям</string>
-    <string name="search_dropped_after_the_given">Поиск карт \nвыпавших \nпосле \nзаданных</string>
-    <string name="search_dropped_after_the_given_without_enter">Поиск карт выпавших \nпосле заданных</string>
-    <string name="search_coincidences_by_year">Поиск \nсовпадений по годам</string>
-    <string name="search_by_type">Поиск по\nтипу</string>
+    <string name="search_by_date_and_direction">Поиск по направлениям</string>
+    <string name="search_dropped_after_the_given">Поиск карт выпавших после заданных</string>
+    <string name="search_dropped_after_the_given_without_enter">Поиск карт выпавших после заданных</string>
+    <string name="search_coincidences_by_year">Поиск совпадений по годам</string>
+    <string name="search_by_type">Поиск по типу</string>
     <string name="search_by_type_without_space">Поиск по типу</string>
     <string name="seven">7</string>
     <string name="eight">8</string>

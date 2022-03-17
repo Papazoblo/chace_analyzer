@@ -60,12 +60,11 @@
                 android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginRight="@dimen/verySmallPadding"
                 android:layout_marginBottom="@dimen/verySmallPadding"
-                android:text="@string/search_by_date_and_direction"
                 android:textSize="@dimen/textInBox"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="high_quality"/>
+                android:breakStrategy="simple"/>
 
             <TextView
                 android:id="@+id/btnAlgorithmTwo"
@@ -75,12 +74,48 @@
                 android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginLeft="@dimen/verySmallPadding"
                 android:layout_marginBottom="@dimen/verySmallPadding"
-                android:text="@string/search_dropped_after_the_given"
                 android:textSize="@dimen/textInBox"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="high_quality"/>
+                android:breakStrategy="simple"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/blockBtnMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/verySmallPadding">
+
+            <TextView
+                android:id="@+id/btnAlgorithmThree"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:layout_marginRight="@dimen/verySmallPadding"
+                android:layout_marginBottom="@dimen/verySmallPadding"
+                android:textSize="@dimen/textInBox"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/paddingInBox"
+                android:breakStrategy="simple"/>
+
+            <TextView
+                android:id="@+id/btnAlgorithmFour"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:layout_marginLeft="@dimen/verySmallPadding"
+                android:layout_marginBottom="@dimen/verySmallPadding"
+                android:textSize="@dimen/textInBox"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:padding="@dimen/paddingInBox"
+                android:breakStrategy="simple"/>
         </LinearLayout>
 
         <LinearLayout
@@ -92,34 +127,32 @@
             android:layout_marginBottom="@dimen/verySmallPadding">
 
             <TextView
-                android:id="@+id/btnAlgorithmThree"
+                android:id="@+id/btnAlgorithmFive"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginRight="@dimen/verySmallPadding"
                 android:layout_marginTop="@dimen/verySmallPadding"
-                android:text="@string/search_coincidences_by_year"
                 android:textSize="@dimen/textInBox"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="high_quality"/>
+                android:breakStrategy="simple"/>
 
             <TextView
-                android:id="@+id/btnAlgorithmFour"
+                android:id="@+id/btnAlgorithmSix"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginLeft="@dimen/verySmallPadding"
                 android:layout_marginTop="@dimen/verySmallPadding"
-                android:text="@string/search_by_type"
                 android:textSize="@dimen/textInBox"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="high_quality"/>
+                android:breakStrategy="simple"/>
         </LinearLayout>
 
         <TextView

@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import alex.studio.csvsearcher.R;
@@ -31,14 +32,17 @@ public class StartActivity extends AppCompatActivity {
     private View btnStorage;
     private View btnDownload;
     private View btnSetting;
-    private View btnAlgorithmOne;
-    private View btnAlgorithmTwo;
-    private View btnAlgorithmThree;
-    private View btnAlgorithmFour;
+    private TextView btnAlgorithmOne;
+    private TextView btnAlgorithmTwo;
+    private TextView btnAlgorithmThree;
+    private TextView btnAlgorithmFour;
+    private TextView btnAlgorithmFive;
+    private TextView btnAlgorithmSix;
     private View btnYes;
     private View btnNo;
     private View blockBtnTop;
     private View blockBtnBottom;
+    private View blockBtnMedium;
     private View blockAsk;
     private View blockProgress;
     private View blockAskExit;
@@ -61,10 +65,13 @@ public class StartActivity extends AppCompatActivity {
         btnAlgorithmTwo = findViewById(R.id.btnAlgorithmTwo);
         btnAlgorithmThree = findViewById(R.id.btnAlgorithmThree);
         btnAlgorithmFour = findViewById(R.id.btnAlgorithmFour);
+        btnAlgorithmFive = findViewById(R.id.btnAlgorithmFive);
+        btnAlgorithmSix = findViewById(R.id.btnAlgorithmSix);
         btnYes = findViewById(R.id.btnYes);
         btnNo = findViewById(R.id.btnNo);
         blockBtnTop = findViewById(R.id.blockBtnTop);
         blockBtnBottom = findViewById(R.id.blockBtnBottom);
+        blockBtnMedium = findViewById(R.id.blockBtnMedium);
         blockAsk = findViewById(R.id.blockAsk);
         blockProgress = findViewById(R.id.blockProgress);
         blockAskExit = findViewById(R.id.blockAskExit);
@@ -73,7 +80,15 @@ public class StartActivity extends AppCompatActivity {
             int h = btnAlgorithmFour.getWidth();
             setBtnHeight(blockBtnBottom, h);
             setBtnHeight(blockBtnTop, h);
+            setBtnHeight(blockBtnMedium, h);
         });
+
+        btnAlgorithmOne.setText(storageManager.read(Properties.ALGO_1));
+        btnAlgorithmTwo.setText(storageManager.read(Properties.ALGO_2));
+        btnAlgorithmThree.setText(storageManager.read(Properties.ALGO_3));
+        btnAlgorithmFour.setText(storageManager.read(Properties.ALGO_4));
+        btnAlgorithmFive.setText(storageManager.read(Properties.ALGO_5));
+        btnAlgorithmSix.setText(storageManager.read(Properties.ALGO_6));
 
         initAction();
     }
@@ -93,7 +108,8 @@ public class StartActivity extends AppCompatActivity {
 
         btnNo.setOnClickListener(v -> toGone(blockAskExit));
 
-        blockAskExit.setOnClickListener(v -> {});
+        blockAskExit.setOnClickListener(v -> {
+        });
 
         btnSetting.setOnClickListener(v -> {
             if (permissionGranted()) {
@@ -105,13 +121,17 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        btnAlgorithmOne.setOnClickListener(v -> startMainActivity("one"));
+        btnAlgorithmOne.setOnClickListener(v -> startMainActivity(Properties.ALGO_1));
 
-        btnAlgorithmTwo.setOnClickListener(v -> startMainActivity("two"));
+        btnAlgorithmTwo.setOnClickListener(v -> startMainActivity(Properties.ALGO_2));
 
-        btnAlgorithmThree.setOnClickListener(v -> startMainActivity("three"));
+        btnAlgorithmThree.setOnClickListener(v -> startMainActivity(Properties.ALGO_3));
 
-        btnAlgorithmFour.setOnClickListener(v -> startMainActivity("four"));
+        btnAlgorithmFour.setOnClickListener(v -> startMainActivity(Properties.ALGO_4));
+
+        btnAlgorithmFive.setOnClickListener(v -> startMainActivity(Properties.ALGO_5));
+
+        btnAlgorithmSix.setOnClickListener(v -> startMainActivity(Properties.ALGO_6));
 
         btnDownload.setOnClickListener(v -> downloadFileAction());
 
@@ -126,7 +146,7 @@ public class StartActivity extends AppCompatActivity {
 
     private void downloadFileAction() {
 
-        if(!checkPermission()) {
+        if (!checkPermission()) {
             return;
         }
 
@@ -134,28 +154,32 @@ public class StartActivity extends AppCompatActivity {
 
         toGone(blockAsk);
         new DownloadFileFromURL(StartActivity.this,
-                storageManager.read(Properties.CSV_FOLDER))
-                .execute(storageManager.read(Properties.CSV_LINK));
+                storageManager.read(Properties.CSV_FOLDER)
+        ).execute(storageManager.read(Properties.CSV_LINK));
     }
 
-    private void startMainActivity(String algorithm) {
+    private void startMainActivity(Properties algorithm) {
 
         if (isPathValid()) {
             switch (algorithm) {
-                case "one":
-                case "two":
+                case ALGO_1:
+                    break;
+                case ALGO_2:
+                    break;
+                case ALGO_3:
+                case ALGO_4:
                     startActivity(new Intent(StartActivity.this, MainActivity.class)
-                            .putExtra("type", algorithm)
+                            .putExtra("type", algorithm.name())
                     );
                     break;
-                case "three":
+                case ALGO_5:
                     startActivity(new Intent(StartActivity.this, MainActivityThree.class)
-                            .putExtra("type", algorithm)
+                            .putExtra("type", algorithm.name())
                     );
                     break;
-                case "four":
+                case ALGO_6:
                     startActivity(new Intent(StartActivity.this, MainActivityFour.class)
-                            .putExtra("type", algorithm)
+                            .putExtra("type", algorithm.name())
                     );
                     break;
             }
@@ -173,7 +197,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private boolean checkPermission() {
-        if(!permissionGranted()) {
+        if (!permissionGranted()) {
             requestPermission();
             return false;
         }
@@ -218,10 +242,10 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(isVisible(blockAsk)) {
+        if (isVisible(blockAsk)) {
             toGone(blockAsk);
-        } else if(isVisible(blockProgress)) {
-        } else if(isVisible(blockAskExit)) {
+        } else if (isVisible(blockProgress)) {
+        } else if (isVisible(blockAskExit)) {
             toGone(blockAskExit);
         } else {
             toVisible(blockAskExit);

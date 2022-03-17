@@ -9,7 +9,7 @@ public class Encripter {
      * @return
      */
     public static String encript(String val){
-        if(val.isEmpty()){
+        if(val == null || val.isEmpty()){
             return "";
         }else{
             return new String(Base64.encode(val.getBytes(), Base64.DEFAULT));
@@ -22,7 +22,7 @@ public class Encripter {
      * @return
      */
     public static String decript(String val){
-        if(val.isEmpty()){
+        if(val == null || val.isEmpty()){
             return "";
         }else{
             return new String(Base64.decode(val.getBytes(), Base64.DEFAULT));

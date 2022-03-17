@@ -34,6 +34,7 @@ import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.CardPosition;
 import alex.studio.csvsearcher.enums.Direction;
+import alex.studio.csvsearcher.enums.Properties;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapter;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapterTwo;
 import alex.studio.csvsearcher.ui.main_activity.Main;
@@ -127,11 +128,11 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     }
 
     private void initConstant() {
-        switch (getIntent().getStringExtra("type")) {
-            case "one":
+        switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
+            case ALGO_3:
                 presenter = new MainPresenterOne();
                 break;
-            case "two":
+            case ALGO_4:
                 presenter = new MainPresenterTwo();
                 break;
         }
@@ -197,12 +198,12 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         recyclerView = findViewById(R.id.recyclerResult);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        switch (getIntent().getStringExtra("type")) {
-            case "one":
+        switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
+            case ALGO_3:
                 resultAdapter = new ResultAdapter(MainActivity.this);
                 recyclerView.setAdapter(resultAdapter);
                 break;
-            case "two":
+            case ALGO_4:
                 resultAdapterTwo = new ResultAdapterTwo(MainActivity.this);
                 recyclerView.setAdapter(resultAdapterTwo);
                 break;
@@ -335,13 +336,12 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     }
 
     private void initEquipment() {
-        String type = getIntent().getStringExtra("type");
 
-        switch (type) {
-            case "one":
+        switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
+            case ALGO_3:
                 initEquipmentOne();
                 break;
-            case "two":
+            case ALGO_4:
                 initEquipmentTwo();
                 break;
         }
@@ -562,8 +562,8 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
     @Override
     public boolean isCardValid() {
-        switch (getIntent().getStringExtra("type")) {
-            case "one":
+        switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
+            case ALGO_3:
                 if (getTextFrom(textOne).equals(cards[0]) ||
                         getTextFrom(textTwo).equals(cards[0]) ||
                         getTextFrom(textThree).equals(cards[0]) ||
@@ -572,7 +572,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
                             .getString(R.string.error_select_card_one), Toast.LENGTH_LONG).show();
                     return false;
                 }
-            case "two":
+            case ALGO_4:
                 if (getTextFrom(textOne).equals(cards[0]) ||
                         getTextFrom(textTwo).equals(cards[0])) {
 
