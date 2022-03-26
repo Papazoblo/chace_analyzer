@@ -5,11 +5,10 @@ import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
 import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import alex.studio.csvsearcher.R;
@@ -30,16 +30,21 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
     private List<String[]> listGroupCards = new ArrayList<>();
     private List<CardPosition> curPositions = new ArrayList<>();
     private List<View> cardSelectPanels = new ArrayList<>();
+    private List<List<TextView>> textViews = new ArrayList<>();
     private String[] cardArray;
     private Context context;
     private int colorYellow;
-    private int colorLightGray = 0;
+    private int colorLightGray;
+    private Drawable whiteBorderBg;
+    private Drawable bottomBorderBg;
 
     public CardAdapterFour(Context context) {
         this.context = context;
         this.colorYellow = context.getResources().getColor(R.color.yellow);
         this.colorLightGray = context.getResources().getColor(R.color.textLightGrayBlue);
         this.cardArray = context.getResources().getStringArray(R.array.cards);
+        whiteBorderBg = context.getResources().getDrawable(R.drawable.white_active_border);
+        bottomBorderBg = context.getResources().getDrawable(R.drawable.bottom_border);
     }
 
     @NonNull
@@ -55,6 +60,7 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
         String[] cards = listGroupCards.get(pos);
 
         cardSelectPanels.add(h.cardSelectorBlock);
+        textViews.add(Arrays.asList(h.textOne, h.textTwo, h.textThree, h.textFour));
 
         h.textOne.setOnClickListener(v -> selectCardClick(h, v, pos));
 
@@ -109,6 +115,7 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
                 }
                 String curText = getTextFrom(v);
                 selectTextView.setText(curText);
+                selectTextView.setBackground(bottomBorderBg);
                 changeColor(curText, selectTextView);
                 toGone(h.cardSelectorBlock);
                 curPositions.set(pos, null);
@@ -129,9 +136,15 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
     }
 
     private void selectCardClick(ResultViewHolder h, View view, int pos) {
-        for(View panel : cardSelectPanels) {
+        for (View panel : cardSelectPanels) {
             toGone(panel);
         }
+        for (List<TextView> group : textViews) {
+            for (TextView tv : group) {
+                tv.setBackground(bottomBorderBg);
+            }
+        }
+        view.setBackground(whiteBorderBg);
         curPositions.set(pos, CardPosition.of((String) view.getTag()));
         toVisible(h.cardSelectorBlock);
     }

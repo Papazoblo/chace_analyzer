@@ -1,5 +1,14 @@
 package alex.studio.csvsearcher.ui.main_activity.view;
 
+import static alex.studio.csvsearcher.enums.Direction.TOP;
+import static alex.studio.csvsearcher.utils.StringUtils.generateDateString;
+import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
+import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
+import static alex.studio.csvsearcher.utils.ViewUtils.isAnyVisible;
+import static alex.studio.csvsearcher.utils.ViewUtils.isEmpty;
+import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
+import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -21,6 +30,7 @@ import java.util.Map;
 
 import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardGroup;
+import alex.studio.csvsearcher.dto.CardMatch;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.Direction;
@@ -28,15 +38,6 @@ import alex.studio.csvsearcher.ui.adapter.CardAdapterFour;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapterFour;
 import alex.studio.csvsearcher.ui.main_activity.Main;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterFour;
-
-import static alex.studio.csvsearcher.enums.Direction.TOP;
-import static alex.studio.csvsearcher.utils.StringUtils.generateDateString;
-import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
-import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
-import static alex.studio.csvsearcher.utils.ViewUtils.isAnyVisible;
-import static alex.studio.csvsearcher.utils.ViewUtils.isEmpty;
-import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
-import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 public class MainActivityFour extends AppCompatActivity implements Main.View {
 
@@ -350,12 +351,17 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     }
 
     @Override
-    public void setRecyclerData(List<CardGroup> data) {
+    public void setCardGroupListToRecycler(List<CardGroup> data) {
 
     }
 
     @Override
-    public void setRecyclerResultData(List<CardSet> data) {
+    public void setCardMatchListToRecycler(List<CardMatch> data) {
+
+    }
+
+    @Override
+    public void setCardSetListToRecycler(List<CardSet> data) {
         resultAdapterFour.setData(data);
         if (data.isEmpty()) {
             toVisible(textNotMatch);
@@ -368,7 +374,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     }
 
     @Override
-    public void setRecyclerData(Map<String, Integer> data) {
+    public void setMapToRecycler(Map<String, Integer> data) {
 
     }
 

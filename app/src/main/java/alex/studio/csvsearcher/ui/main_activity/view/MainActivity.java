@@ -1,20 +1,24 @@
 package alex.studio.csvsearcher.ui.main_activity.view;
 
+import static alex.studio.csvsearcher.utils.StringUtils.generateDateString;
+import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
+import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
+import static alex.studio.csvsearcher.utils.ViewUtils.isAnyVisible;
+import static alex.studio.csvsearcher.utils.ViewUtils.isEmpty;
+import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
+import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,13 +27,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardGroup;
+import alex.studio.csvsearcher.dto.CardMatch;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.CardPosition;
@@ -38,18 +42,8 @@ import alex.studio.csvsearcher.enums.Properties;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapter;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapterTwo;
 import alex.studio.csvsearcher.ui.main_activity.Main;
-import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterOne;
+import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterMain;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterTwo;
-import alex.studio.csvsearcher.utils.ViewUtils;
-
-import static alex.studio.csvsearcher.utils.StringUtils.generateDateString;
-import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
-import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
-import static alex.studio.csvsearcher.utils.ViewUtils.isAnyVisible;
-import static alex.studio.csvsearcher.utils.ViewUtils.isEmpty;
-import static alex.studio.csvsearcher.utils.ViewUtils.isVisible;
-import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
-import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 public class MainActivity extends AppCompatActivity implements Main.View {
 
@@ -111,12 +105,14 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     private CardPosition curPosition;
     private Direction curDirection;
     private String[] cards;
-    int yearCur;
-    int monthCur;
-    int dayCur;
-    int yearCurTo;
-    int monthCurTo;
-    int dayCurTo;
+    private int yearCur;
+    private int monthCur;
+    private int dayCur;
+    private int yearCurTo;
+    private int monthCurTo;
+    private int dayCurTo;
+    private Drawable whiteBorderBg;
+    private Drawable bottomBorderBg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,20 +126,22 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     private void initConstant() {
         switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
             case ALGO_3:
-                presenter = new MainPresenterOne();
+                presenter = new MainPresenterMain();
                 break;
             case ALGO_4:
                 presenter = new MainPresenterTwo();
                 break;
         }
 
-        curDirection = null;
+        curDirection = Direction.FULL;
         curPosition = null;
         colorYellow = getResources().getColor(R.color.yellow);
         colorWhite = getResources().getColor(R.color.white);
         colorBlack = getResources().getColor(R.color.black);
         colorLightGray = getResources().getColor(R.color.textLightGrayBlue);
         cards = getResources().getStringArray(R.array.cards);
+        whiteBorderBg = getResources().getDrawable(R.drawable.white_active_border);
+        bottomBorderBg = getResources().getDrawable(R.drawable.bottom_border);
 
         Calendar dateAndTime = Calendar.getInstance();
         yearCur = yearCurTo = dateAndTime.get(Calendar.YEAR);
@@ -253,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
                 } else {
                     selectTextView.setTextColor(colorYellow);
                 }
+                selectTextView.setBackground(bottomBorderBg);
                 toGone(cardSelectorBlock);
                 curPosition = null;
             });
@@ -286,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         });
 
         btnSearch.setOnClickListener(v -> {
-            curDirection = null;
+            curDirection = Direction.FULL;
             presenter.launchSearch();
             unselectAllColor(arrowTop, arrowBottom, arrowLeft, arrowRight, arrowBottomLeft,
                     arrowBottomRight, arrowTopLeft, arrowTopRight);
@@ -331,6 +330,11 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     }
 
     private void selectCardClick(View view) {
+        textOne.setBackground(bottomBorderBg);
+        textTwo.setBackground(bottomBorderBg);
+        textThree.setBackground(bottomBorderBg);
+        textFour.setBackground(bottomBorderBg);
+        view.setBackground(whiteBorderBg);
         curPosition = CardPosition.of((String) view.getTag());
         toVisible(cardSelectorBlock);
     }
@@ -532,12 +536,17 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     }
 
     @Override
-    public void setRecyclerData(List<CardGroup> data) {
+    public void setCardGroupListToRecycler(List<CardGroup> data) {
         resultAdapter.setData(data);
     }
 
     @Override
-    public void setRecyclerResultData(List<CardSet> data) {
+    public void setCardMatchListToRecycler(List<CardMatch> data) {
+
+    }
+
+    @Override
+    public void setCardSetListToRecycler(List<CardSet> data) {
 
     }
 
@@ -547,7 +556,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     }
 
     @Override
-    public void setRecyclerData(Map<String, Integer> data) {
+    public void setMapToRecycler(Map<String, Integer> data) {
         resultAdapterTwo.setData(data);
     }
 

@@ -5,13 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 import alex.studio.csvsearcher.dto.CardSet;
+import alex.studio.csvsearcher.functions.Consumer;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivity;
 
 public class MainPresenterTwo extends MainPresenter {
 
     private Map<String, Integer> result;
 
-    protected void launchAlgorithm() {
+    @Override
+    public void initializationData(Consumer<CardSet> action) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void launchAlgorithm() {
 
         result = initResultMap();
         String[] selectCards = view.getCards();
@@ -72,7 +79,7 @@ public class MainPresenterTwo extends MainPresenter {
             CardSet cardSet = list.get(i);
 
             equalsGames(new String[]{cardSet.getCard1(), cardSet.getCard2(), cardSet.getCard3(),
-                    cardSet.getCard4()}, selectCards, dates, cardSet.getDate());
+                    cardSet.getCard4()}, selectCards, dates, cardSet.getDateString());
         }
     }
 
@@ -83,7 +90,7 @@ public class MainPresenterTwo extends MainPresenter {
             CardSet cardSet = list.get(i);
 
             equalsGames(new String[]{cardSet.getCard4(), cardSet.getCard3(), cardSet.getCard2(),
-                    cardSet.getCard1()}, selectCards, dates, cardSet.getDate());
+                    cardSet.getCard1()}, selectCards, dates, cardSet.getDateString());
         }
 
     }
@@ -120,8 +127,8 @@ public class MainPresenterTwo extends MainPresenter {
                                         cardSet2.getCardByPos(j),
                                         cardSet1.getCardByPos(j),
                                         cardSet0.getCardByPos(j)
-                                }, selectCards, dates, cardSet2.getDate(),
-                                cardSet1.getDate(), cardSet0.getDate());
+                                }, selectCards, dates, cardSet2.getDateString(),
+                                cardSet1.getDateString(), cardSet0.getDateString());
                         break;
                     case 3:
                         equalsGames(new String[]{
@@ -130,8 +137,8 @@ public class MainPresenterTwo extends MainPresenter {
                                         cardSet1.getCardByPos(j),
                                         cardSet0.getCardByPos(j)
                                 }, selectCards,
-                                dates, cardSet3.getDate(), cardSet2.getDate(), cardSet1.getDate(),
-                                cardSet0.getDate());
+                                dates, cardSet3.getDateString(), cardSet2.getDateString(), cardSet1.getDateString(),
+                                cardSet0.getDateString());
                         break;
                     case 4:
                         equalsGames(new String[]{
@@ -140,9 +147,9 @@ public class MainPresenterTwo extends MainPresenter {
                                         cardSet2.getCardByPos(j),
                                         cardSet1.getCardByPos(j),
                                         cardSet0.getCardByPos(j)
-                                }, selectCards, dates, cardSet4.getDate(),
-                                cardSet3.getDate(), cardSet2.getDate(),
-                                cardSet1.getDate(), cardSet0.getDate());
+                                }, selectCards, dates, cardSet4.getDateString(),
+                                cardSet3.getDateString(), cardSet2.getDateString(),
+                                cardSet1.getDateString(), cardSet0.getDateString());
                         break;
                 }
             }
@@ -182,8 +189,8 @@ public class MainPresenterTwo extends MainPresenter {
                                         cardSet0.getCardByPos(j),
                                         cardSet1.getCardByPos(j),
                                         cardSet2.getCardByPos(j)
-                                }, selectCards, dates, cardSet0.getDate(),
-                                cardSet1.getDate(), cardSet2.getDate());
+                                }, selectCards, dates, cardSet0.getDateString(),
+                                cardSet1.getDateString(), cardSet2.getDateString());
                         break;
                     case 3:
                         equalsGames(new String[]{
@@ -192,8 +199,8 @@ public class MainPresenterTwo extends MainPresenter {
                                         cardSet2.getCardByPos(j),
                                         cardSet3.getCardByPos(j)
                                 }, selectCards,
-                                dates, cardSet0.getDate(), cardSet1.getDate(), cardSet2.getDate(),
-                                cardSet3.getDate());
+                                dates, cardSet0.getDateString(), cardSet1.getDateString(), cardSet2.getDateString(),
+                                cardSet3.getDateString());
                         break;
                     case 4:
                         equalsGames(new String[]{
@@ -202,9 +209,9 @@ public class MainPresenterTwo extends MainPresenter {
                                         cardSet2.getCardByPos(j),
                                         cardSet3.getCardByPos(j),
                                         cardSet4.getCardByPos(j)
-                                }, selectCards, dates, cardSet0.getDate(),
-                                cardSet1.getDate(), cardSet2.getDate(),
-                                cardSet3.getDate(), cardSet4.getDate());
+                                }, selectCards, dates, cardSet0.getDateString(),
+                                cardSet1.getDateString(), cardSet2.getDateString(),
+                                cardSet3.getDateString(), cardSet4.getDateString());
                         break;
                 }
             }
@@ -223,8 +230,8 @@ public class MainPresenterTwo extends MainPresenter {
 
             equalsGames(new String[]{cardSet4.getCardByPos(0), cardSet3.getCardByPos(1),
                             cardSet2.getCardByPos(2), cardSet1.getCardByPos(3)}, selectCards,
-                    dates, cardSet1.getDate(), cardSet2.getDate(), cardSet3.getDate(),
-                    cardSet4.getDate());
+                    dates, cardSet1.getDateString(), cardSet2.getDateString(), cardSet3.getDateString(),
+                    cardSet4.getDateString());
         }
 
     }
@@ -240,8 +247,8 @@ public class MainPresenterTwo extends MainPresenter {
 
             equalsGames(new String[]{cardSet4.getCardByPos(3), cardSet3.getCardByPos(2),
                             cardSet2.getCardByPos(1), cardSet1.getCardByPos(0)}, selectCards,
-                    dates, cardSet1.getDate(), cardSet2.getDate(), cardSet3.getDate(),
-                    cardSet4.getDate());
+                    dates, cardSet1.getDateString(), cardSet2.getDateString(), cardSet3.getDateString(),
+                    cardSet4.getDateString());
         }
 
     }
@@ -257,8 +264,8 @@ public class MainPresenterTwo extends MainPresenter {
 
             equalsGames(new String[]{cardSet1.getCardByPos(0), cardSet2.getCardByPos(1),
                             cardSet3.getCardByPos(2), cardSet4.getCardByPos(3)}, selectCards,
-                    dates, cardSet1.getDate(), cardSet2.getDate(), cardSet3.getDate(),
-                    cardSet4.getDate());
+                    dates, cardSet1.getDateString(), cardSet2.getDateString(), cardSet3.getDateString(),
+                    cardSet4.getDateString());
         }
 
     }
@@ -274,8 +281,8 @@ public class MainPresenterTwo extends MainPresenter {
 
             equalsGames(new String[]{cardSet1.getCardByPos(3), cardSet2.getCardByPos(2),
                             cardSet3.getCardByPos(1), cardSet4.getCardByPos(0)}, selectCards,
-                    dates, cardSet1.getDate(), cardSet2.getDate(), cardSet3.getDate(),
-                    cardSet4.getDate());
+                    dates, cardSet1.getDateString(), cardSet2.getDateString(), cardSet3.getDateString(),
+                    cardSet4.getDateString());
         }
 
     }
@@ -363,7 +370,7 @@ public class MainPresenterTwo extends MainPresenter {
 
     private void outputData(Map<String, Integer> result) {
         ((MainActivity) view.getContext()).runOnUiThread(() -> {
-            view.setRecyclerData(result);
+            view.setMapToRecycler(result);
             view.changeVisibleBlockWait(false);
         });
     }

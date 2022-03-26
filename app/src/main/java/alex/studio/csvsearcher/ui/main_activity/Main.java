@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import alex.studio.csvsearcher.dto.CardGroup;
+import alex.studio.csvsearcher.dto.CardMatch;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.Direction;
+import alex.studio.csvsearcher.functions.Consumer;
 
 public interface Main {
 
@@ -19,23 +21,42 @@ public interface Main {
         void clearData();
 
         Direction getDirection();
+
         String[] getCards();
+
         List<String[]> getCardsList();
+
         String[] getActiveDate();
+
         Integer getActiveCountGames();
 
-        void setRecyclerData(List<CardGroup> data);
-        void setRecyclerData(Map<String, Integer> data);
-        void setRecyclerResultData(List<CardSet> data);
+        void setCardGroupListToRecycler(List<CardGroup> data);
+
+        void setCardMatchListToRecycler(List<CardMatch> data);
+
+        void setMapToRecycler(Map<String, Integer> data);
+
+        void setCardSetListToRecycler(List<CardSet> data);
+
         void setRecyclerResultData(List<Map<String, ColorMatch>> data, List<List<CardSet>> list);
+
         void changeVisibleBlockWait(boolean changeVisible);
+
         boolean isCardValid();
+
         boolean isOrderSet();
     }
 
     interface Presenter {
 
         void setView(Main.View view);
+
         void launchSearch();
+
+        void initReadFile(Consumer<CardSet> afterEnd);
+
+        void initializationData(Consumer<CardSet> action);
+
+        void launchAlgorithm();
     }
 }

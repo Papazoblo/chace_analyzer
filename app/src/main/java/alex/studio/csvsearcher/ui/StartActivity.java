@@ -1,8 +1,8 @@
 package alex.studio.csvsearcher.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import static alex.studio.csvsearcher.utils.ViewUtils.isVisible;
+import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
+import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 import android.Manifest;
 import android.content.Intent;
@@ -13,17 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.components.DownloadFileFromURL;
 import alex.studio.csvsearcher.components.StorageManager;
 import alex.studio.csvsearcher.enums.Properties;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivity;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivityFour;
+import alex.studio.csvsearcher.ui.main_activity.view.MainActivityOne;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivityThree;
-
-import static alex.studio.csvsearcher.utils.ViewUtils.isVisible;
-import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
-import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -160,30 +161,29 @@ public class StartActivity extends AppCompatActivity {
 
     private void startMainActivity(Properties algorithm) {
 
+        Class<?> clazz = null;
         if (isPathValid()) {
             switch (algorithm) {
                 case ALGO_1:
+                    clazz = MainActivityOne.class;
                     break;
                 case ALGO_2:
                     break;
                 case ALGO_3:
                 case ALGO_4:
-                    startActivity(new Intent(StartActivity.this, MainActivity.class)
-                            .putExtra("type", algorithm.name())
-                    );
+                    clazz = MainActivity.class;
                     break;
                 case ALGO_5:
-                    startActivity(new Intent(StartActivity.this, MainActivityThree.class)
-                            .putExtra("type", algorithm.name())
-                    );
+                    clazz = MainActivityThree.class;
                     break;
                 case ALGO_6:
-                    startActivity(new Intent(StartActivity.this, MainActivityFour.class)
-                            .putExtra("type", algorithm.name())
-                    );
+                    clazz = MainActivityFour.class;
                     break;
             }
         }
+        startActivity(new Intent(StartActivity.this, clazz)
+                .putExtra("type", algorithm.name())
+        );
     }
 
     private boolean isPathValid() {

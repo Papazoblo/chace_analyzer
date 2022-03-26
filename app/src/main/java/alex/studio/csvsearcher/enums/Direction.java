@@ -8,7 +8,8 @@ public enum Direction {
     TOP_LEFT("topLeft"),
     TOP_RIGHT("topRight"),
     BOTTOM_LEFT("bottomLeft"),
-    BOTTOM_RIGHT("bottomRight");
+    BOTTOM_RIGHT("bottomRight"),
+    FULL("full");
 
     Direction(String direction) {
         this.direction = direction;

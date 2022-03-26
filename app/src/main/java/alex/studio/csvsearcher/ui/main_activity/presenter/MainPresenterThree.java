@@ -1,5 +1,7 @@
 package alex.studio.csvsearcher.ui.main_activity.presenter;
 
+import static alex.studio.csvsearcher.utils.DateUtils.toDate;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -10,16 +12,21 @@ import java.util.Map;
 import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
+import alex.studio.csvsearcher.functions.Consumer;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivityThree;
-
-import static alex.studio.csvsearcher.utils.DateUtils.dateFromString;
 
 public class MainPresenterThree extends MainPresenter {
 
     private List<Map<String, ColorMatch>> result;
     private List<List<CardSet>> workList;
 
-    protected void launchAlgorithm() {
+    @Override
+    public void initializationData(Consumer<CardSet> action) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void launchAlgorithm() {
 
         String[] selectCards = view.getCards();
         String[] dates = view.getActiveDate();
@@ -180,10 +187,10 @@ public class MainPresenterThree extends MainPresenter {
     protected static boolean equalsDates(String[] dates, String[] cardDates) {
         for (String cardDateString : cardDates) {
             boolean dateInArray = false;
-            Date cardDate = dateFromString(cardDateString);
+            Date cardDate = toDate(cardDateString);
 
             for (String selectDateString : dates) {
-                Date selectDate = dateFromString(selectDateString);
+                Date selectDate = toDate(selectDateString);
 
                 if (selectDate.getTime() == cardDate.getTime()) {
                     dateInArray = true;
@@ -285,7 +292,7 @@ public class MainPresenterThree extends MainPresenter {
             List<CardSet> result = new ArrayList<>();
 
             for (CardSet cardSet : setList) {
-                if (equalsDates(new String[]{date}, new String[]{cardSet.getDate()})) {
+                if (equalsDates(new String[]{date}, new String[]{cardSet.getDateString()})) {
                     result.add(cardSet);
                 }
             }

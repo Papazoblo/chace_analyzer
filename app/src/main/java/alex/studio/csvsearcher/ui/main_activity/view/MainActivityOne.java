@@ -1,5 +1,6 @@
 package alex.studio.csvsearcher.ui.main_activity.view;
 
+import static alex.studio.csvsearcher.utils.DateUtils.toDate;
 import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
 import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
 import static alex.studio.csvsearcher.utils.ViewUtils.isVisible;
@@ -15,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,12 +36,12 @@ import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.CardPosition;
 import alex.studio.csvsearcher.enums.Direction;
-import alex.studio.csvsearcher.ui.adapter.ResultAdapterThree;
+import alex.studio.csvsearcher.ui.adapter.ResultAdapterOne;
 import alex.studio.csvsearcher.ui.adapter.YearAdapter;
 import alex.studio.csvsearcher.ui.main_activity.Main;
-import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterThree;
+import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterOne;
 
-public class MainActivityThree extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
+public class MainActivityOne extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
         Main.View {
 
     private Main.Presenter presenter;
@@ -47,6 +49,7 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
     private View btnAllYear;
     private View btnCancel;
     private View btnSave;
+    private View btnResetField;
     private View btnReset;
     private View btnSearch;
     private View btnYes;
@@ -54,11 +57,16 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
     private View blockAskExit;
     private View blockWait;
     private View blockSelectDate;
-    private View blockByDate;
+    private View blockOptions;
+    private View btnClose;
+    private View btnSetting;
+
+    private TextView switchFourRandom;
+    private TextView switchFourOriginal;
+    private TextView switchThreeRandom;
+    private TextView switchThreeOriginal;
 
     private LinearLayout cardSelectorBlock;
-
-    private Switch switchOrder;
 
     private TextView textOne;
     private TextView textTwo;
@@ -71,37 +79,41 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
     private RecyclerView recyclerYear;
     private RecyclerView recyclerView;
-    private ResultAdapterThree resultAdapter;
+    private ResultAdapterOne resultAdapter;
     private YearAdapter yearAdapter;
 
     private CardPosition curPosition;
     private int colorYellow;
     private int colorLightGray;
+    private Drawable activeBg;
     private Drawable whiteBorderBg;
     private Drawable bottomBorderBg;
 
+    private boolean[] optionsState = new boolean[]{true, false, false, false};
     private boolean stateAllYear = true;
 
     private String[] cards;
     private String[] months;
+    private String firstDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_three);
+        setContentView(R.layout.activity_main_one);
 
         initConstant();
         initView();
     }
 
     private void initConstant() {
-        presenter = new MainPresenterThree();
+        presenter = new MainPresenterOne();
         curPosition = null;
 
         colorLightGray = getResources().getColor(R.color.textLightGrayBlue);
         colorYellow = getResources().getColor(R.color.yellow);
         cards = getResources().getStringArray(R.array.cards);
         months = getResources().getStringArray(R.array.months);
+        activeBg = getResources().getDrawable(R.drawable.blue_radius_active_border);
         whiteBorderBg = getResources().getDrawable(R.drawable.white_active_border);
         bottomBorderBg = getResources().getDrawable(R.drawable.bottom_border);
     }
@@ -110,17 +122,23 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
         btnAllYear = findViewById(R.id.btnAllYear);
         btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
+        btnResetField = findViewById(R.id.btnResetField);
         btnReset = findViewById(R.id.btnReset);
+        btnSetting = findViewById(R.id.btnSettings);
         btnSearch = findViewById(R.id.btnSearch);
         btnYes = findViewById(R.id.btnYes);
         btnNo = findViewById(R.id.btnNo);
+        btnClose = findViewById(R.id.btnClose);
+        blockOptions = findViewById(R.id.blockOptions);
         blockAskExit = findViewById(R.id.blockAskExit);
         blockWait = findViewById(R.id.blockWait);
         blockSelectDate = findViewById(R.id.blockSelectDate);
-        blockByDate = findViewById(R.id.blockByDate);
         cardSelectorBlock = findViewById(R.id.cardSelectorBlock);
 
-        switchOrder = findViewById(R.id.switchOrder);
+        switchFourRandom = findViewById(R.id.switchFourRandom);
+        switchFourOriginal = findViewById(R.id.switchFourOriginal);
+        switchThreeOriginal = findViewById(R.id.switchThreeOriginal);
+        switchThreeRandom = findViewById(R.id.switchThreeRandom);
 
         textDate = findViewById(R.id.textDate);
 
@@ -133,19 +151,16 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
         recyclerView = findViewById(R.id.recyclerResult);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        resultAdapter = new ResultAdapterThree(MainActivityThree.this);
+        resultAdapter = new ResultAdapterOne(MainActivityOne.this);
         recyclerView.setAdapter(resultAdapter);
 
         recyclerYear = findViewById(R.id.recyclerYear);
         recyclerYear.setLayoutManager(new LinearLayoutManager(this));
-        yearAdapter = new YearAdapter(MainActivityThree.this);
+        yearAdapter = new YearAdapter(MainActivityOne.this, true);
         recyclerYear.setAdapter(yearAdapter);
         yearAdapter.initData();
 
-        textOne.setText(cards[0]);
-        textTwo.setText(cards[0]);
-        textThree.setText(cards[0]);
-        textFour.setText(cards[0]);
+        spinnerDays.post(this::initializationData);
 
         for (int i = 0; i < cards.length; i++) {
             TextView textView = (TextView) LayoutInflater.from(this)
@@ -194,6 +209,39 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
         initAction();
     }
 
+    private void initializationData() {
+        presenter.initializationData((CardSet val) -> {
+            textOne.setText(val.getCard1());
+            textTwo.setText(val.getCard2());
+            textThree.setText(val.getCard3());
+            textFour.setText(val.getCard4());
+            textDate.setText(val.getDateString());
+            Calendar c = Calendar.getInstance();
+            c.setTime(val.getDate());
+            spinnerMonths.setSelection(c.get(Calendar.MONTH));
+            selectDay(c.get(Calendar.MONTH));
+            spinnerDays.setSelection(c.get(Calendar.DAY_OF_MONTH) - 1);
+            firstDate = val.getDateString();
+        });
+    }
+
+    private void changeEnableState(int pos, View view) {
+        if (optionsState[pos]) {
+            view.setBackground(null);
+            optionsState[pos] = false;
+        } else {
+            view.setBackground(activeBg);
+            optionsState[pos] = true;
+        }
+    }
+
+    private void resetCards() {
+        textOne.setText(cards[0]);
+        textTwo.setText(cards[0]);
+        textThree.setText(cards[0]);
+        textFour.setText(cards[0]);
+    }
+
     private void initAction() {
 
         btnYes.setOnClickListener(v -> {
@@ -203,17 +251,24 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
         btnNo.setOnClickListener(v -> toGone(blockAskExit));
 
-        blockAskExit.setOnClickListener(v -> {});
+        blockAskExit.setOnClickListener(v -> {
+        });
 
-        btnAllYear.setOnClickListener(v -> changeAllYearState());
-
-        btnSave.setOnClickListener(v -> saveAction());
+        btnSave.setOnClickListener(v -> saveDateAction());
 
         btnCancel.setOnClickListener(v -> toGone(blockSelectDate));
+
+        btnResetField.setOnClickListener(v -> resetCards());
+
+        btnAllYear.setOnClickListener(v -> changeAllYearState());
 
         btnReset.setOnClickListener(v -> clearData());
 
         btnSearch.setOnClickListener(v -> presenter.launchSearch());
+
+        btnSetting.setOnClickListener(v -> toVisible(blockOptions));
+
+        btnClose.setOnClickListener(v -> toGone(blockOptions));
 
         textOne.setOnClickListener(this::selectCardClick);
 
@@ -227,13 +282,21 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
         spinnerDays.setOnItemSelectedListener(this);
 
+        switchFourOriginal.setOnClickListener(v -> changeEnableState(0, v));
+
+        switchFourRandom.setOnClickListener(v -> changeEnableState(1, v));
+
+        switchThreeOriginal.setOnClickListener(v -> changeEnableState(2, v));
+
+        switchThreeRandom.setOnClickListener(v -> changeEnableState(3, v));
+
         blockWait.setOnClickListener(v -> {
         });
 
         blockSelectDate.setOnClickListener(v -> {
         });
 
-        blockByDate.setOnClickListener(v -> toVisible(blockSelectDate));
+        textDate.setOnClickListener(v -> toVisible(blockSelectDate));
     }
 
     private void selectCardClick(View view) {
@@ -246,15 +309,8 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
         toVisible(cardSelectorBlock);
     }
 
-    private void initSpinner() {
-        ArrayAdapter<String> adapterMonth = new ArrayAdapter<>(MainActivityThree.this,
-                R.layout.item_spinner_style_month_drop_down, months);
-        adapterMonth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMonths.setAdapter(adapterMonth);
-    }
-
     private void changeAllYearState() {
-        if(!stateAllYear) {
+        if (!stateAllYear) {
             stateAllYear = true;
             yearAdapter.clearAll();
             btnAllYear.setBackground(getResources().getDrawable(R.drawable.blue_dark_radius_border));
@@ -263,6 +319,13 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
             yearAdapter.selectAll();
             btnAllYear.setBackground(getResources().getDrawable(R.drawable.blue_radius_active_border));
         }
+    }
+
+    private void initSpinner() {
+        ArrayAdapter<String> adapterMonth = new ArrayAdapter<>(MainActivityOne.this,
+                R.layout.item_spinner_style_month_drop_down, months);
+        adapterMonth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMonths.setAdapter(adapterMonth);
     }
 
     private void changeSpinnerColor(TextView currentText, int position) {
@@ -302,7 +365,7 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
     @Override
     public Context getContext() {
-        return MainActivityThree.this;
+        return MainActivityOne.this;
     }
 
     @Override
@@ -310,28 +373,18 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
         return null;
     }
 
+    public List<Integer> getSelectedYears() {
+        return yearAdapter.getArraySelectedYears();
+    }
+
     @Override
     public String[] getCards() {
-
-        if(getTextFrom(textThree).equals(cards[0])) {
-            return new String[]{
-                    getTextFrom(textOne),
-                    getTextFrom(textTwo)
-            };
-        } else if(getTextFrom(textFour).equals(cards[0])) {
-            return new String[]{
-                    getTextFrom(textOne),
-                    getTextFrom(textTwo),
-                    getTextFrom(textThree)
-            };
-        } else {
-            return new String[]{
-                    getTextFrom(textOne),
-                    getTextFrom(textTwo),
-                    getTextFrom(textThree),
-                    getTextFrom(textFour)
-            };
-        }
+        return new String[]{
+                getTextFrom(textFour),
+                getTextFrom(textThree),
+                getTextFrom(textTwo),
+                getTextFrom(textOne)
+        };
     }
 
     @Override
@@ -342,14 +395,8 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
     @Override
     public String[] getActiveDate() {
         String[] dMY = textDate.getText().toString().split("\\.");
-        dMY[2] = dMY[2].replace("[", "");
-        dMY[2] = dMY[2].replace("]", "");
-        String[] year = dMY[2].split(",");
-        String[] dates = new String[year.length];
-        for(int i = 0 ; i < year.length ; i++) {
-            dates[i] = dMY[0] + "." + dMY[1] + "." + year[i];
-        }
-        return dates;
+        String result = dMY[0] + "." + dMY[1] + "." + firstDate.substring(6);
+        return new String[]{result};
     }
 
     @Override
@@ -358,7 +405,15 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
     }
 
     public void clearData() {
-        resultAdapter.setData(new ArrayList<>(), new ArrayList<>());
+        resultAdapter.setData(new ArrayList<>());
+        textDate.setText(firstDate);
+        Date date = toDate(firstDate);
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        spinnerMonths.setSelection(c.get(Calendar.MONTH));
+        selectDay(c.get(Calendar.MONTH));
+        spinnerDays.setSelection(c.get(Calendar.DAY_OF_MONTH) - 1);
+        yearAdapter.clearAll();
     }
 
     @Override
@@ -368,7 +423,7 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
     @Override
     public void setCardMatchListToRecycler(List<CardMatch> data) {
-
+        resultAdapter.setData(data);
     }
 
     @Override
@@ -378,7 +433,7 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
     @Override
     public void setRecyclerResultData(List<Map<String, ColorMatch>> data, List<List<CardSet>> list) {
-        resultAdapter.setData(data, list);
+
     }
 
     @Override
@@ -397,20 +452,18 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
     @Override
     public boolean isCardValid() {
-        if (getTextFrom(textOne).equals(cards[0]) ||
-                getTextFrom(textTwo).equals(cards[0])) {
 
-            Toast.makeText(MainActivityThree.this, getResources()
-                    .getString(R.string.error_select_card), Toast.LENGTH_LONG).show();
-            return false;
-        } else if(getTextFrom(textThree).equals(cards[0]) &&
-                !getTextFrom(textFour).equals(cards[0])) {
-            Toast.makeText(MainActivityThree.this, getResources()
-                    .getString(R.string.error_card_order), Toast.LENGTH_LONG).show();
+        if (getTextFrom(textOne).equals(cards[0]) ||
+                getTextFrom(textTwo).equals(cards[0]) ||
+                getTextFrom(textThree).equals(cards[0]) ||
+                getTextFrom(textFour).equals(cards[0])) {
+
+            Toast.makeText(MainActivityOne.this, getResources()
+                    .getString(R.string.error_select_card_one), Toast.LENGTH_LONG).show();
             return false;
         }
-        if(textDate.getText().toString().isEmpty()) {
-            Toast.makeText(MainActivityThree.this, getResources()
+        if (textDate.getText().toString().isEmpty()) {
+            Toast.makeText(MainActivityOne.this, getResources()
                     .getString(R.string.error_select_date), Toast.LENGTH_LONG).show();
             return false;
         }
@@ -419,7 +472,11 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
     @Override
     public boolean isOrderSet() {
-        return switchOrder.isChecked();
+        return false;
+    }
+
+    public boolean[] getOptionsState() {
+        return optionsState;
     }
 
     @Override
@@ -429,32 +486,28 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
             toGone(cardSelectorBlock);
             return;
         }
-        if(isVisible(blockSelectDate)) {
+        if (isVisible(blockSelectDate)) {
             toGone(blockSelectDate);
         } else {
             changeVisible(blockAskExit);
         }
     }
 
-    private void saveAction() {
+    private void saveDateAction() {
         String result = "";
+        List<Integer> years = yearAdapter.getArraySelectedYears();
 
         result += addZero(spinnerDays.getSelectedItemPosition() + 1) + ".";
-        result += addZero(spinnerMonths.getSelectedItemPosition() + 1) + ".";
-        if(yearAdapter.getSelectedCount() > 0) {
-            result += yearAdapter.getSelectYears();
-        } else {
-            Toast.makeText(MainActivityThree.this,
-                    getResources().getString(R.string.error_select_year), Toast.LENGTH_LONG).show();
-            return;
-        }
+        result += addZero(spinnerMonths.getSelectedItemPosition() + 1) +
+                (years.size() == 1 ? "." + years.get(0) :
+                        years.isEmpty() ? "." + firstDate.substring(6) : "");
 
         textDate.setText(result);
         toGone(blockSelectDate);
     }
 
     private String addZero(int num) {
-        if(num < 10) {
+        if (num < 10) {
             return "0" + num;
         }
         return num + "";
@@ -464,7 +517,7 @@ public class MainActivityThree extends AppCompatActivity implements AdapterView.
 
         int selection = spinnerDays.getSelectedItemPosition();
 
-        ArrayAdapter<String> adapterDays = new ArrayAdapter<>(MainActivityThree.this,
+        ArrayAdapter<String> adapterDays = new ArrayAdapter<>(MainActivityOne.this,
                 R.layout.item_spinner_style_month_drop_down, generateDaysArray(pos));
         adapterDays.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDays.setAdapter(adapterDays);

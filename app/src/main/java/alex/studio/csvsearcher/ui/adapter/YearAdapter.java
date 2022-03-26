@@ -21,13 +21,19 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
     private List<YearDto> listYear = new ArrayList<>();
     private Context context;
 
+    private boolean multiselect;
     private int colorYellow;
     private int colorWhite;
 
     public YearAdapter(Context context) {
+        this(context, true);
+    }
+
+    public YearAdapter(Context context, boolean multiselect) {
         this.context = context;
         this.colorYellow = context.getResources().getColor(R.color.yellow);
         this.colorWhite = context.getResources().getColor(R.color.white);
+        this.multiselect = multiselect;
     }
 
     @NonNull
@@ -46,13 +52,30 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
         changeColor(h.textYear, yearDto.isMark());
 
         h.textYear.setOnClickListener(v -> {
+            if (!multiselect) {
+                clearAll();
+            }
             yearDto.changeMark();
             changeColor(h.textYear, yearDto.isMark());
         });
     }
 
+    public int selectYear(int yearNum) {
+        clearAll();
+        int i = 0;
+        for (YearDto year : listYear) {
+            if (year.getYear().equals(String.valueOf(yearNum))) {
+                year.setMark(true);
+                break;
+            }
+            i++;
+        }
+        notifyDataSetChanged();
+        return i;
+    }
+
     private void changeColor(TextView textView, boolean flag) {
-        if(flag) {
+        if (flag) {
             textView.setTextColor(colorYellow);
         } else {
             textView.setTextColor(colorWhite);
@@ -70,7 +93,7 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
         Calendar dateAndTime = Calendar.getInstance();
         int year = dateAndTime.get(Calendar.YEAR);
 
-        for(int i = 1994 ; i <= year; i++) {
+        for (int i = 1994; i <= year; i++) {
             listYear.add(new YearDto(i));
         }
         notifyDataSetChanged();
@@ -85,7 +108,7 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
     }
 
     private void changeStateAll(boolean state) {
-        for(YearDto year : listYear) {
+        for (YearDto year : listYear) {
             year.setMark(state);
         }
         notifyDataSetChanged();
@@ -93,8 +116,8 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
 
     public int getSelectedCount() {
         int count = 0;
-        for(YearDto year : listYear) {
-            if(year.isMark()) {
+        for (YearDto year : listYear) {
+            if (year.isMark()) {
                 count++;
             }
         }
@@ -104,9 +127,9 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
     public String getSelectYears() {
         String result = "";
 
-        for(YearDto year : listYear) {
-            if(year.isMark()) {
-                if(!result.isEmpty()) {
+        for (YearDto year : listYear) {
+            if (year.isMark()) {
+                if (!result.isEmpty()) {
                     result += ",";
                 }
                 result += year.getYear();
@@ -114,6 +137,16 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
         }
 
         return result.length() <= 4 ? result : "[" + result + "]";
+    }
+
+    public List<Integer> getArraySelectedYears() {
+        List<Integer> years = new ArrayList<>();
+        for (YearDto year : listYear) {
+            if (year.isMark()) {
+                years.add(Integer.valueOf(year.getYear()));
+            }
+        }
+        return years;
     }
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {

@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +47,7 @@ public class ResultAdapterThree extends RecyclerView.Adapter<ResultAdapterThree.
         adapter.setData(colorMatchMap.get(newPos), cardSetList.get(newPos));
 
         if(!cardSetList.get(newPos).isEmpty()) {
-            h.textDate.setText(cardSetList.get(newPos).get(0).getDate());
+            h.textDate.setText(cardSetList.get(newPos).get(0).getDateString());
         }
 
     }

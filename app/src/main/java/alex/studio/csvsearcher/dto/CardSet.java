@@ -1,5 +1,9 @@
 package alex.studio.csvsearcher.dto;
 
+import static alex.studio.csvsearcher.utils.DateUtils.toDate;
+
+import java.util.Date;
+
 public class CardSet {
 
     private final int DATE = 0;
@@ -44,8 +48,12 @@ public class CardSet {
         card4 = infoArray[CARD_4];
     }
 
-    public String getDate() {
+    public String getDateString() {
         return date;
+    }
+
+    public Date getDate() {
+        return toDate(this.date);
     }
 
     public String getNumber() {
@@ -66,6 +74,10 @@ public class CardSet {
 
     public String getCard4() {
         return card4;
+    }
+
+    public String[] getCards() {
+        return new String[]{card1, card2, card3, card4};
     }
 
     public String getCardByPos(int pos) {
@@ -105,12 +117,17 @@ public class CardSet {
         return card1 + " " + card2 + " " + card3 + " " + card4;
     }
 
+    public String toString(boolean isReverse, boolean withSpace) {
+        String result = isReverse ? card4 + " " + card3 + " " + card2 + " " + card1 : toString();
+        return withSpace ? result : result.replace(" ", "");
+    }
+
     public static CardSet stringToCardSet(String str) {
         String[] array = str.split(" ");
 
-        if(array.length == 4) {
+        if (array.length == 4) {
             CardSet result = new CardSet();
-            for(int i = 0 ; i < array.length ; i++) {
+            for (int i = 0; i < array.length; i++) {
                 result.setCardByPos(i, array[i]);
             }
             return result;

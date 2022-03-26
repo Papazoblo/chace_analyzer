@@ -19,17 +19,6 @@
         android:textSize="@dimen/bigAppNameSize"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/textSelectCards"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="@dimen/smallPadding"
-        android:text="@string/select_card"
-        android:textColor="@color/textLightGrayBlue"
-        android:textSize="@dimen/headTextSize"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/blockSelectCard"
         android:layout_width="match_parent"
@@ -38,10 +27,11 @@
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
         android:paddingBottom="@dimen/smallPadding"
-        app:layout_constraintTop_toBottomOf="@id/textSelectCards">
+        android:layout_marginTop="@dimen/smallPadding"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/btnReset"
+            android:id="@+id/btnResetField"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/verySmallPadding"
@@ -75,44 +65,53 @@
     <LinearLayout
         android:id="@+id/mainBlock"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/selectCardBlockHeight"
         android:layout_marginTop="@dimen/verySmallPadding"
-        android:background="@color/grayBlue"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/verySmallPadding"
+        android:paddingRight="@dimen/verySmallPadding"
+        android:paddingBottom="@dimen/smallPadding"
         app:layout_constraintTop_toBottomOf="@id/blockSelectCard">
 
-        <LinearLayout
-            android:id="@+id/blockByDate"
+        <TextView
+            android:id="@+id/btnReset"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/smallPadding"
+            android:layout_weight="1"
+            android:background="@drawable/blue_dark_radius_border"
+            android:gravity="center"
+            android:text="@string/reset"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headSecondTextSize" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/select_date"
-                android:textColor="@color/white"
-                android:textSize="@dimen/headTextSize" />
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/blue_dark_radius_border"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:hint="@string/dateFormat"
+            android:paddingLeft="@dimen/smallPadding"
+            android:paddingRight="@dimen/smallPadding"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/textLightGrayBlue"
+            android:textSize="@dimen/headTextSize" />
 
-            <TextView
-                android:id="@+id/textDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/smallPadding"
-                android:background="@drawable/bottom_left_right_border"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:hint="@string/dateFormat"
-                android:paddingLeft="@dimen/smallPadding"
-                android:paddingRight="@dimen/smallPadding"
-                android:singleLine="true"
-                android:textColor="@color/yellow"
-                android:textColorHint="@color/textLightGrayBlue"
-                android:textSize="@dimen/headTextSize" />
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/btnSettings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/smallPadding"
+            android:layout_weight="1"
+            android:background="@drawable/blue_dark_radius_border"
+            android:gravity="center"
+            android:text="@string/setting"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headSecondTextSize" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -205,34 +204,6 @@
                                 app:layout_constraintBottom_toBottomOf="@id/spinnerDay"
                                 app:layout_constraintRight_toRightOf="@id/spinnerDay" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <FrameLayout
-                            android:id="@+id/switchOrderBlock"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:orientation="vertical">
-
-                                <Switch
-                                    android:id="@+id/switchOrder"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_gravity="center" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_horizontal"
-                                    android:paddingBottom="@dimen/verySmallPadding"
-                                    android:text="@string/exact_sequence"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/headSecondTextSize" />
-                            </LinearLayout>
-                        </FrameLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -371,109 +342,59 @@
             android:orientation="vertical"
             android:padding="@dimen/smallPadding">
 
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/switchFourOriginal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:padding="@dimen/verySmallPadding"
-                android:layout_marginBottom="@dimen/smallPadding">
+                android:gravity="center|center_vertical"
+                android:text="@string/four_original"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headSecondTextSize"
+                android:padding="@dimen/smallPadding"
+                android:layout_marginBottom="@dimen/smallPadding"
+                android:layout_marginLeft="@dimen/smallPadding"
+                android:layout_marginRight="@dimen/smallPadding"
+                android:background="@drawable/blue_radius_active_border" />
 
-                <Switch
-                    android:id="@+id/switchFourOriginal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:checked="true" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start|center_vertical"
-                    android:paddingBottom="@dimen/verySmallPadding"
-                    android:text="@string/four_original"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/headSecondTextSize" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/switchFourRandom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:padding="@dimen/verySmallPadding"
-                android:layout_marginBottom="@dimen/smallPadding">
+                android:gravity="center|center_vertical"
+                android:text="@string/four_random"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headSecondTextSize"
+                android:padding="@dimen/smallPadding"
+                android:layout_marginBottom="@dimen/smallPadding"
+                android:layout_marginLeft="@dimen/smallPadding"
+                android:layout_marginRight="@dimen/smallPadding" />
 
-                <Switch
-                    android:id="@+id/switchFourRandom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:checked="true" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:paddingBottom="@dimen/verySmallPadding"
-                    android:text="@string/four_random"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/headSecondTextSize" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/switchThreeOriginal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:padding="@dimen/verySmallPadding"
-                android:layout_marginBottom="@dimen/smallPadding">
+                android:gravity="center|center_vertical"
+                android:text="@string/three_original"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headSecondTextSize"
+                android:padding="@dimen/smallPadding"
+                android:layout_marginBottom="@dimen/smallPadding"
+                android:layout_marginLeft="@dimen/smallPadding"
+                android:layout_marginRight="@dimen/smallPadding" />
 
-                <Switch
-                    android:id="@+id/switchThreeOriginal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:checked="true" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:paddingBottom="@dimen/verySmallPadding"
-                    android:text="@string/three_original"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/headSecondTextSize" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/switchThreeRandom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:padding="@dimen/verySmallPadding"
-                android:layout_marginBottom="@dimen/smallPadding">
-
-                <Switch
-                    android:id="@+id/switchThreeRandom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:checked="true" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:paddingBottom="@dimen/verySmallPadding"
-                    android:text="@string/three_random"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/headSecondTextSize" />
-            </LinearLayout>
+                android:gravity="center|center_vertical"
+                android:text="@string/three_random"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headSecondTextSize"
+                android:padding="@dimen/smallPadding"
+                android:layout_marginBottom="@dimen/smallPadding"
+                android:layout_marginLeft="@dimen/smallPadding"
+                android:layout_marginRight="@dimen/smallPadding" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -482,33 +403,27 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/btnCancelSearch"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/selectCardBlockHeight"
-                    android:layout_marginRight="@dimen/smallPadding"
-                    android:layout_weight="1"
-                    android:background="@drawable/blue_dark_radius_border"
-                    android:gravity="center"
-                    android:padding="@dimen/smallPadding"
-                    android:text="@string/cancel"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/headTextSize" />
+                    android:layout_height="1px"
+                    android:layout_weight="2" />
 
                 <TextView
                     android:id="@+id/btnClose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/smallPadding"
-                    android:layout_marginRight="@dimen/selectCardBlockHeight"
                     android:layout_weight="1"
-                    android:background="@drawable/blue_radius_active_border"
+                    android:background="@drawable/blue_dark_radius_border"
                     android:gravity="center"
                     android:padding="@dimen/smallPadding"
-                    android:text="@string/launch"
+                    android:text="@string/close"
                     android:textColor="@color/white"
                     android:textSize="@dimen/headTextSize" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_weight="2" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

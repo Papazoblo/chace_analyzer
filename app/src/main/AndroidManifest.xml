@@ -10,13 +10,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/short_app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:requestLegacyExternalStorage="true">
+        android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.SettingActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.SettingActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.StartActivity"
             android:screenOrientation="portrait">
@@ -26,6 +27,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.main_activity.view.MainActivityOne"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main_activity.view.MainActivity"
             android:screenOrientation="portrait" />

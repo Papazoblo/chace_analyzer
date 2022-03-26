@@ -1,5 +1,7 @@
 package alex.studio.csvsearcher.ui.main_activity.presenter;
 
+import static alex.studio.csvsearcher.dto.CardSet.stringToCardSet;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -8,15 +10,20 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import alex.studio.csvsearcher.dto.CardSet;
+import alex.studio.csvsearcher.functions.Consumer;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivityFour;
-
-import static alex.studio.csvsearcher.dto.CardSet.stringToCardSet;
 
 public class MainPresenterFour extends MainPresenter {
 
     private List<CardSet> result;
 
-    protected void launchAlgorithm() {
+    @Override
+    public void initializationData(Consumer<CardSet> action) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void launchAlgorithm() {
 
         result = new ArrayList<>();
         List<String[]> selectCards = view.getCardsList();
@@ -70,7 +77,7 @@ public class MainPresenterFour extends MainPresenter {
                                 current.getCard4()
                         },
                         selectCards.get(j),
-                        dates, selection.get(j + 1).getDate())) {
+                        dates, selection.get(j + 1).getDateString())) {
                     resultEquals = false;
                     break;
                 }
@@ -105,7 +112,7 @@ public class MainPresenterFour extends MainPresenter {
                                 current.getCard4()
                         },
                         selectCards.get(j),
-                        dates, selection.get(j).getDate())) {
+                        dates, selection.get(j).getDateString())) {
                     resultEquals = false;
                     break;
                 }
@@ -305,7 +312,7 @@ public class MainPresenterFour extends MainPresenter {
 
         if (dates != null) {
             for (int i = 0; i < cardsFromFile.size(); i++) {
-                if (!equalsDates(dates, new String[]{cardsFromFile.get(i).getDate()})) {
+                if (!equalsDates(dates, new String[]{cardsFromFile.get(i).getDateString()})) {
                     return false;
                 }
             }
@@ -350,7 +357,7 @@ public class MainPresenterFour extends MainPresenter {
 
     private void outputData(List<CardSet> result) {
         ((MainActivityFour) view.getContext()).runOnUiThread(() -> {
-            view.setRecyclerResultData(result);
+            view.setCardSetListToRecycler(result);
             view.changeVisibleBlockWait(false);
         });
     }
