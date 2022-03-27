@@ -1,120 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/smallPadding">
 
-        <TextView
-            android:id="@+id/textOne"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bottom_border"
-            android:gravity="center"
-            android:tag="one"
-            android:textColor="@color/textLightGrayBlue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/triangleOne"
-            android:layout_width="@dimen/triangleSize"
-            android:layout_height="@dimen/triangleSize"
-            android:src="@drawable/triangle"
-            app:layout_constraintBottom_toBottomOf="@id/textOne"
-            app:layout_constraintRight_toRightOf="@id/textOne" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textOne"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_border"
+                android:gravity="center"
+                android:tag="one"
+                android:textColor="@color/textLightGrayBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="@dimen/verySmallPadding"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/triangleOne"
+                android:layout_width="@dimen/triangleSize"
+                android:layout_height="@dimen/triangleSize"
+                android:src="@drawable/triangle"
+                app:layout_constraintBottom_toBottomOf="@id/textOne"
+                app:layout_constraintRight_toRightOf="@id/textOne" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textTwo"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bottom_border"
-            android:gravity="center"
-            android:tag="two"
-            android:textColor="@color/textLightGrayBlue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/triangleTwo"
-            android:layout_width="@dimen/triangleSize"
-            android:layout_height="@dimen/triangleSize"
-            android:src="@drawable/triangle"
-            app:layout_constraintBottom_toBottomOf="@id/textTwo"
-            app:layout_constraintRight_toRightOf="@id/textTwo" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textTwo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_border"
+                android:gravity="center"
+                android:tag="two"
+                android:textColor="@color/textLightGrayBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="@dimen/verySmallPadding"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/triangleTwo"
+                android:layout_width="@dimen/triangleSize"
+                android:layout_height="@dimen/triangleSize"
+                android:src="@drawable/triangle"
+                app:layout_constraintBottom_toBottomOf="@id/textTwo"
+                app:layout_constraintRight_toRightOf="@id/textTwo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textThree"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bottom_border"
-            android:gravity="center"
-            android:tag="three"
-            android:textColor="@color/textLightGrayBlue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/triangleThree"
-            android:layout_width="@dimen/triangleSize"
-            android:layout_height="@dimen/triangleSize"
-            android:src="@drawable/triangle"
-            app:layout_constraintBottom_toBottomOf="@id/textThree"
-            app:layout_constraintRight_toRightOf="@id/textThree" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textThree"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_border"
+                android:gravity="center"
+                android:tag="three"
+                android:textColor="@color/textLightGrayBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="@dimen/verySmallPadding"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/triangleThree"
+                android:layout_width="@dimen/triangleSize"
+                android:layout_height="@dimen/triangleSize"
+                android:src="@drawable/triangle"
+                app:layout_constraintBottom_toBottomOf="@id/textThree"
+                app:layout_constraintRight_toRightOf="@id/textThree" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textFour"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bottom_border"
-            android:gravity="center"
-            android:tag="four"
-            android:textColor="@color/textLightGrayBlue"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/triangleFour"
-            android:layout_width="@dimen/triangleSize"
-            android:layout_height="@dimen/triangleSize"
-            android:src="@drawable/triangle"
-            app:layout_constraintBottom_toBottomOf="@id/textFour"
-            app:layout_constraintRight_toRightOf="@id/textFour" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textFour"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_border"
+                android:gravity="center"
+                android:tag="four"
+                android:textColor="@color/textLightGrayBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/triangleFour"
+                android:layout_width="@dimen/triangleSize"
+                android:layout_height="@dimen/triangleSize"
+                android:src="@drawable/triangle"
+                app:layout_constraintBottom_toBottomOf="@id/textFour"
+                app:layout_constraintRight_toRightOf="@id/textFour" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondSelectCardBlock"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/smallPadding">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textFive"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_border"
+                android:gravity="center"
+                android:tag="one"
+                android:textColor="@color/textLightGrayBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/triangleFive"
+                android:layout_width="@dimen/triangleSize"
+                android:layout_height="@dimen/triangleSize"
+                android:src="@drawable/triangle"
+                app:layout_constraintBottom_toBottomOf="@id/textFive"
+                app:layout_constraintRight_toRightOf="@id/textFive" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textSix"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_border"
+                android:gravity="center"
+                android:tag="two"
+                android:textColor="@color/textLightGrayBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/triangleSix"
+                android:layout_width="@dimen/triangleSize"
+                android:layout_height="@dimen/triangleSize"
+                android:src="@drawable/triangle"
+                app:layout_constraintBottom_toBottomOf="@id/textSix"
+                app:layout_constraintRight_toRightOf="@id/textSix" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textSeven"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_border"
+                android:gravity="center"
+                android:tag="three"
+                android:textColor="@color/textLightGrayBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/triangleSeven"
+                android:layout_width="@dimen/triangleSize"
+                android:layout_height="@dimen/triangleSize"
+                android:src="@drawable/triangle"
+                app:layout_constraintBottom_toBottomOf="@id/textSeven"
+                app:layout_constraintRight_toRightOf="@id/textSeven" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textEight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bottom_border"
+                android:gravity="center"
+                android:tag="four"
+                android:textColor="@color/textLightGrayBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/triangleEight"
+                android:layout_width="@dimen/triangleSize"
+                android:layout_height="@dimen/triangleSize"
+                android:src="@drawable/triangle"
+                app:layout_constraintBottom_toBottomOf="@id/textEight"
+                app:layout_constraintRight_toRightOf="@id/textEight" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -42,10 +42,10 @@ import alex.studio.csvsearcher.enums.Properties;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapter;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapterTwo;
 import alex.studio.csvsearcher.ui.main_activity.Main;
-import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterMain;
-import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterTwo;
+import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterFour;
+import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterThree;
 
-public class MainActivity extends AppCompatActivity implements Main.View {
+public class MainActivityThreeFour extends AppCompatActivity implements Main.View {
 
     private Main.Presenter presenter;
 
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     private View blockCountGames;
     private View blockByDate;
     private View blockWait;
+    private View secondSelectCardBlock;
 
     private LinearLayout cardSelectorBlock;
 
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_three_four);
 
         initConstant();
         initView();
@@ -126,10 +127,10 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     private void initConstant() {
         switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
             case ALGO_3:
-                presenter = new MainPresenterMain();
+                presenter = new MainPresenterThree();
                 break;
             case ALGO_4:
-                presenter = new MainPresenterTwo();
+                presenter = new MainPresenterFour();
                 break;
         }
 
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
         blockByDate = findViewById(R.id.blockByDate);
         blockWait = findViewById(R.id.blockWait);
         cardSelectorBlock = findViewById(R.id.cardSelectorBlock);
+        secondSelectCardBlock = findViewById(R.id.secondSelectCardBlock);
 
         textAppNameSmall = findViewById(R.id.textAppNameSmall);
         textDateFrom = findViewById(R.id.textDateFrom);
@@ -198,11 +200,11 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
         switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
             case ALGO_3:
-                resultAdapter = new ResultAdapter(MainActivity.this);
+                resultAdapter = new ResultAdapter(MainActivityThreeFour.this);
                 recyclerView.setAdapter(resultAdapter);
                 break;
             case ALGO_4:
-                resultAdapterTwo = new ResultAdapterTwo(MainActivity.this);
+                resultAdapterTwo = new ResultAdapterTwo(MainActivityThreeFour.this);
                 recyclerView.setAdapter(resultAdapterTwo);
                 break;
 
@@ -210,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
         btnByDate.post(() -> changeButtonWidth(btnSearch.getWidth(), btnCountGames, btnByDate));
 
+        toGone(secondSelectCardBlock);
         textOne.setText(cards[0]);
         textTwo.setText(cards[0]);
         textThree.setText(cards[0]);
@@ -407,7 +410,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
     }
 
     private void closeOtherOptionMessage() {
-        Toast.makeText(MainActivity.this, getResources().getString(
+        Toast.makeText(MainActivityThreeFour.this, getResources().getString(
                 R.string.close_other_option), Toast.LENGTH_LONG).show();
     }
 
@@ -415,7 +418,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
         DatePickerDialog datePickerDialog;
         if (dateType) {
-            datePickerDialog = new DatePickerDialog(MainActivity.this,
+            datePickerDialog = new DatePickerDialog(MainActivityThreeFour.this,
                     (datePicker, year, month, day) -> {
 
                         dayCur = day;
@@ -428,7 +431,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
                     monthCur,
                     dayCur);
         } else {
-            datePickerDialog = new DatePickerDialog(MainActivity.this,
+            datePickerDialog = new DatePickerDialog(MainActivityThreeFour.this,
                     (datePicker, year, month, day) -> {
 
                         dayCurTo = day;
@@ -481,7 +484,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
 
     @Override
     public Context getContext() {
-        return MainActivity.this;
+        return MainActivityThreeFour.this;
     }
 
     @Override
@@ -577,7 +580,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
                         getTextFrom(textTwo).equals(cards[0]) ||
                         getTextFrom(textThree).equals(cards[0]) ||
                         getTextFrom(textFour).equals(cards[0])) {
-                    Toast.makeText(MainActivity.this, getResources()
+                    Toast.makeText(MainActivityThreeFour.this, getResources()
                             .getString(R.string.error_select_card_one), Toast.LENGTH_LONG).show();
                     return false;
                 }
@@ -585,7 +588,7 @@ public class MainActivity extends AppCompatActivity implements Main.View {
                 if (getTextFrom(textOne).equals(cards[0]) ||
                         getTextFrom(textTwo).equals(cards[0])) {
 
-                    Toast.makeText(MainActivity.this, getResources()
+                    Toast.makeText(MainActivityThreeFour.this, getResources()
                             .getString(R.string.error_select_card), Toast.LENGTH_LONG).show();
                     return false;
                 }

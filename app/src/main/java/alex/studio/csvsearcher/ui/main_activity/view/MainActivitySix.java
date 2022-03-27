@@ -37,9 +37,9 @@ import alex.studio.csvsearcher.enums.Direction;
 import alex.studio.csvsearcher.ui.adapter.CardAdapterFour;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapterFour;
 import alex.studio.csvsearcher.ui.main_activity.Main;
-import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterFour;
+import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterSix;
 
-public class MainActivityFour extends AppCompatActivity implements Main.View {
+public class MainActivitySix extends AppCompatActivity implements Main.View {
 
     private Main.Presenter presenter;
 
@@ -86,14 +86,14 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_four);
+        setContentView(R.layout.activity_main_six);
 
         initConstant();
         initView();
     }
 
     private void initConstant() {
-        presenter = new MainPresenterFour();
+        presenter = new MainPresenterSix();
 
         curDirection = TOP;
 
@@ -133,11 +133,11 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
 
         recyclerView = findViewById(R.id.recyclerResult);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        resultAdapterFour = new ResultAdapterFour(MainActivityFour.this);
+        resultAdapterFour = new ResultAdapterFour(MainActivitySix.this);
         recyclerView.setAdapter(resultAdapterFour);
         recyclerRow = findViewById(R.id.recyclerRow);
         recyclerRow.setLayoutManager(new LinearLayoutManager(this));
-        cardAdapterFour = new CardAdapterFour(MainActivityFour.this);
+        cardAdapterFour = new CardAdapterFour(MainActivitySix.this);
         recyclerRow.setAdapter(cardAdapterFour);
 
         changeColor((ImageView) btnTop, colorYellow);
@@ -255,7 +255,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     }
 
     private void closeOtherOptionMessage() {
-        Toast.makeText(MainActivityFour.this, getResources().getString(
+        Toast.makeText(MainActivitySix.this, getResources().getString(
                 R.string.close_other_option), Toast.LENGTH_LONG).show();
     }
 
@@ -263,7 +263,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
 
         DatePickerDialog datePickerDialog;
         if (dateType) {
-            datePickerDialog = new DatePickerDialog(MainActivityFour.this,
+            datePickerDialog = new DatePickerDialog(MainActivitySix.this,
                     (datePicker, year, month, day) -> {
 
                         dayCur = day;
@@ -276,7 +276,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
                     monthCur,
                     dayCur);
         } else {
-            datePickerDialog = new DatePickerDialog(MainActivityFour.this,
+            datePickerDialog = new DatePickerDialog(MainActivitySix.this,
                     (datePicker, year, month, day) -> {
 
                         dayCurTo = day;
@@ -302,7 +302,7 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
 
     @Override
     public Context getContext() {
-        return MainActivityFour.this;
+        return MainActivitySix.this;
     }
 
     @Override
@@ -390,21 +390,21 @@ public class MainActivityFour extends AppCompatActivity implements Main.View {
     @Override
     public boolean isCardValid() {
         if (cardAdapterFour.getItemCount() < 2) {
-            Toast.makeText(MainActivityFour.this,
+            Toast.makeText(MainActivitySix.this,
                     getResources().getString(R.string.error_min_limit_rows),
                     Toast.LENGTH_LONG).show();
             return false;
         } else {
 
             if (!cardAdapterFour.isSelectedValid()) {
-                Toast.makeText(MainActivityFour.this,
+                Toast.makeText(MainActivitySix.this,
                         getResources().getString(R.string.error_select_card_position),
                         Toast.LENGTH_LONG).show();
                 return false;
             }
 
             if (!cardAdapterFour.isHasCardInRow()) {
-                Toast.makeText(MainActivityFour.this,
+                Toast.makeText(MainActivitySix.this,
                         getResources().getString(R.string.error_row_is_empty),
                         Toast.LENGTH_LONG).show();
                 return false;

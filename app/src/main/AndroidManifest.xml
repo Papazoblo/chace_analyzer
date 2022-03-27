@@ -31,13 +31,13 @@
             android:name=".ui.main_activity.view.MainActivityOne"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main_activity.view.MainActivity"
+            android:name=".ui.main_activity.view.MainActivityThreeFour"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main_activity.view.MainActivityThree"
+            android:name=".ui.main_activity.view.MainActivityFive"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.main_activity.view.MainActivityFour"
+            android:name=".ui.main_activity.view.MainActivitySix"
             android:screenOrientation="portrait" />
     </application>
 

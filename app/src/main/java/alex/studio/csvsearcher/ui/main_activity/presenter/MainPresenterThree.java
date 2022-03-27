@@ -1,24 +1,14 @@
 package alex.studio.csvsearcher.ui.main_activity.presenter;
 
-import static alex.studio.csvsearcher.utils.DateUtils.toDate;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import alex.studio.csvsearcher.R;
+import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardSet;
-import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.functions.Consumer;
-import alex.studio.csvsearcher.ui.main_activity.view.MainActivityThree;
+import alex.studio.csvsearcher.ui.main_activity.view.MainActivityThreeFour;
 
 public class MainPresenterThree extends MainPresenter {
-
-    private List<Map<String, ColorMatch>> result;
-    private List<List<CardSet>> workList;
 
     @Override
     public void initializationData(Consumer<CardSet> action) {
@@ -33,272 +23,405 @@ public class MainPresenterThree extends MainPresenter {
 
         List<CardSet> workListCard = getWorkList(1);
 
-        workList = createWorkList(workListCard, dates);
-        result = new ArrayList<>();
+        List<CardGroup> result = new ArrayList<>();
 
-        for (List<CardSet> cardSetList : workList) {
-            Map<String, ColorMatch> mapResult = new HashMap<>();
-
-            searchLeftDirection(cardSetList, selectCards, mapResult);
-            searchTopDirection(cardSetList, selectCards, mapResult);
-            searchTopRightDirection(cardSetList, selectCards, mapResult);
-            searchTopLeftDirection(cardSetList, selectCards, mapResult);
-
-            result.add(mapResult);
+        switch (view.getDirection()) {
+            case RIGHT:
+                result = searchRightDirection(workListCard, dates, selectCards);
+                break;
+            case LEFT:
+                result = searchLeftDirection(workListCard, dates, selectCards);
+                break;
+            case TOP:
+                result = searchTopDirection(workListCard, dates, selectCards);
+                break;
+            case BOTTOM:
+                result = searchBottomDirection(workListCard, dates, selectCards);
+                break;
+            case TOP_RIGHT:
+                result = searchTopRightDirection(workListCard, dates, selectCards);
+                break;
+            case TOP_LEFT:
+                result = searchTopLeftDirection(workListCard, dates, selectCards);
+                break;
+            case BOTTOM_RIGHT:
+                result = searchBottomRightDirection(workListCard, dates, selectCards);
+                break;
+            case BOTTOM_LEFT:
+                result = searchBottomLeftDirection(workListCard, dates, selectCards);
+                break;
+            default:
+                result.addAll(searchRightDirection(workListCard, dates, selectCards));
+                result.addAll(searchLeftDirection(workListCard, dates, selectCards));
+                result.addAll(searchTopDirection(workListCard, dates, selectCards));
+                result.addAll(searchBottomDirection(workListCard, dates, selectCards));
+                result.addAll(searchTopRightDirection(workListCard, dates, selectCards));
+                result.addAll(searchTopLeftDirection(workListCard, dates, selectCards));
+                result.addAll(searchBottomRightDirection(workListCard, dates, selectCards));
+                result.addAll(searchBottomLeftDirection(workListCard, dates, selectCards));
         }
 
-        for(int i = workList.size() - 1 ; i >= 0 ; i--) {
-            if(workList.get(i).isEmpty()) {
-                workList.remove(i);
-                result.remove(i);
-                i--;
-            }
-        }
-
-        outputData(workList);
+        outputData(result);
     }
 
-    private void searchLeftDirection(List<CardSet> list, String[] selectCards,
-                                     Map<String, ColorMatch> mapResult) {
-
-        int maxLength = selectCards.length;
-        boolean order = view.isOrderSet();
+    private List<CardGroup> searchRightDirection(List<CardSet> list, String[] dates,
+                                                 String[] selectCards) {
+        List<CardGroup> listGroup = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
             CardSet cardSet = list.get(i);
 
-            for(int j = 0 ; j + maxLength <= 4 ; j++) {
-
-                String[] equalArray = new String[maxLength];
-                for(int eq = 0 ; eq < maxLength ; eq++) {
-                    equalArray[eq] = cardSet.getCardByPos(j + eq);
-                }
-
-                if(!equalsGames(equalArray, selectCards, order).isEmpty()) {
-
-                    for (int m = 0; m < maxLength; m++) {
-                        createColorMatch(i, m + j, mapResult);
-                    }
+            if (equalsGames(new String[]{cardSet.getCard1(), cardSet.getCard2(), cardSet.getCard3(),
+                    cardSet.getCard4()}, selectCards, dates, cardSet.getDateString())) {
+                if (i == 0) {
+                    listGroup.add(new CardGroup(null, list.get(i + 1)));
+                } else if (i == list.size() - 1) {
+                    listGroup.add(new CardGroup(list.get(i - 1), null));
+                } else {
+                    listGroup.add(new CardGroup(list.get(i - 1), list.get(i + 1)));
                 }
             }
         }
+        return listGroup;
     }
 
-    private void searchTopDirection(List<CardSet> list, String[] selectCards, Map<String,
-            ColorMatch> mapResult) {
+    private List<CardGroup> searchLeftDirection(List<CardSet> list, String[] dates,
+                                                String[] selectCards) {
+        List<CardGroup> listGroup = new ArrayList<>();
 
-        int maxLength = selectCards.length;
-        boolean order = view.isOrderSet();
+        for (int i = 0; i < list.size(); i++) {
+            CardSet cardSet = list.get(i);
 
-        for (int i = 0; i <= list.size() - maxLength; i++) {
+            if (equalsGames(new String[]{cardSet.getCard4(), cardSet.getCard3(), cardSet.getCard2(),
+                    cardSet.getCard1()}, selectCards, dates, cardSet.getDateString())) {
+                if (i == 0) {
+                    listGroup.add(new CardGroup(null, toLeft(list.get(i + 1))));
+                } else if (i == list.size() - 1) {
+                    listGroup.add(new CardGroup(toLeft(list.get(i - 1)), null));
+                } else {
+                    listGroup.add(new CardGroup(toLeft(list.get(i - 1)), toLeft(list.get(i + 1))));
+                }
+            }
+        }
 
-            if (i + maxLength > list.size()) {
-                continue;
+        return listGroup;
+    }
+
+    private List<CardGroup> searchTopDirection(List<CardSet> list, String[] dates,
+                                               String[] selectCards) {
+        List<CardGroup> listGroup = new ArrayList<>();
+
+        for (int i = 0; i < list.size() - 3; i++) {
+
+            if (i + 3 >= list.size()) {
+                return listGroup;
             }
 
-            List<CardSet> cardFromFile = new ArrayList<>(list.subList(i, i + maxLength));
+            CardSet cardSet1 = list.get(i);
+            CardSet cardSet2 = list.get(i + 1);
+            CardSet cardSet3 = list.get(i + 2);
+            CardSet cardSet4 = list.get(i + 3);
 
             for (int j = 0; j < 4; j++) {
 
-                String[] equalArray = new String[maxLength];
-                for(int eq = 0 ; eq < maxLength ; eq++) {
-                    equalArray[eq] = cardFromFile.get(eq).getCardByPos(j);
-                }
+                if (equalsGames(new String[]{cardSet4.getCardByPos(j), cardSet3.getCardByPos(j),
+                                cardSet2.getCardByPos(j), cardSet1.getCardByPos(j)}, selectCards,
+                        dates, cardSet1.getDateString(), cardSet2.getDateString(),
+                        cardSet3.getDateString(), cardSet4.getDateString())) {
 
-                if(!equalsGames(equalArray, selectCards, order).isEmpty()) {
-
-                    for (int m = 0; m < maxLength; m++) {
-                        createColorMatch(i + m, j, mapResult);
+                    if (j == 0) {
+                        listGroup.add(new CardGroup(null, toTop(cardSet1, cardSet2, cardSet3,
+                                cardSet4, j + 1)));
+                    } else if (j == 3) {
+                        listGroup.add(new CardGroup(toTop(cardSet1, cardSet2, cardSet3,
+                                cardSet4, j - 1), null));
+                    } else {
+                        listGroup.add(new CardGroup(toTop(cardSet1, cardSet2, cardSet3,
+                                cardSet4, j - 1), toTop(cardSet1, cardSet2, cardSet3,
+                                cardSet4, j + 1)));
                     }
                 }
             }
         }
+
+        return listGroup;
     }
 
-    private void searchTopLeftDirection(List<CardSet> list, String[] selectCards,
-                                        Map<String, ColorMatch> mapResult) {
-        int maxLength = selectCards.length;
-        boolean order = view.isOrderSet();
+    private List<CardGroup> searchBottomDirection(List<CardSet> list, String[] dates,
+                                                  String[] selectCards) {
+        List<CardGroup> listGroup = new ArrayList<>();
 
-        for (int i = 0; i <= list.size() - maxLength; i++) {
-            if (i + maxLength > list.size()) {
-                continue;
+        for (int i = 0; i < list.size() - 3; i++) {
+
+            if (i + 3 >= list.size()) {
+                return listGroup;
             }
 
-            List<CardSet> cardFromFile = new ArrayList<>(list.subList(i, i + maxLength));
+            CardSet cardSet1 = list.get(i);
+            CardSet cardSet2 = list.get(i + 1);
+            CardSet cardSet3 = list.get(i + 2);
+            CardSet cardSet4 = list.get(i + 3);
 
-            for (int j = 0; j < 4 - maxLength + 1; j++) {
+            for (int j = 0; j < 4; j++) {
 
-                String[] equalArray = new String[maxLength];
-                for (int eq = 0; eq < maxLength; eq++) {
-                    equalArray[eq] = cardFromFile.get(maxLength - eq - 1)
-                            .getCardByPos(maxLength - eq - 1 + j);
-                }
+                if (equalsGames(new String[]{cardSet1.getCardByPos(j), cardSet2.getCardByPos(j),
+                                cardSet3.getCardByPos(j), cardSet4.getCardByPos(j)}, selectCards,
+                        dates, cardSet1.getDateString(), cardSet2.getDateString(),
+                        cardSet3.getDateString(), cardSet4.getDateString())) {
 
-                if (!equalsGames(equalArray, selectCards, order).isEmpty()) {
-
-                    for (int m = 0; m < maxLength; m++) {
-                        createColorMatch(i + m, j + m, mapResult);
+                    if (j == 0) {
+                        listGroup.add(new CardGroup(null, toBottom(cardSet1, cardSet2, cardSet3,
+                                cardSet4, j + 1)));
+                    } else if (j == 3) {
+                        listGroup.add(new CardGroup(toBottom(cardSet1, cardSet2, cardSet3,
+                                cardSet4, j - 1), null));
+                    } else {
+                        listGroup.add(new CardGroup(toBottom(cardSet1, cardSet2, cardSet3,
+                                cardSet4, j - 1), toBottom(cardSet1, cardSet2, cardSet3,
+                                cardSet4, j + 1)));
                     }
                 }
             }
         }
+
+        return listGroup;
     }
 
-    private void searchTopRightDirection(List<CardSet> list, String[] selectCards, Map<String,
-            ColorMatch> mapResult) {
-        int maxLength = selectCards.length;
-        boolean order = view.isOrderSet();
+    private List<CardGroup> searchTopRightDirection(List<CardSet> list, String[] dates,
+                                                    String[] selectCards) {
+        List<CardGroup> listGroup = new ArrayList<>();
 
-        for (int i = 0; i <= list.size() - maxLength; i++) {
-            if (i + maxLength > list.size()) {
-                continue;
+        for (int i = 0; i < list.size() - 3; i++) {
+
+            if (i + 3 >= list.size()) {
+                return listGroup;
             }
 
-            List<CardSet> cardFromFile = new ArrayList<>(list.subList(i, i + maxLength));
+            CardSet cardSet1 = list.get(i);
+            CardSet cardSet2 = list.get(i + 1);
+            CardSet cardSet3 = list.get(i + 2);
+            CardSet cardSet4 = list.get(i + 3);
 
-            for (int j = 0; j < 4 - maxLength + 1; j++) {
+            if (equalsGames(new String[]{cardSet4.getCardByPos(0), cardSet3.getCardByPos(1),
+                            cardSet2.getCardByPos(2), cardSet1.getCardByPos(3)}, selectCards,
+                    dates, cardSet1.getDateString(), cardSet2.getDateString(),
+                    cardSet3.getDateString(), cardSet4.getDateString())) {
 
-                String[] equalArray = new String[maxLength];
-                for(int eq = 0 ; eq < maxLength ; eq++) {
-                    equalArray[eq] = cardFromFile.get(maxLength - eq - 1).getCardByPos(j + eq);
-                }
+                if (i == 0) {
 
-                if(!equalsGames(equalArray, selectCards, order).isEmpty()) {
+                    CardSet cardSet5 = list.get(i + 4);
 
-                    for (int m = 0; m < maxLength; m++) {
-                        createColorMatch(i + m, j - m + maxLength - 1, mapResult);
-                    }
+                    listGroup.add(new CardGroup(toRightDiagonal(cardSet3, cardSet2, cardSet1,
+                            null), toRightDiagonal(cardSet5, cardSet4, cardSet3, cardSet2)));
+                } else if (i == list.size() - 3) {
+                    CardSet cardSet0 = list.get(i - 1);
+
+                    listGroup.add(new CardGroup(toRightDiagonal(cardSet3, cardSet2, cardSet1,
+                            cardSet0), toRightDiagonal(null, cardSet4, cardSet3,
+                            cardSet2)));
+                } else {
+                    CardSet cardSet0 = list.get(i - 1);
+                    CardSet cardSet5 = list.get(i + 4);
+
+                    listGroup.add(new CardGroup(toRightDiagonal(cardSet3, cardSet2, cardSet1,
+                            cardSet0), toRightDiagonal(cardSet5, cardSet4, cardSet3, cardSet2)));
                 }
             }
         }
+
+        return listGroup;
     }
 
-    private static String equalsGames(String[] cardsFromFile,
-                                      String[] cards, boolean order) {
+    private List<CardGroup> searchTopLeftDirection(List<CardSet> list, String[] dates,
+                                                   String[] selectCards) {
+        List<CardGroup> listGroup = new ArrayList<>();
 
-        if(order) {
-            return equalsCardWithOrder(cardsFromFile, cards);
-        } else {
-            return equalsCardWithoutOrder(cardsFromFile, cards);
-        }
-    }
+        for (int i = 0; i < list.size() - 3; i++) {
 
-    protected static boolean equalsDates(String[] dates, String[] cardDates) {
-        for (String cardDateString : cardDates) {
-            boolean dateInArray = false;
-            Date cardDate = toDate(cardDateString);
-
-            for (String selectDateString : dates) {
-                Date selectDate = toDate(selectDateString);
-
-                if (selectDate.getTime() == cardDate.getTime()) {
-                    dateInArray = true;
-                    break;
-                }
+            if (i + 3 >= list.size()) {
+                return listGroup;
             }
 
-            if (!dateInArray) {
+            CardSet cardSet1 = list.get(i);
+            CardSet cardSet2 = list.get(i + 1);
+            CardSet cardSet3 = list.get(i + 2);
+            CardSet cardSet4 = list.get(i + 3);
+
+            if (equalsGames(new String[]{cardSet4.getCardByPos(3), cardSet3.getCardByPos(2),
+                            cardSet2.getCardByPos(1), cardSet1.getCardByPos(0)}, selectCards,
+                    dates, cardSet1.getDateString(), cardSet2.getDateString(),
+                    cardSet3.getDateString(), cardSet4.getDateString())) {
+
+                if (i == 0) {
+
+                    CardSet cardSet5 = list.get(i + 4);
+
+                    listGroup.add(new CardGroup(toLeftDiagonal(cardSet3, cardSet2, cardSet1,
+                            null), toLeftDiagonal(cardSet5, cardSet4, cardSet3, cardSet2)));
+                } else if (i == list.size() - 3) {
+                    CardSet cardSet0 = list.get(i - 1);
+
+                    listGroup.add(new CardGroup(toLeftDiagonal(cardSet3, cardSet2, cardSet1,
+                            cardSet0), toLeftDiagonal(null, cardSet4, cardSet3,
+                            cardSet2)));
+                } else {
+                    CardSet cardSet0 = list.get(i - 1);
+                    CardSet cardSet5 = list.get(i + 4);
+
+                    listGroup.add(new CardGroup(toLeftDiagonal(cardSet3, cardSet2, cardSet1,
+                            cardSet0), toLeftDiagonal(cardSet5, cardSet4, cardSet3, cardSet2)));
+                }
+            }
+        }
+
+        return listGroup;
+    }
+
+    private List<CardGroup> searchBottomRightDirection(List<CardSet> list, String[] dates,
+                                                       String[] selectCards) {
+        List<CardGroup> listGroup = new ArrayList<>();
+
+        for (int i = 0; i < list.size() - 3; i++) {
+
+            if (i + 3 >= list.size()) {
+                return listGroup;
+            }
+
+            CardSet cardSet1 = list.get(i);
+            CardSet cardSet2 = list.get(i + 1);
+            CardSet cardSet3 = list.get(i + 2);
+            CardSet cardSet4 = list.get(i + 3);
+
+            if (equalsGames(new String[]{cardSet1.getCardByPos(0), cardSet2.getCardByPos(1),
+                            cardSet3.getCardByPos(2), cardSet4.getCardByPos(3)}, selectCards,
+                    dates, cardSet1.getDateString(), cardSet2.getDateString(),
+                    cardSet3.getDateString(), cardSet4.getDateString())) {
+
+                if (i == 0) {
+
+                    CardSet cardSet5 = list.get(i + 4);
+
+                    listGroup.add(new CardGroup(toRightDiagonal(null, cardSet1, cardSet2, cardSet3),
+                            toRightDiagonal(cardSet2, cardSet3, cardSet4, cardSet5)));
+                } else if (i == list.size() - 3) {
+                    CardSet cardSet0 = list.get(i - 1);
+
+                    listGroup.add(new CardGroup(toRightDiagonal(cardSet0, cardSet1, cardSet2,
+                            cardSet3), toRightDiagonal(cardSet2, cardSet3, cardSet4, null)));
+                } else {
+                    CardSet cardSet0 = list.get(i - 1);
+                    CardSet cardSet5 = list.get(i + 4);
+
+                    listGroup.add(new CardGroup(toRightDiagonal(cardSet0, cardSet1, cardSet2,
+                            cardSet3), toRightDiagonal(cardSet2, cardSet3, cardSet4, cardSet5)));
+                }
+            }
+        }
+
+        return listGroup;
+    }
+
+    private List<CardGroup> searchBottomLeftDirection(List<CardSet> list, String[] dates,
+                                                      String[] selectCards) {
+        List<CardGroup> listGroup = new ArrayList<>();
+
+        for (int i = 0; i < list.size() - 3; i++) {
+            CardSet cardSet1 = list.get(i);
+            CardSet cardSet2 = list.get(i + 1);
+            CardSet cardSet3 = list.get(i + 2);
+            CardSet cardSet4 = list.get(i + 3);
+
+            if (equalsGames(new String[]{cardSet1.getCardByPos(3), cardSet2.getCardByPos(2),
+                            cardSet3.getCardByPos(1), cardSet4.getCardByPos(0)}, selectCards,
+                    dates, cardSet1.getDateString(), cardSet2.getDateString(),
+                    cardSet3.getDateString(), cardSet4.getDateString())) {
+
+                if (i == 0) {
+
+                    CardSet cardSet5 = list.get(i + 4);
+
+                    listGroup.add(new CardGroup(toLeftDiagonal(null, cardSet1, cardSet2,
+                            cardSet3), toLeftDiagonal(cardSet2, cardSet3, cardSet4, cardSet5)));
+                } else if (i == list.size() - 3) {
+                    CardSet cardSet0 = list.get(i - 1);
+
+                    listGroup.add(new CardGroup(toLeftDiagonal(cardSet0, cardSet1, cardSet2,
+                            cardSet3), toLeftDiagonal(cardSet2, cardSet3, cardSet4,
+                            null)));
+                } else {
+                    CardSet cardSet0 = list.get(i - 1);
+                    CardSet cardSet5 = list.get(i + 4);
+
+                    listGroup.add(new CardGroup(toLeftDiagonal(cardSet0, cardSet1, cardSet2,
+                            cardSet3), toLeftDiagonal(cardSet2, cardSet3, cardSet4, cardSet5)));
+                }
+            }
+        }
+
+        return listGroup;
+    }
+
+    private static boolean equalsGames(String[] cardsFromFile,
+                                       String[] cards, String[] dates,
+                                       String... cardDates) {
+
+        if (dates != null) {
+            if (!equalsDates(dates, cardDates)) {
+                return false;
+            }
+        }
+        return equalsCard(cardsFromFile, cards);
+    }
+
+    private static boolean equalsCard(String[] cardFromFile,
+                                      String[] cards) {
+
+        for (int i = 0; i < 4; i++) {
+            if (!cardFromFile[i].equals(cards[i])) {
                 return false;
             }
         }
         return true;
     }
 
-    private static String equalsCardWithOrder(String[] cardFromFile, String[] cards) {
-
-        String str1 = stringFromArray(cards);
-        String str2 = inverseStringFromArray(cards);
-        String res = stringFromArray(cardFromFile);
-
-        if(res.equals(str1) || res.equals(str2)) {
-            return str1;
-        } else {
-            return "";
-        }
+    private static CardSet toLeft(CardSet set) {
+        return new CardSet(set.getDateString(), set.getNumber(), set.getCard4(),
+                set.getCard3(), set.getCard2(), set.getCard1());
     }
 
-    private static String stringFromArray(String[] array) {
-        String res = "";
-        for(String str : array) {
-            res += str;
-        }
-        return res;
+    private static CardSet toTop(CardSet set1, CardSet set2, CardSet set3, CardSet set4, int pos) {
+        return new CardSet(set1.getDateString(), set1.getNumber(), set4.getCardByPos(pos),
+                set3.getCardByPos(pos), set2.getCardByPos(pos), set1.getCardByPos(pos));
     }
 
-    private static String inverseStringFromArray(String[] str) {
-        String res = "";
-        for(int i = str.length - 1 ; i >= 0 ; i--) {
-            res += str[i];
-        }
-        return res;
+    private static CardSet toBottom(CardSet set1, CardSet set2, CardSet set3, CardSet set4,
+                                    int pos) {
+        return new CardSet(set1.getDateString(), set1.getNumber(), set1.getCardByPos(pos),
+                set2.getCardByPos(pos), set3.getCardByPos(pos), set4.getCardByPos(pos));
     }
 
-    private static String equalsCardWithoutOrder(String[] cardFromFile, String[] cards) {
-
-        List<String> list = new ArrayList<>(Arrays.asList(cardFromFile));
-
-        String str = "";
-        int success = 0;
-
-        for (int i = 0; i < cards.length; i++) {
-            for (int j = 0; j < list.size(); j++) {
-                if (cards[i].equals(list.get(j))) {
-                    str += cards[i];
-                    list.remove(j);
-                    success++;
-                    break;
-                }
-            }
-            if (success != i + 1) {
-                return "";
-            }
-        }
-        return str;
+    private static CardSet toRightDiagonal(CardSet set1, CardSet set2, CardSet set3, CardSet set4) {
+        return new CardSet(set2.getDateString(), set2.getNumber(),
+                set1 == null ? "-" : set1.getCardByPos(0),
+                set2.getCardByPos(1),
+                set3.getCardByPos(2),
+                set4 == null ? "-" : set4.getCardByPos(3)
+        );
     }
 
-    private void outputData(List<List<CardSet>> workList) {
-        ((MainActivityThree) view.getContext()).runOnUiThread(() -> {
-            view.setRecyclerResultData(result, workList);
+    private static CardSet toLeftDiagonal(CardSet set1, CardSet set2, CardSet set3, CardSet set4) {
+        return new CardSet(set2.getDateString(), set2.getNumber(),
+                set1 == null ? "-" : set1.getCardByPos(3),
+                set2.getCardByPos(2),
+                set3.getCardByPos(1),
+                set4 == null ? "-" : set4.getCardByPos(0)
+        );
+    }
+
+    private void outputData(List<CardGroup> cardGroups) {
+        ((MainActivityThreeFour) view.getContext()).runOnUiThread(() -> {
+            view.setCardGroupListToRecycler(cardGroups != null ? cardGroups : new ArrayList<>());
             view.changeVisibleBlockWait(false);
         });
-    }
-
-    private String createKey(int i, int j) {
-        return i + "," + j;
-    }
-
-    private void createColorMatch(int i, int j, Map<String, ColorMatch> result) {
-
-        int color;
-        color = view.getContext().getResources().getColor(R.color.yellow);
-
-        String key = createKey(i, j);
-        if (result.get(key) == null) {
-            result.put(key, new ColorMatch(color));
-        } else {
-            if (!result.get(key).isIntersection() && result.get(key).getColor() != color) {
-                result.get(key).setIntersection(true);
-                result.get(key).setColor(
-                        view.getContext().getResources().getColor(R.color.yellow));
-            }
-        }
-    }
-
-    private static List<List<CardSet>> createWorkList(List<CardSet> setList, String[] dates) {
-        List<List<CardSet>> allResult = new ArrayList<>();
-
-        for (String date : dates) {
-            List<CardSet> result = new ArrayList<>();
-
-            for (CardSet cardSet : setList) {
-                if (equalsDates(new String[]{date}, new String[]{cardSet.getDateString()})) {
-                    result.add(cardSet);
-                }
-            }
-
-            allResult.add(result);
-        }
-        return allResult;
     }
 }

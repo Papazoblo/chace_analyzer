@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     app:layout_constraintTop_toBottomOf="@id/textSelectCards"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,8 +8,7 @@
     <LinearLayout
         android:id="@+id/blockSelectCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/selectCardBlockHeight"
+        android:layout_height="@dimen/selectCardBlockHeight"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
@@ -21,13 +18,13 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="8">
+            android:layout_weight="7">
 
             <TextView
                 android:id="@+id/btnClear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
                 android:layout_marginLeft="@dimen/verySmallPadding"
                 android:layout_marginRight="@dimen/verySmallPadding"
                 android:background="@drawable/blue_dark_radius_border"
@@ -42,20 +39,20 @@
         <include
             android:id="@+id/cardSelectPanel"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/selectCardBlockHeight"
+            android:layout_height="wrap_content"
             android:layout_weight="4"
             layout="@layout/card_select_panel" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="8">
+            android:layout_weight="7">
 
             <TextView
                 android:id="@+id/btnDelete"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
                 android:layout_marginLeft="@dimen/verySmallPadding"
                 android:layout_marginRight="@dimen/verySmallPadding"
                 android:background="@drawable/blue_dark_radius_border"

@@ -1,5 +1,7 @@
 package alex.studio.csvsearcher.ui.adapter;
 
+import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import alex.studio.csvsearcher.R;
-import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardSet;
 
 public class ResultAdapterFour extends RecyclerView.Adapter<ResultAdapterFour.ResultViewHolder> {
@@ -41,6 +42,7 @@ public class ResultAdapterFour extends RecyclerView.Adapter<ResultAdapterFour.Re
         h.textCard2.setText(cardSet.getCard2());
         h.textCard3.setText(cardSet.getCard3());
         h.textCard4.setText(cardSet.getCard4());
+        toGone(h.secondBlockSelectCard);
     }
 
     @Override
@@ -63,6 +65,7 @@ public class ResultAdapterFour extends RecyclerView.Adapter<ResultAdapterFour.Re
         private TextView textCard2;
         private TextView textCard3;
         private TextView textCard4;
+        private View secondBlockSelectCard;
 
         public ResultViewHolder(@NonNull View v) {
             super(v);
@@ -71,6 +74,7 @@ public class ResultAdapterFour extends RecyclerView.Adapter<ResultAdapterFour.Re
             textCard2 = v.findViewById(R.id.textCard2);
             textCard3 = v.findViewById(R.id.textCard3);
             textCard4 = v.findViewById(R.id.textCard4);
+            secondBlockSelectCard = v.findViewById(R.id.secondSelectCardBlock);
         }
     }
 }

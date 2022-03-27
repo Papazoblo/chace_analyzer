@@ -21,10 +21,10 @@ import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.components.DownloadFileFromURL;
 import alex.studio.csvsearcher.components.StorageManager;
 import alex.studio.csvsearcher.enums.Properties;
-import alex.studio.csvsearcher.ui.main_activity.view.MainActivity;
-import alex.studio.csvsearcher.ui.main_activity.view.MainActivityFour;
+import alex.studio.csvsearcher.ui.main_activity.view.MainActivityFive;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivityOne;
-import alex.studio.csvsearcher.ui.main_activity.view.MainActivityThree;
+import alex.studio.csvsearcher.ui.main_activity.view.MainActivitySix;
+import alex.studio.csvsearcher.ui.main_activity.view.MainActivityThreeFour;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -171,13 +171,13 @@ public class StartActivity extends AppCompatActivity {
                     break;
                 case ALGO_3:
                 case ALGO_4:
-                    clazz = MainActivity.class;
+                    clazz = MainActivityThreeFour.class;
                     break;
                 case ALGO_5:
-                    clazz = MainActivityThree.class;
+                    clazz = MainActivityFive.class;
                     break;
                 case ALGO_6:
-                    clazz = MainActivityFour.class;
+                    clazz = MainActivitySix.class;
                     break;
             }
         }

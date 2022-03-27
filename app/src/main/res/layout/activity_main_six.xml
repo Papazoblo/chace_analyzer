@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.main_activity.view.MainActivity">
+    tools:context=".ui.main_activity.view.MainActivityThreeFour">
 
     <TextView
         android:id="@+id/textAppName"
@@ -336,6 +335,7 @@
         android:id="@+id/recyclerRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/smallPadding"
         app:layout_constraintTop_toBottomOf="@id/blockArrow"/>
 
     <androidx.recyclerview.widget.RecyclerView

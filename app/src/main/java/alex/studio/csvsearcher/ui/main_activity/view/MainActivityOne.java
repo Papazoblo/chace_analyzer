@@ -60,6 +60,7 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
     private View blockOptions;
     private View btnClose;
     private View btnSetting;
+    private View secondSelectCardBlock;
 
     private TextView switchFourRandom;
     private TextView switchFourOriginal;
@@ -134,6 +135,7 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
         blockWait = findViewById(R.id.blockWait);
         blockSelectDate = findViewById(R.id.blockSelectDate);
         cardSelectorBlock = findViewById(R.id.cardSelectorBlock);
+        secondSelectCardBlock = findViewById(R.id.secondSelectCardBlock);
 
         switchFourRandom = findViewById(R.id.switchFourRandom);
         switchFourOriginal = findViewById(R.id.switchFourOriginal);
@@ -160,6 +162,7 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
         recyclerYear.setAdapter(yearAdapter);
         yearAdapter.initData();
 
+        toGone(secondSelectCardBlock);
         spinnerDays.post(this::initializationData);
 
         for (int i = 0; i < cards.length; i++) {
