@@ -31,6 +31,9 @@
             android:name=".ui.main_activity.view.MainActivityOne"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.main_activity.view.MainActivityTwo"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.main_activity.view.MainActivityThreeFour"
             android:screenOrientation="portrait" />
         <activity

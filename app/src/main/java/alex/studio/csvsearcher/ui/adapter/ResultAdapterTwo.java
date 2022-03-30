@@ -10,28 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import alex.studio.csvsearcher.R;
-import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardSet;
-import alex.studio.csvsearcher.dto.CountCard;
 
 public class ResultAdapterTwo extends RecyclerView.Adapter<ResultAdapterTwo.ResultViewHolder> {
 
-    private List<CountCard> listGroup = new ArrayList<>();
+    private List<CardSet> cardSetList = new ArrayList<>();
     private Context context;
-    private int maxVal = 0;
-    private int colorYellow;
     private int colorWhite;
+    private int colorGray;
 
     public ResultAdapterTwo(Context context) {
         this.context = context;
-        this.colorYellow = context.getResources().getColor(R.color.yellow);
-        this.colorWhite = context.getResources().getColor(R.color.white);
+        colorWhite = context.getResources().getColor(R.color.white);
+        colorGray = context.getResources().getColor(R.color.lightGrayBlue);
     }
 
     @NonNull
@@ -44,77 +38,48 @@ public class ResultAdapterTwo extends RecyclerView.Adapter<ResultAdapterTwo.Resu
     @Override
     public void onBindViewHolder(@NonNull ResultViewHolder h, int pos) {
 
-        CountCard card = listGroup.get(pos);
+        CardSet set = cardSetList.get(pos);
+        h.textCard4.setText(set.getCard4());
+        h.textCard4.setTextColor(set.getCard4().equals("#") ? colorGray : colorWhite);
 
-        h.textName.setText(card.getName());
-        h.textCount.setText(card.getCount() + "");
+        h.textCard3.setText(set.getCard3());
+        h.textCard3.setTextColor(set.getCard3().equals("#") ? colorGray : colorWhite);
 
-        if (card.getCount() == maxVal) {
-            changeTextColor(colorYellow, h.textCount, h.textRovno, h.textName);
-        } else {
-            changeTextColor(colorWhite, h.textCount, h.textRovno, h.textName);
-        }
-    }
+        h.textCard2.setText(set.getCard2());
+        h.textCard2.setTextColor(set.getCard2().equals("#") ? colorGray : colorWhite);
 
-    private void changeTextColor(int color, TextView... views) {
+        h.textCard1.setText(set.getCard1());
+        h.textCard1.setTextColor(set.getCard1().equals("#") ? colorGray : colorWhite);
 
-        for (TextView view : views) {
-            view.setTextColor(color);
-        }
+        h.textName.setText(set.getNumber());
     }
 
     @Override
     public int getItemCount() {
-        return listGroup.size();
+        return cardSetList.size();
     }
 
-    public void clear() {
-        setData(new HashMap<>());
-    }
-
-    public void setData(Map<String, Integer> data) {
-        this.listGroup.clear();
-
-        if(!data.isEmpty()) {
-            List<Integer> list = new ArrayList<>();
-            for (int i = 7; i < 15; i++) {
-                String key = i + "";
-                switch (key) {
-                    case "11":
-                        key = "J";
-                        break;
-                    case "12":
-                        key = "Q";
-                        break;
-                    case "13":
-                        key = "K";
-                        break;
-                    case "14":
-                        key = "A";
-                        break;
-                }
-
-                list.add(data.get(key));
-                listGroup.add(new CountCard(key, data.get(key)));
-            }
-
-            maxVal = Collections.max(list);
-        }
+    public void setData(List<CardSet> cardSets) {
+        this.cardSetList = cardSets;
         notifyDataSetChanged();
     }
 
-    public class ResultViewHolder extends RecyclerView.ViewHolder {
+    public static class ResultViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView textCard1;
+        private TextView textCard2;
+        private TextView textCard3;
+        private TextView textCard4;
         private TextView textName;
-        private TextView textCount;
-        private TextView textRovno;
 
         public ResultViewHolder(@NonNull View v) {
             super(v);
 
-            textRovno = v.findViewById(R.id.textRovno);
-            textName = v.findViewById(R.id.textName);
-            textCount = v.findViewById(R.id.textCount);
+            textCard1 = v.findViewById(R.id.textCard1);
+            textCard2 = v.findViewById(R.id.textCard2);
+            textCard3 = v.findViewById(R.id.textCard3);
+            textCard4 = v.findViewById(R.id.textCard4);
+            textName = v.findViewById(R.id.name);
         }
     }
 }

@@ -25,6 +25,7 @@ import alex.studio.csvsearcher.ui.main_activity.view.MainActivityFive;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivityOne;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivitySix;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivityThreeFour;
+import alex.studio.csvsearcher.ui.main_activity.view.MainActivityTwo;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -168,6 +169,7 @@ public class StartActivity extends AppCompatActivity {
                     clazz = MainActivityOne.class;
                     break;
                 case ALGO_2:
+                    clazz = MainActivityTwo.class;
                     break;
                 case ALGO_3:
                 case ALGO_4:

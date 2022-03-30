@@ -31,12 +31,16 @@ public class CardSet {
     }
 
     public CardSet() {
+        this("-", "");
+    }
+
+    public CardSet(String emptySymbol, String number) {
         date = "";
-        number = "";
-        card1 = "-";
-        card2 = "-";
-        card3 = "-";
-        card4 = "-";
+        this.number = number;
+        card1 = emptySymbol;
+        card2 = emptySymbol;
+        card3 = emptySymbol;
+        card4 = emptySymbol;
     }
 
     public CardSet(String[] infoArray) {

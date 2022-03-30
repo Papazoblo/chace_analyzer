@@ -23,7 +23,7 @@ import java.util.List;
 import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.enums.CardPosition;
 
-public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.ResultViewHolder> {
+public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultViewHolder> {
 
     private final int MAX_ROW_COUNT = 7;
 
@@ -38,7 +38,7 @@ public class CardAdapterFour extends RecyclerView.Adapter<CardAdapterFour.Result
     private Drawable whiteBorderBg;
     private Drawable bottomBorderBg;
 
-    public CardAdapterFour(Context context) {
+    public CardAdapterSix(Context context) {
         this.context = context;
         this.colorYellow = context.getResources().getColor(R.color.yellow);
         this.colorLightGray = context.getResources().getColor(R.color.textLightGrayBlue);

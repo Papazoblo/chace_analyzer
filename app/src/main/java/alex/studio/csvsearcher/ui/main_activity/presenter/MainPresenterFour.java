@@ -13,7 +13,7 @@ public class MainPresenterFour extends MainPresenter {
     private Map<String, Integer> result;
 
     @Override
-    public void initializationData(Consumer<CardSet> action) {
+    public void initializationData(Consumer<List<CardSet>> action) {
         throw new UnsupportedOperationException();
     }
 

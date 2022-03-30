@@ -53,9 +53,9 @@ public interface Main {
 
         void launchSearch();
 
-        void initReadFile(Consumer<CardSet> afterEnd);
+        void initReadFile(Consumer<List<CardSet>> afterEnd);
 
-        void initializationData(Consumer<CardSet> action);
+        void initializationData(Consumer<List<CardSet>> action);
 
         void launchAlgorithm();
     }

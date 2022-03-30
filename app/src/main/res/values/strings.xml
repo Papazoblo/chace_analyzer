@@ -73,6 +73,12 @@
     <string name="three_original">3 карты с оригинальным расположением</string>
     <string name="three_random">3 карты с рандомным расположением</string>
 
+    <string name="first_pare">1-ая пара</string>
+    <string name="second_pare">2-ая пара</string>
+    <string name="third_pare">3-ая пара</string>
+    <string name="fourth_pare">4-ая пара</string>
+    <string name="plus_one">Добавить +1 к результату</string>
+
     <string name="close_other_option">Отмените другой вариант поиска</string>
 
     <string name="csv_folder">Папка хранения CSV файлов</string>
@@ -95,6 +101,7 @@
     <string name="not_match">Нет совпадений</string>
 
     <string name="exact_sequence">Точный порядок</string>
+    <string name="error_select_card_with_options">Необходимо указать карты для активных пар</string>
     <string name="error_select_card_one">Необхдимо выбрать четыре карты</string>
     <string name="error_select_card">Необхдимо выбрать минимум первые две карты</string>
     <string name="error_card_order">Карты необходимо указать по порядку</string>

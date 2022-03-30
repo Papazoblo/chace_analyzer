@@ -39,8 +39,8 @@ import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.CardPosition;
 import alex.studio.csvsearcher.enums.Direction;
 import alex.studio.csvsearcher.enums.Properties;
-import alex.studio.csvsearcher.ui.adapter.ResultAdapter;
-import alex.studio.csvsearcher.ui.adapter.ResultAdapterTwo;
+import alex.studio.csvsearcher.ui.adapter.ResultAdapterFour;
+import alex.studio.csvsearcher.ui.adapter.ResultAdapterThree;
 import alex.studio.csvsearcher.ui.main_activity.Main;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterFour;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterThree;
@@ -78,6 +78,7 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
     private View blockByDate;
     private View blockWait;
     private View secondSelectCardBlock;
+    private View cardSelectPanel;
 
     private LinearLayout cardSelectorBlock;
 
@@ -95,8 +96,8 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
     private TextView textFour;
 
     private RecyclerView recyclerView;
-    private ResultAdapter resultAdapter;
-    private ResultAdapterTwo resultAdapterTwo;
+    private ResultAdapterThree resultAdapter;
+    private ResultAdapterFour resultAdapterThreeFour;
 
     private int colorBlack;
     private int colorYellow;
@@ -181,6 +182,7 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
         blockWait = findViewById(R.id.blockWait);
         cardSelectorBlock = findViewById(R.id.cardSelectorBlock);
         secondSelectCardBlock = findViewById(R.id.secondSelectCardBlock);
+        cardSelectPanel = findViewById(R.id.cardSelectPanel);
 
         textAppNameSmall = findViewById(R.id.textAppNameSmall);
         textDateFrom = findViewById(R.id.textDateFrom);
@@ -200,12 +202,12 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
 
         switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
             case ALGO_3:
-                resultAdapter = new ResultAdapter(MainActivityThreeFour.this);
+                resultAdapter = new ResultAdapterThree(MainActivityThreeFour.this);
                 recyclerView.setAdapter(resultAdapter);
                 break;
             case ALGO_4:
-                resultAdapterTwo = new ResultAdapterTwo(MainActivityThreeFour.this);
-                recyclerView.setAdapter(resultAdapterTwo);
+                resultAdapterThreeFour = new ResultAdapterFour(MainActivityThreeFour.this);
+                recyclerView.setAdapter(resultAdapterThreeFour);
                 break;
 
         }
@@ -232,21 +234,7 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
             }
             textView.setLayoutParams(params);
             textView.setOnClickListener(v -> {
-                TextView selectTextView = null;
-                switch (curPosition) {
-                    case ONE:
-                        selectTextView = textOne;
-                        break;
-                    case TWO:
-                        selectTextView = textTwo;
-                        break;
-                    case THREE:
-                        selectTextView = textThree;
-                        break;
-                    case FOUR:
-                        selectTextView = textFour;
-                        break;
-                }
+                TextView selectTextView = cardSelectPanel.findViewWithTag(curPosition.getPosition());
                 String curText = getTextFrom(v);
                 selectTextView.setText(curText);
                 if (curText.equals(cards[0])) {
@@ -533,8 +521,8 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
             resultAdapter.clear();
         }
 
-        if (resultAdapterTwo != null) {
-            resultAdapterTwo.clear();
+        if (resultAdapterThreeFour != null) {
+            resultAdapterThreeFour.clear();
         }
     }
 
@@ -560,7 +548,7 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
 
     @Override
     public void setMapToRecycler(Map<String, Integer> data) {
-        resultAdapterTwo.setData(data);
+        resultAdapterThreeFour.setData(data);
     }
 
     @Override

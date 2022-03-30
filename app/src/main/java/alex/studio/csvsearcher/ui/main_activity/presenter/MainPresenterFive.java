@@ -21,7 +21,7 @@ public class MainPresenterFive extends MainPresenter {
     private List<List<CardSet>> workList;
 
     @Override
-    public void initializationData(Consumer<CardSet> action) {
+    public void initializationData(Consumer<List<CardSet>> action) {
         throw new UnsupportedOperationException();
     }
 

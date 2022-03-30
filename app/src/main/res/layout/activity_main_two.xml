@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.main_activity.view.MainActivityThreeFour">
+
+    <TextView
+        android:id="@+id/textAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="@dimen/smallPadding"
+        android:paddingRight="@dimen/smallPadding"
+        android:text="@string/app_name"
+        android:textColor="@color/opacityGreen"
+        android:textSize="@dimen/bigAppNameSize"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/blockSelectCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/smallPadding"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/verySmallPadding"
+        android:paddingRight="@dimen/verySmallPadding"
+        android:paddingBottom="@dimen/smallPadding"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:layout_marginRight="@dimen/verySmallPadding"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/btnResetField"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:paddingBottom="@dimen/verySmallPadding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:gravity="center"
+                    android:text="@string/reset"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btnResetResult"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:paddingBottom="@dimen/verySmallPadding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:gravity="center"
+                    android:text="@string/reset"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+
+            <include
+                android:id="@+id/cardSelectPanel"
+                layout="@layout/card_select_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/verySmallPadding"
+            android:layout_weight="7"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/btnSearch"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:paddingBottom="@dimen/verySmallPadding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:gravity="center"
+                    android:text="@string/launch"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/btnSettings"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:paddingBottom="@dimen/verySmallPadding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/blue_dark_radius_border"
+                    android:gravity="center"
+                    android:text="@string/setting"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerResult"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/smallPadding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/blockSelectCard" />
+
+    <LinearLayout
+        android:id="@+id/cardSelectorBlock"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:layout_marginBottom="1px"
+        android:background="@color/textLightGrayBlue"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/blockOptions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/selectCardBlockHeight"
+            android:paddingRight="@dimen/selectCardBlockHeight"
+            android:background="@color/grayBlue">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/smallPadding">
+
+                <TextView
+                    android:id="@+id/btnFirstPare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/smallPadding"
+                    android:layout_marginRight="@dimen/smallPadding"
+                    android:background="@drawable/blue_radius_active_border"
+                    android:gravity="center|center_vertical"
+                    android:padding="@dimen/smallPadding"
+                    android:text="@string/first_pare"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/headSecondTextSize" />
+
+                <TextView
+                    android:id="@+id/btnSecondPare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/smallPadding"
+                    android:layout_marginBottom="@dimen/smallPadding"
+                    android:gravity="center|center_vertical"
+                    android:padding="@dimen/smallPadding"
+                    android:text="@string/second_pare"
+                    android:textColor="@color/white"
+                    android:background="@drawable/blue_radius_active_border"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/grayBlue"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/smallPadding">
+
+                <TextView
+                    android:id="@+id/btnThirdPare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/smallPadding"
+                    android:layout_marginBottom="@dimen/smallPadding"
+                    android:gravity="center|center_vertical"
+                    android:padding="@dimen/smallPadding"
+                    android:background="@drawable/blue_radius_active_border"
+                    android:text="@string/third_pare"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/headSecondTextSize" />
+
+                <TextView
+                    android:id="@+id/btnFourthPare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/smallPadding"
+                    android:layout_marginBottom="@dimen/smallPadding"
+                    android:gravity="center|center_vertical"
+                    android:padding="@dimen/smallPadding"
+                    android:background="@drawable/blue_radius_active_border"
+                    android:text="@string/fourth_pare"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnPlusOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|center_vertical"
+                android:text="@string/plus_one"
+                android:background="@drawable/blue_radius_active_border"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headSecondTextSize"
+                android:padding="@dimen/smallPadding"
+                android:layout_marginBottom="@dimen/smallPadding"
+                android:layout_marginTop="@dimen/smallPadding" />
+
+            <TextView
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:padding="@dimen/smallPadding"
+                android:text="@string/close"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headTextSize"
+                android:layout_marginBottom="@dimen/smallPadding"
+                android:layout_marginTop="@dimen/smallPadding" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/blockWait"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/opacityBlack"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="@dimen/selectCardBlockHeight"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="@dimen/smallPadding"
+                android:text="@string/pls_wait"
+                android:textColor="@color/green"
+                android:textSize="@dimen/underAppNameTextSize" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <include
+        android:id="@+id/blockAskExit"
+        layout="@layout/block_exit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

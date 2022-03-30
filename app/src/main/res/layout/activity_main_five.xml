@@ -37,7 +37,7 @@
         android:orientation="horizontal"
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
-        android:paddingBottom="@dimen/smallPadding"
+        android:paddingBottom="@dimen/verySmallPadding"
         app:layout_constraintTop_toBottomOf="@id/textSelectCards">
 
         <TextView

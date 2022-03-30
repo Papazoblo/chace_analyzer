@@ -34,8 +34,8 @@ import alex.studio.csvsearcher.dto.CardMatch;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.Direction;
-import alex.studio.csvsearcher.ui.adapter.CardAdapterFour;
-import alex.studio.csvsearcher.ui.adapter.ResultAdapterFour;
+import alex.studio.csvsearcher.ui.adapter.CardAdapterSix;
+import alex.studio.csvsearcher.ui.adapter.ResultAdapterSix;
 import alex.studio.csvsearcher.ui.main_activity.Main;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterSix;
 
@@ -69,8 +69,8 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
     private RecyclerView recyclerRow;
     private RecyclerView recyclerView;
-    private ResultAdapterFour resultAdapterFour;
-    private CardAdapterFour cardAdapterFour;
+    private ResultAdapterSix resultAdapterFour;
+    private CardAdapterSix cardAdapterSix;
 
     private int colorYellow;
     private int colorWhite;
@@ -133,12 +133,12 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
         recyclerView = findViewById(R.id.recyclerResult);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        resultAdapterFour = new ResultAdapterFour(MainActivitySix.this);
+        resultAdapterFour = new ResultAdapterSix(MainActivitySix.this);
         recyclerView.setAdapter(resultAdapterFour);
         recyclerRow = findViewById(R.id.recyclerRow);
         recyclerRow.setLayoutManager(new LinearLayoutManager(this));
-        cardAdapterFour = new CardAdapterFour(MainActivitySix.this);
-        recyclerRow.setAdapter(cardAdapterFour);
+        cardAdapterSix = new CardAdapterSix(MainActivitySix.this);
+        recyclerRow.setAdapter(cardAdapterSix);
 
         changeColor((ImageView) btnTop, colorYellow);
         initAction();
@@ -155,7 +155,7 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
         blockAskExit.setOnClickListener(v -> {});
 
-        btnAddRow.setOnClickListener(v -> cardAdapterFour.addRow());
+        btnAddRow.setOnClickListener(v -> cardAdapterSix.addRow());
 
         btnResetDateTo.setOnClickListener(v -> textDateTo.setText(""));
 
@@ -317,7 +317,7 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
     @Override
     public List<String[]> getCardsList() {
-        return cardAdapterFour.getListGroupCards();
+        return cardAdapterSix.getListGroupCards();
     }
 
     @Override
@@ -389,21 +389,21 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
     @Override
     public boolean isCardValid() {
-        if (cardAdapterFour.getItemCount() < 2) {
+        if (cardAdapterSix.getItemCount() < 2) {
             Toast.makeText(MainActivitySix.this,
                     getResources().getString(R.string.error_min_limit_rows),
                     Toast.LENGTH_LONG).show();
             return false;
         } else {
 
-            if (!cardAdapterFour.isSelectedValid()) {
+            if (!cardAdapterSix.isSelectedValid()) {
                 Toast.makeText(MainActivitySix.this,
                         getResources().getString(R.string.error_select_card_position),
                         Toast.LENGTH_LONG).show();
                 return false;
             }
 
-            if (!cardAdapterFour.isHasCardInRow()) {
+            if (!cardAdapterSix.isHasCardInRow()) {
                 Toast.makeText(MainActivitySix.this,
                         getResources().getString(R.string.error_row_is_empty),
                         Toast.LENGTH_LONG).show();

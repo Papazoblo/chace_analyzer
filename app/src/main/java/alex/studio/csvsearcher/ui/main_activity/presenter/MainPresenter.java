@@ -45,7 +45,7 @@ public abstract class MainPresenter<A extends AppCompatActivity> implements Main
     }
 
     @Override
-    public void initReadFile(Consumer<CardSet> afterEnd) {
+    public void initReadFile(Consumer<List<CardSet>> afterEnd) {
         new Thread(() -> {
             if (!listCard.isEmpty()) {
                 listCard.clear();
@@ -64,7 +64,7 @@ public abstract class MainPresenter<A extends AppCompatActivity> implements Main
                 e.printStackTrace();
             }
             if (afterEnd != null) {
-                afterEnd.accept(listCard.get(0));
+                afterEnd.accept(listCard.subList(0, 2));
             }
         }).start();
     }

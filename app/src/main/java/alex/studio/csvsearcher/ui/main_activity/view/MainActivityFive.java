@@ -34,7 +34,7 @@ import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.CardPosition;
 import alex.studio.csvsearcher.enums.Direction;
-import alex.studio.csvsearcher.ui.adapter.ResultAdapterThree;
+import alex.studio.csvsearcher.ui.adapter.ResultAdapterFive;
 import alex.studio.csvsearcher.ui.adapter.YearAdapter;
 import alex.studio.csvsearcher.ui.main_activity.Main;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterFive;
@@ -56,6 +56,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
     private View blockSelectDate;
     private View blockByDate;
     private View secondSelectCardBlock;
+    private View cardSelectPanel;
 
     private LinearLayout cardSelectorBlock;
 
@@ -72,7 +73,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
 
     private RecyclerView recyclerYear;
     private RecyclerView recyclerView;
-    private ResultAdapterThree resultAdapter;
+    private ResultAdapterFive resultAdapter;
     private YearAdapter yearAdapter;
 
     private CardPosition curPosition;
@@ -121,6 +122,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
         blockByDate = findViewById(R.id.blockByDate);
         cardSelectorBlock = findViewById(R.id.cardSelectorBlock);
         secondSelectCardBlock = findViewById(R.id.secondSelectCardBlock);
+        cardSelectPanel = findViewById(R.id.cardSelectPanel);
 
         switchOrder = findViewById(R.id.switchOrder);
 
@@ -135,7 +137,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
 
         recyclerView = findViewById(R.id.recyclerResult);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        resultAdapter = new ResultAdapterThree(MainActivityFive.this);
+        resultAdapter = new ResultAdapterFive(MainActivityFive.this);
         recyclerView.setAdapter(resultAdapter);
 
         recyclerYear = findViewById(R.id.recyclerYear);
@@ -164,21 +166,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
             }
             textView.setLayoutParams(params);
             textView.setOnClickListener(v -> {
-                TextView selectTextView = null;
-                switch (curPosition) {
-                    case ONE:
-                        selectTextView = textOne;
-                        break;
-                    case TWO:
-                        selectTextView = textTwo;
-                        break;
-                    case THREE:
-                        selectTextView = textThree;
-                        break;
-                    case FOUR:
-                        selectTextView = textFour;
-                        break;
-                }
+                TextView selectTextView = cardSelectPanel.findViewWithTag(curPosition.getPosition());
                 String curText = getTextFrom(v);
                 selectTextView.setText(curText);
                 if (curText.equals(cards[0])) {

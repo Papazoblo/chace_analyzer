@@ -4,7 +4,11 @@ public enum CardPosition {
     ONE("one"),
     TWO("two"),
     THREE("three"),
-    FOUR("four");
+    FOUR("four"),
+    FIVE("five"),
+    SIX("six"),
+    SEVEN("seven"),
+    EIGHT("eight");
 
     CardPosition(String pos) {
         this.position = pos;

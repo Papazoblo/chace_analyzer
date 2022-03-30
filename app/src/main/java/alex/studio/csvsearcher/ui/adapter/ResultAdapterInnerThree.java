@@ -34,7 +34,7 @@ public class ResultAdapterInnerThree extends RecyclerView.Adapter<ResultAdapterI
     @Override
     public ResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ResultViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.item_result_style_4, parent, false));
+                .inflate(R.layout.item_result_style_6, parent, false));
     }
 
     @Override

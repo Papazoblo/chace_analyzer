@@ -61,6 +61,7 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
     private View btnClose;
     private View btnSetting;
     private View secondSelectCardBlock;
+    private View cardSelectPanel;
 
     private TextView switchFourRandom;
     private TextView switchFourOriginal;
@@ -136,6 +137,7 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
         blockSelectDate = findViewById(R.id.blockSelectDate);
         cardSelectorBlock = findViewById(R.id.cardSelectorBlock);
         secondSelectCardBlock = findViewById(R.id.secondSelectCardBlock);
+        cardSelectPanel = findViewById(R.id.cardSelectPanel);
 
         switchFourRandom = findViewById(R.id.switchFourRandom);
         switchFourOriginal = findViewById(R.id.switchFourOriginal);
@@ -179,21 +181,7 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
             }
             textView.setLayoutParams(params);
             textView.setOnClickListener(v -> {
-                TextView selectTextView = null;
-                switch (curPosition) {
-                    case ONE:
-                        selectTextView = textOne;
-                        break;
-                    case TWO:
-                        selectTextView = textTwo;
-                        break;
-                    case THREE:
-                        selectTextView = textThree;
-                        break;
-                    case FOUR:
-                        selectTextView = textFour;
-                        break;
-                }
+                TextView selectTextView = cardSelectPanel.findViewWithTag(curPosition.getPosition());
                 String curText = getTextFrom(v);
                 selectTextView.setText(curText);
                 if (curText.equals(cards[0])) {
@@ -213,7 +201,8 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
     }
 
     private void initializationData() {
-        presenter.initializationData((CardSet val) -> {
+        presenter.initializationData((List<CardSet> list) -> {
+            CardSet val = list.get(0);
             textOne.setText(val.getCard1());
             textTwo.setText(val.getCard2());
             textThree.setText(val.getCard3());

@@ -11,7 +11,7 @@ import alex.studio.csvsearcher.ui.main_activity.view.MainActivityThreeFour;
 public class MainPresenterThree extends MainPresenter {
 
     @Override
-    public void initializationData(Consumer<CardSet> action) {
+    public void initializationData(Consumer<List<CardSet>> action) {
         throw new UnsupportedOperationException();
     }
 

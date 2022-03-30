@@ -26,7 +26,7 @@
         android:orientation="horizontal"
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
-        android:paddingBottom="@dimen/smallPadding"
+        android:paddingBottom="@dimen/verySmallPadding"
         android:layout_marginTop="@dimen/smallPadding"
         app:layout_constraintTop_toTopOf="parent">
 

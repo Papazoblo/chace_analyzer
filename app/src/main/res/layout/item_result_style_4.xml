@@ -11,61 +11,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/textCard1"
+            android:id="@+id/textName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/underAppNameTextSize"
-            android:textColor="@color/white"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center_vertical|right"
+            android:textColor="@color/white" />
 
         <TextView
-            android:id="@+id/textCard2"
+            android:id="@+id/textRovno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/underAppNameTextSize"
+            android:text="="
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:paddingLeft="@dimen/smallPadding"
+            android:paddingRight="@dimen/smallPadding" />
+
+        <TextView
+            android:id="@+id/textCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/underAppNameTextSize"
-            android:textColor="@color/white"
             android:layout_weight="1"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/textCard3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/underAppNameTextSize"
-            android:textColor="@color/white"
-            android:layout_weight="1"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/textCard4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/underAppNameTextSize"
-            android:textColor="@color/white"
-            android:layout_weight="1"
-            android:gravity="center"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:gravity="center_vertical|left" />
     </LinearLayout>
 
 </LinearLayout>

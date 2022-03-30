@@ -1,7 +1,6 @@
 package alex.studio.csvsearcher.utils;
 
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,8 +29,13 @@ public class ViewUtils {
         return true;
     }
 
+    public static boolean toInvisible(View view) {
+        view.setVisibility(View.INVISIBLE);
+        return true;
+    }
+
     public static boolean changeVisible(View view) {
-        if(isVisible(view)) {
+        if (isVisible(view)) {
             return toGone(view);
         } else {
             return toVisible(view);
