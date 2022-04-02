@@ -92,6 +92,8 @@
     <string name="storage">Нет</string>
     <string name="csv_not_found">CSV файл не найден</string>
     <string name="cancel">Отмена</string>
+    <string name="export_settings">Экспорт настроек</string>
+    <string name="import_settings">Импорт настроек</string>
     <string name="close">Закрыть</string>
     <string name="save">Сохранить</string>
     <string name="clear">Очистить</string>
