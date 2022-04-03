@@ -137,7 +137,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -428,34 +428,11 @@
         </LinearLayout>
     </FrameLayout>
 
-    <FrameLayout
+    <include
         android:id="@+id/blockWait"
+        layout="@layout/block_exit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/opacityBlack"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <ProgressBar
-                android:layout_width="@dimen/selectCardBlockHeight"
-                android:layout_height="@dimen/selectCardBlockHeight"
-                android:layout_gravity="center" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginTop="@dimen/smallPadding"
-                android:text="@string/pls_wait"
-                android:textColor="@color/green"
-                android:textSize="@dimen/underAppNameTextSize" />
-        </LinearLayout>
-    </FrameLayout>
+        android:layout_height="match_parent" />
 
     <include
         android:id="@+id/blockAskExit"
