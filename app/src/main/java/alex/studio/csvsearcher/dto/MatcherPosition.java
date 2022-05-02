@@ -17,6 +17,10 @@ public class MatcherPosition {
         this.positions = new int[]{3, 2, 1, 0};
     }
 
+    public void setMatched(boolean[] matched) {
+        this.matched = matched;
+    }
+
     public void reverseMatch() {
         boolean tmp = matched[0];
         matched[0] = matched[3];

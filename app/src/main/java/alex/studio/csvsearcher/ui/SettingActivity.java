@@ -54,8 +54,7 @@ public class SettingActivity extends AppCompatActivity {
     private View btnChangeCsvFolder;
     private View btnSave;
     private View btnCancel;
-    private View btnImport;
-    private View btnExport;
+    //private View btnImport;
 
     private TextView textCsvFolder;
     private StorageManager storageManager;
@@ -84,8 +83,7 @@ public class SettingActivity extends AppCompatActivity {
                 break;
             case READ_REQUEST_CODE_EXPORT:
                 try {
-                    exportToFile(getFullPathFromTreeUri(data.getData(),
-                            SettingActivity.this));
+                    exportToFile();
                     Toast.makeText(SettingActivity.this,
                             "Настройки успешно экспортированы", Toast.LENGTH_SHORT).show();
                 } catch (Exception ex) {
@@ -113,8 +111,7 @@ public class SettingActivity extends AppCompatActivity {
     private void initView() {
         editCsvLink = findViewById(R.id.editCsvLink);
 
-        btnImport = findViewById(R.id.btnImport);
-        btnExport = findViewById(R.id.btnExport);
+        //btnImport = findViewById(R.id.btnImport);
         btnChangeCsvFolder = findViewById(R.id.btnChangeCsvFolder);
         //btnChangePdfFolder = findViewById(R.id.btnChangePdfFolder);
 
@@ -142,14 +139,18 @@ public class SettingActivity extends AppCompatActivity {
 
         btnCancel.setOnClickListener(v -> closeActivity());
 
-        btnSave.setOnClickListener(v -> saveAction());
+        btnSave.setOnClickListener(v -> {
+            try {
+                saveAction();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
-        btnImport.setOnClickListener(v -> performFileSearch(READ_REQUEST_CODE_IMPORT, false));
-
-        btnExport.setOnClickListener(v -> performFileSearch(READ_REQUEST_CODE_EXPORT, true));
+        //btnImport.setOnClickListener(v -> performFileSearch(READ_REQUEST_CODE_IMPORT, false));
     }
 
-    private void saveAction() {
+    private void saveAction() throws IOException {
         if (isDataValid()) {
             StorageManager storageManager = new StorageManager(SettingActivity.this);
             storageManager.write(Properties.CSV_FOLDER, getTextFrom(textCsvFolder));
@@ -161,6 +162,7 @@ public class SettingActivity extends AppCompatActivity {
             storageManager.write(ALGO_4, getTextFrom(editFourAlgoName));
             storageManager.write(ALGO_5, getTextFrom(editFiveAlgoName));
             storageManager.write(ALGO_6, getTextFrom(editSixAlgoName));
+            //exportToFile();
             closeActivity();
             return;
         }
@@ -181,8 +183,8 @@ public class SettingActivity extends AppCompatActivity {
         //textPdfFolder.setText(storageManager.read(PDF_FOLDER));
     }
 
-    private void exportToFile(String path) throws IOException {
-        File file = new File(path + "/" + IMPORT_FILE_NAME);
+    private void exportToFile() throws IOException {
+        File file = new File(getTextFrom(textCsvFolder) + "/" + IMPORT_FILE_NAME);
         StringBuilder sb = new StringBuilder();
         sb.append(createSettingsString(CSV_LINK, editCsvLink));
         sb.append(createSettingsString(CSV_FOLDER, textCsvFolder));

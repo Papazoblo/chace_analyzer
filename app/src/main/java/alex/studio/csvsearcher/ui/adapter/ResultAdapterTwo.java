@@ -39,17 +39,25 @@ public class ResultAdapterTwo extends RecyclerView.Adapter<ResultAdapterTwo.Resu
     public void onBindViewHolder(@NonNull ResultViewHolder h, int pos) {
 
         CardSet set = cardSetList.get(pos);
+        if (set == null) {
+            h.textCard1.setText("");
+            h.textCard2.setText("");
+            h.textCard3.setText("");
+            h.textCard4.setText("");
+            h.textName.setText("");
+            return;
+        }
         h.textCard4.setText(set.getCard4());
-        h.textCard4.setTextColor(set.getCard4().equals("#") ? colorGray : colorWhite);
+        h.textCard4.setTextColor(set.getCard4().equals("-") ? colorGray : colorWhite);
 
         h.textCard3.setText(set.getCard3());
-        h.textCard3.setTextColor(set.getCard3().equals("#") ? colorGray : colorWhite);
+        h.textCard3.setTextColor(set.getCard3().equals("-") ? colorGray : colorWhite);
 
         h.textCard2.setText(set.getCard2());
-        h.textCard2.setTextColor(set.getCard2().equals("#") ? colorGray : colorWhite);
+        h.textCard2.setTextColor(set.getCard2().equals("-") ? colorGray : colorWhite);
 
         h.textCard1.setText(set.getCard1());
-        h.textCard1.setTextColor(set.getCard1().equals("#") ? colorGray : colorWhite);
+        h.textCard1.setTextColor(set.getCard1().equals("-") ? colorGray : colorWhite);
 
         h.textName.setText(set.getNumber());
     }
@@ -60,6 +68,9 @@ public class ResultAdapterTwo extends RecyclerView.Adapter<ResultAdapterTwo.Resu
     }
 
     public void setData(List<CardSet> cardSets) {
+        if (cardSets.size() == 4) {
+            cardSets.add(2, null);
+        }
         this.cardSetList = cardSets;
         notifyDataSetChanged();
     }

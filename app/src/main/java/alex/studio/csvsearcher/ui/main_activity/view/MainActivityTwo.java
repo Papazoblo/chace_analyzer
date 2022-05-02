@@ -72,6 +72,7 @@ public class MainActivityTwo extends AppCompatActivity implements Main.View {
     private CardPosition curPosition;
     private int colorYellow;
     private int colorLightGray;
+    private int colorBlack;
     private int activeBg;
     private int blueBorderBg;
     private int whiteBorderBg;
@@ -94,6 +95,7 @@ public class MainActivityTwo extends AppCompatActivity implements Main.View {
         presenter = new MainPresenterTwo();
         curPosition = null;
 
+        colorBlack = getResources().getColor(R.color.black);
         colorLightGray = getResources().getColor(R.color.textLightGrayBlue);
         colorYellow = getResources().getColor(R.color.yellow);
         cards = getResources().getStringArray(R.array.cards);
@@ -411,6 +413,12 @@ public class MainActivityTwo extends AppCompatActivity implements Main.View {
     @Override
     public void setCardSetListToRecycler(List<CardSet> data) {
         resultAdapter.setData(data);
+
+        if (data.isEmpty()) {
+            recyclerView.setBackground(null);
+        } else {
+            recyclerView.setBackgroundColor(colorBlack);
+        }
     }
 
     @Override

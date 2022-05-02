@@ -17,6 +17,7 @@
         android:gravity="center"
         android:paddingLeft="@dimen/smallPadding"
         android:paddingRight="@dimen/smallPadding"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
@@ -361,14 +362,16 @@
 
     <include
         android:id="@+id/blockWait"
-        layout="@layout/block_exit"
+        layout="@layout/block_wait"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/blockAskExit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        layout="@layout/block_exit"/>
+        layout="@layout/block_exit"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

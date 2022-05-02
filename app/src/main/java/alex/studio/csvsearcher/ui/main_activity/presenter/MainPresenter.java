@@ -34,6 +34,11 @@ public abstract class MainPresenter<A extends AppCompatActivity> implements Main
     }
 
     @Override
+    public List<CardSet> getCards() {
+        return listCard;
+    }
+
+    @Override
     public void launchSearch() {
 
         if (!view.isCardValid()) {

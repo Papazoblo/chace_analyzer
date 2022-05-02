@@ -29,4 +29,25 @@ public class DateUtils {
         c.setTime(date);
         return c.get(field);
     }
+
+    public static String toDateString(Integer day, Integer month, Integer year) {
+        StringBuilder sb = new StringBuilder();
+        int finalDay = getMaxDayOfMonth(day, (month - 1), year);
+        sb.append(finalDay < 10 ? "0" + finalDay : String.valueOf(finalDay));
+        sb.append(".");
+        sb.append(month < 10 ? "0" + month : String.valueOf(month));
+        sb.append(".");
+        sb.append(year);
+        return sb.toString();
+    }
+
+    public static int getMaxDayOfMonth(int curDay, int month, int year) {
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, 1);
+        int maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        if (curDay > maxDay) {
+            return maxDay;
+        }
+        return curDay;
+    }
 }

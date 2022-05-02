@@ -58,5 +58,7 @@ public interface Main {
         void initializationData(Consumer<List<CardSet>> action);
 
         void launchAlgorithm();
+
+        List<CardSet> getCards();
     }
 }

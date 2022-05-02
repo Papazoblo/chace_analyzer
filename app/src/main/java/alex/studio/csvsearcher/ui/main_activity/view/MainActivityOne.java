@@ -1,5 +1,8 @@
 package alex.studio.csvsearcher.ui.main_activity.view;
 
+import static alex.studio.csvsearcher.enums.SelectDayType.FROM;
+import static alex.studio.csvsearcher.enums.SelectDayType.GENERAL;
+import static alex.studio.csvsearcher.enums.SelectDayType.TO;
 import static alex.studio.csvsearcher.utils.DateUtils.toDate;
 import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
 import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
@@ -8,14 +11,10 @@ import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
 import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +23,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardGroup;
@@ -36,18 +39,16 @@ import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.CardPosition;
 import alex.studio.csvsearcher.enums.Direction;
+import alex.studio.csvsearcher.enums.SelectDayType;
 import alex.studio.csvsearcher.ui.adapter.ResultAdapterOne;
-import alex.studio.csvsearcher.ui.adapter.YearAdapter;
+import alex.studio.csvsearcher.ui.adapter.SelectYearAdapter;
 import alex.studio.csvsearcher.ui.main_activity.Main;
 import alex.studio.csvsearcher.ui.main_activity.presenter.MainPresenterOne;
 
-public class MainActivityOne extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
-        Main.View {
+public class MainActivityOne extends AppCompatActivity implements Main.View {
 
     private Main.Presenter presenter;
 
-    private View btnAllYear;
-    private View btnCancel;
     private View btnSave;
     private View btnResetField;
     private View btnReset;
@@ -63,6 +64,37 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
     private View secondSelectCardBlock;
     private View cardSelectPanel;
 
+    private View btnResetDate;
+    private View btnSaveSelect;
+    private View btnCancelSelectDay;
+    private View blockDayPicker;
+    private TextView textDay;
+    private TextView textFromDay;
+    private TextView textToDay;
+    private TextView[] textDays = new TextView[31];
+    private Integer selectedDay = null;
+    private Integer[] selectedDaysRange = new Integer[2];
+    private SelectDayType selectDayType;
+
+    private View btnCancel;
+    private View btnSelectAllMonth;
+    private View btnAllMonth;
+    private View blockMonthPicker;
+    private View btnResetSelectMonth;
+    private View btnSaveSelectMonth;
+    private TextView btnMonth;
+    private TextView[] textMonth = new TextView[12];
+    private TreeSet<Integer> selectedMonth = new TreeSet<>();
+
+    private TextView btnYear;
+    private View btnSaveSelectYear;
+    private View btnResetSelectYear;
+    private View btnAllYear;
+    private View btnResetYear;
+    private View btnAllSelectYear;
+    private View blockYearPicker;
+    private RecyclerView recyclerYear;
+
     private TextView switchFourRandom;
     private TextView switchFourOriginal;
     private TextView switchThreeRandom;
@@ -74,22 +106,23 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
     private TextView textTwo;
     private TextView textThree;
     private TextView textFour;
-    private Spinner spinnerMonths;
-    private Spinner spinnerDays;
 
     private TextView textDate;
 
-    private RecyclerView recyclerYear;
     private RecyclerView recyclerView;
     private ResultAdapterOne resultAdapter;
-    private YearAdapter yearAdapter;
+    private SelectYearAdapter yearAdapter;
 
     private CardPosition curPosition;
     private int colorYellow;
+    private int colorGray;
+    private int colorWhite;
     private int colorLightGray;
-    private Drawable activeBg;
-    private Drawable whiteBorderBg;
-    private Drawable bottomBorderBg;
+    private int colorBlack;
+    private int activeBg;
+    private int circleSelectBg;
+    private int whiteBorderBg;
+    private int bottomBorderBg;
 
     private boolean[] optionsState = new boolean[]{true, false, false, false};
     private boolean stateAllYear = true;
@@ -113,16 +146,20 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
 
         colorLightGray = getResources().getColor(R.color.textLightGrayBlue);
         colorYellow = getResources().getColor(R.color.yellow);
+        colorGray = getResources().getColor(R.color.gray);
+        colorWhite = getResources().getColor(R.color.white);
+        colorBlack = getResources().getColor(R.color.black);
         cards = getResources().getStringArray(R.array.cards);
         months = getResources().getStringArray(R.array.months);
-        activeBg = getResources().getDrawable(R.drawable.blue_radius_active_border);
-        whiteBorderBg = getResources().getDrawable(R.drawable.white_active_border);
-        bottomBorderBg = getResources().getDrawable(R.drawable.bottom_border);
+        circleSelectBg = R.drawable.circle_select;
+        activeBg = R.drawable.blue_radius_active_border;
+        whiteBorderBg = R.drawable.white_active_border;
+        bottomBorderBg = R.drawable.bottom_border;
     }
 
     private void initView() {
-        btnAllYear = findViewById(R.id.btnAllYear);
         btnCancel = findViewById(R.id.btnCancel);
+        btnResetDate = findViewById(R.id.btnResetDate);
         btnSave = findViewById(R.id.btnSave);
         btnResetField = findViewById(R.id.btnResetField);
         btnReset = findViewById(R.id.btnReset);
@@ -150,22 +187,13 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
         textTwo = findViewById(R.id.textTwo);
         textThree = findViewById(R.id.textThree);
         textFour = findViewById(R.id.textFour);
-        spinnerMonths = findViewById(R.id.spinnerMonth);
-        spinnerDays = findViewById(R.id.spinnerDay);
 
         recyclerView = findViewById(R.id.recyclerResult);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         resultAdapter = new ResultAdapterOne(MainActivityOne.this);
         recyclerView.setAdapter(resultAdapter);
 
-        recyclerYear = findViewById(R.id.recyclerYear);
-        recyclerYear.setLayoutManager(new LinearLayoutManager(this));
-        yearAdapter = new YearAdapter(MainActivityOne.this, true);
-        recyclerYear.setAdapter(yearAdapter);
-        yearAdapter.initData();
-
         toGone(secondSelectCardBlock);
-        spinnerDays.post(this::initializationData);
 
         for (int i = 0; i < cards.length; i++) {
             TextView textView = (TextView) LayoutInflater.from(this)
@@ -189,15 +217,290 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
                 } else {
                     selectTextView.setTextColor(colorYellow);
                 }
-                selectTextView.setBackground(bottomBorderBg);
+                selectTextView.setBackgroundResource(bottomBorderBg);
                 toGone(cardSelectorBlock);
                 curPosition = null;
             });
             cardSelectorBlock.addView(textView);
         }
 
-        initSpinner();
         initAction();
+        initDayPicker();
+        initMonthPicker();
+        initYearPicker();
+        textDay.post(this::initializationData);
+    }
+
+    private void initDayPicker() {
+        btnCancelSelectDay = findViewById(R.id.btnCancelSelectDay);
+        btnSaveSelect = findViewById(R.id.btnSaveSelect);
+        blockDayPicker = findViewById(R.id.blockDayPicker);
+        textDay = findViewById(R.id.textDay);
+        textFromDay = findViewById(R.id.textFromDay);
+        textToDay = findViewById(R.id.textToDay);
+
+        blockDayPicker.post(() -> {
+            for (int i = 0; i < textDays.length; i++) {
+                TextView textView = blockDayPicker.findViewWithTag(String.valueOf(i + 1));
+                textView.setOnClickListener(v -> {
+                    resetAllSelect(textDays, new HashSet<>(Collections.singletonList(selectedDay)));
+                    ((TextView) v).setTextColor(colorWhite);
+                    v.setBackgroundResource(circleSelectBg);
+                    switch (selectDayType) {
+                        case GENERAL:
+                            selectedDay = Integer.valueOf((String) v.getTag());
+                            break;
+                        case FROM:
+                            selectedDaysRange[0] = Integer.valueOf((String) v.getTag());
+                            break;
+                        case TO:
+                            selectedDaysRange[1] = Integer.valueOf((String) v.getTag());
+                            break;
+                    }
+                });
+                textDays[i] = textView;
+            }
+        });
+
+        blockDayPicker.setOnClickListener(v -> {
+        });
+
+        textDay.setOnClickListener(v -> showSelectByType(GENERAL));
+
+        textFromDay.setOnClickListener(v -> showSelectByType(FROM));
+
+        textToDay.setOnClickListener(v -> showSelectByType(TO));
+
+        btnSaveSelect.setOnClickListener(v -> {
+            Calendar c = Calendar.getInstance();
+            c.setTime(toDate(firstDate));
+
+            switch (selectDayType) {
+                case GENERAL:
+                    if (selectedDay != null) {
+                        selectedDaysRange = new Integer[2];
+                        textDay.setText(String.valueOf(selectedDay));
+                        textFromDay.setText(R.string.from);
+                        textToDay.setText(R.string.to);
+                    } else if (selectedDaysRange[0] != null || selectedDaysRange[1] != null) {
+                        selectDayType = FROM;
+                    }
+                    break;
+                case FROM:
+                    if (selectedDaysRange[0] != null) {
+                        if (selectedDaysRange[1] != null &&
+                                selectedDaysRange[0] > selectedDaysRange[1]) {
+                            Toast.makeText(MainActivityOne.this, String.format(getResources()
+                                            .getString(R.string.error_from_less_then_to), selectedDaysRange[1]),
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        selectedDay = null;
+                        textDay.setText("интервал");
+                        textFromDay.setText(String.valueOf(selectedDaysRange[0]));
+                    } else if (selectedDay != null) {
+                        selectDayType = GENERAL;
+                    } else {
+                        selectDayType = TO;
+                    }
+                case TO:
+                    if (selectedDaysRange[1] != null) {
+                        if (selectedDaysRange[0] != null &&
+                                selectedDaysRange[1] < selectedDaysRange[0]) {
+                            Toast.makeText(MainActivityOne.this, String.format(getResources()
+                                            .getString(R.string.error_to_less_then_from), selectedDaysRange[0]),
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        selectedDay = null;
+                        textDay.setText("интервал");
+                        textToDay.setText(String.valueOf(selectedDaysRange[1]));
+                    } else if (selectedDay != null) {
+                        selectDayType = GENERAL;
+                    } else {
+                        selectDayType = FROM;
+                    }
+                    break;
+            }
+            toGone(blockDayPicker);
+        });
+
+        btnCancelSelectDay.setOnClickListener(v -> btnSaveSelect.performClick());
+    }
+
+    private void initMonthPicker() {
+        btnSelectAllMonth = findViewById(R.id.btnAllSelectMonth);
+        btnAllMonth = findViewById(R.id.btnAllMonth);
+        blockMonthPicker = findViewById(R.id.blockMonthPicker);
+        btnResetSelectMonth = findViewById(R.id.btnResetSelectMonth);
+        btnSaveSelectMonth = findViewById(R.id.btnSaveSelectMonth);
+        btnMonth = findViewById(R.id.btnMonth);
+
+        blockMonthPicker.post(() -> {
+            for (int i = 0; i < textMonth.length; i++) {
+                TextView textView = blockMonthPicker.findViewWithTag(String.valueOf(i + 1));
+                textView.setOnClickListener(v -> {
+                    Integer cur = Integer.valueOf((String) v.getTag());
+                    if (selectedMonth.contains(cur)) {
+                        ((TextView) v).setTextColor(colorGray);
+                        v.setBackground(null);
+                        selectedMonth.remove(cur);
+                    } else {
+                        ((TextView) v).setTextColor(colorWhite);
+                        v.setBackgroundResource(circleSelectBg);
+                        selectedMonth.add(cur);
+                    }
+                });
+                textMonth[i] = textView;
+            }
+        });
+
+        blockMonthPicker.setOnClickListener(v -> {
+        });
+
+        btnMonth.setOnClickListener(v -> toVisible(blockMonthPicker));
+
+        btnSaveSelectMonth.setOnClickListener(v -> {
+            Calendar c = Calendar.getInstance();
+            c.setTime(toDate(firstDate));
+            if (selectedMonth.isEmpty()) {
+                int month = c.get(Calendar.MONTH);
+                textMonth[month].setBackgroundResource(circleSelectBg);
+                textMonth[month].setTextColor(colorWhite);
+                btnMonth.setText(months[month]);
+            } else if (selectedMonth.size() == 1) {
+                int month = selectedMonth.first() - 1;
+                textMonth[month].setBackgroundResource(circleSelectBg);
+                textMonth[month].setTextColor(colorWhite);
+                btnMonth.setText(months[month]);
+            } else {
+                if (selectedMonth.size() == 12) {
+                    btnMonth.setText("все месяцы");
+                } else {
+                    btnMonth.setText("несколько");
+                }
+            }
+            toGone(blockMonthPicker);
+        });
+
+        btnResetSelectMonth.setOnClickListener(v -> resetAllSelect(textMonth, selectedMonth));
+
+        /*btnResetMonth.setOnClickListener(v -> {
+            Calendar c = Calendar.getInstance();
+            c.setTime(toDate(firstDate));
+            int month = c.get(Calendar.MONTH);
+            resetAllSelect(textMonth, selectedMonth);
+            textMonth[month].setBackgroundResource(circleSelectBg);
+            textMonth[month].setTextColor(colorWhite);
+            btnMonth.setText(textMonth[month].getText());
+        });*/
+
+        btnSelectAllMonth.setOnClickListener(v -> selectAll(textMonth, selectedMonth, btnMonth));
+
+        btnAllMonth.setOnClickListener(v -> selectAll(textMonth, selectedMonth, btnMonth));
+    }
+
+    private void initYearPicker() {
+        btnAllSelectYear = findViewById(R.id.btnAllSelectYear);
+        btnAllYear = findViewById(R.id.btnAllYear);
+        btnYear = findViewById(R.id.btnYear);
+        btnSaveSelectYear = findViewById(R.id.btnSaveSelectYear);
+        btnResetSelectYear = findViewById(R.id.btnResetSelectYear);
+        btnResetYear = findViewById(R.id.btnResetYear);
+        blockYearPicker = findViewById(R.id.blockYearPicker);
+        recyclerYear = findViewById(R.id.recyclerYear);
+
+        yearAdapter = new SelectYearAdapter(MainActivityOne.this, true);
+        recyclerYear.setLayoutManager(new LinearLayoutManager(this));
+        recyclerYear.setAdapter(yearAdapter);
+        yearAdapter.initData();
+
+        blockYearPicker.setOnClickListener(v -> {
+        });
+
+        btnAllYear.setOnClickListener(v -> {
+            yearAdapter.selectAll();
+            btnYear.setText("все года");
+        });
+
+        btnAllSelectYear.setOnClickListener(v -> yearAdapter.selectAll());
+
+        btnYear.setOnClickListener(v -> toVisible(blockYearPicker));
+
+        btnSaveSelectYear.setOnClickListener(v -> {
+            List<Integer> years = yearAdapter.getArraySelectedYears();
+            if (years.isEmpty()) {
+                Calendar c = Calendar.getInstance();
+                c.setTime(toDate(firstDate));
+                yearAdapter.selectYear(c.get(Calendar.YEAR));
+                btnYear.setText(String.valueOf(c.get(Calendar.YEAR)));
+            } else if (years.size() == 1) {
+                btnYear.setText(String.valueOf(years.get(0)));
+            } else {
+                if (years.size() == yearAdapter.getAllItemCount()) {
+                    btnYear.setText("все года");
+                } else {
+                    btnYear.setText("несколько");
+                }
+            }
+            toGone(blockYearPicker);
+        });
+
+        btnResetSelectYear.setOnClickListener(v -> yearAdapter.clearAll());
+
+        btnResetYear.setOnClickListener(v -> {
+            yearAdapter.selectAll();
+            btnYear.setText("все года");
+        });
+    }
+
+    private void showSelectByType(SelectDayType selectDayType) {
+        this.selectDayType = selectDayType;
+        resetAllSelect(textDays, null);
+        switch (selectDayType) {
+            case GENERAL:
+                if (selectedDay != null) {
+                    selectTextView(selectedDay);
+                }
+                break;
+            case FROM:
+                if (selectedDaysRange[0] != null) {
+                    selectTextView(selectedDaysRange[0]);
+                }
+                break;
+            case TO:
+                if (selectedDaysRange[1] != null) {
+                    selectTextView(selectedDaysRange[1]);
+                }
+                break;
+        }
+        toVisible(blockDayPicker);
+    }
+
+    private void selectTextView(Integer value) {
+        TextView textView = blockDayPicker.findViewWithTag(String.valueOf(value));
+        textView.setTextColor(colorWhite);
+        textView.setBackgroundResource(circleSelectBg);
+    }
+
+    private void selectAll(TextView[] array, Set<Integer> valueSet, TextView btn) {
+        for (TextView item : array) {
+            valueSet.add(Integer.valueOf((String) item.getTag()));
+            item.setTextColor(colorWhite);
+            item.setBackgroundResource(circleSelectBg);
+            btn.setText("все месяцы");
+        }
+    }
+
+    private void resetAllSelect(TextView[] array, Set<Integer> valueSet) {
+        for (TextView day : array) {
+            if (valueSet != null) {
+                valueSet.clear();
+            }
+            day.setTextColor(colorGray);
+            day.setBackground(null);
+        }
     }
 
     private void initializationData() {
@@ -207,22 +510,42 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
             textTwo.setText(val.getCard2());
             textThree.setText(val.getCard3());
             textFour.setText(val.getCard4());
-            textDate.setText(val.getDateString());
-            Calendar c = Calendar.getInstance();
-            c.setTime(val.getDate());
-            spinnerMonths.setSelection(c.get(Calendar.MONTH));
-            selectDay(c.get(Calendar.MONTH));
-            spinnerDays.setSelection(c.get(Calendar.DAY_OF_MONTH) - 1);
-            firstDate = val.getDateString();
+            initDate(val.getDateString());
         });
     }
 
-    private void changeEnableState(int pos, View view) {
+    private void initDate(String date) {
+        selectDayType = GENERAL;
+        firstDate = date;
+        textFromDay.setText(R.string.from);
+        textToDay.setText(R.string.to);
+        Calendar c = Calendar.getInstance();
+        c.setTime(toDate(date));
+        int curDay = c.get(Calendar.DAY_OF_MONTH);
+        textDay.setText(String.valueOf(curDay));
+        selectedDay = curDay;
+        selectedDaysRange = new Integer[2];
+        int month = c.get(Calendar.MONTH);
+        resetAllSelect(textMonth, selectedMonth);
+        textMonth[month].setBackgroundResource(circleSelectBg);
+        textMonth[month].setTextColor(colorWhite);
+        btnMonth.setText(months[month]);
+        selectedMonth.add(month + 1);
+        yearAdapter.selectAll();
+        btnYear.setText("все года");
+        saveDateAction();
+    }
+
+    private void changeEnableState(int pos, View view, int textColorActive, int textColorUnActive,
+                                   int bgColor) {
         if (optionsState[pos]) {
             view.setBackground(null);
+            ((TextView) view).setTextColor(textColorUnActive);
             optionsState[pos] = false;
         } else {
-            view.setBackground(activeBg);
+            view.setBackgroundResource(activeBg);
+            ((TextView) view).setTextColor(textColorActive);
+            view.setBackgroundResource(bgColor);
             optionsState[pos] = true;
         }
     }
@@ -246,13 +569,14 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
         blockAskExit.setOnClickListener(v -> {
         });
 
-        btnSave.setOnClickListener(v -> saveDateAction());
+        btnSave.setOnClickListener(v -> {
+            saveDateAction();
+            toGone(blockSelectDate);
+        });
 
-        btnCancel.setOnClickListener(v -> toGone(blockSelectDate));
+        btnCancel.setOnClickListener(v -> btnSave.performClick());
 
         btnResetField.setOnClickListener(v -> resetCards());
-
-        btnAllYear.setOnClickListener(v -> changeAllYearState());
 
         btnReset.setOnClickListener(v -> clearData());
 
@@ -260,7 +584,14 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
 
         btnSetting.setOnClickListener(v -> toVisible(blockOptions));
 
-        btnClose.setOnClickListener(v -> toGone(blockOptions));
+        btnClose.setOnClickListener(v -> {
+            if (!optionsState[0] && !optionsState[1] && !optionsState[2] && !optionsState[3]) {
+                Toast.makeText(MainActivityOne.this, getResources()
+                        .getString(R.string.error_select_option), Toast.LENGTH_LONG).show();
+                return;
+            }
+            toGone(blockOptions);
+        });
 
         textOne.setOnClickListener(this::selectCardClick);
 
@@ -270,17 +601,18 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
 
         textFour.setOnClickListener(this::selectCardClick);
 
-        spinnerMonths.setOnItemSelectedListener(this);
+        switchFourOriginal.setOnClickListener(v -> changeEnableState(0, v,
+                getResources().getColor(R.color.black), colorWhite,
+                R.drawable.four_original_active_border));
 
-        spinnerDays.setOnItemSelectedListener(this);
+        switchFourRandom.setOnClickListener(v -> changeEnableState(1, v, colorWhite,
+                colorWhite, R.drawable.four_random_active_border));
 
-        switchFourOriginal.setOnClickListener(v -> changeEnableState(0, v));
+        switchThreeOriginal.setOnClickListener(v -> changeEnableState(2, v, colorWhite,
+                colorWhite, R.drawable.three_original_active_border));
 
-        switchFourRandom.setOnClickListener(v -> changeEnableState(1, v));
-
-        switchThreeOriginal.setOnClickListener(v -> changeEnableState(2, v));
-
-        switchThreeRandom.setOnClickListener(v -> changeEnableState(3, v));
+        switchThreeRandom.setOnClickListener(v -> changeEnableState(3, v, colorWhite,
+                colorWhite, R.drawable.three_random_active_border));
 
         blockWait.setOnClickListener(v -> {
         });
@@ -289,69 +621,23 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
         });
 
         textDate.setOnClickListener(v -> toVisible(blockSelectDate));
+
+        btnResetDate.setOnClickListener(v -> initDate(firstDate));
     }
 
     private void selectCardClick(View view) {
-        textOne.setBackground(bottomBorderBg);
-        textTwo.setBackground(bottomBorderBg);
-        textThree.setBackground(bottomBorderBg);
-        textFour.setBackground(bottomBorderBg);
-        view.setBackground(whiteBorderBg);
+        textOne.setBackgroundResource(bottomBorderBg);
+        textTwo.setBackgroundResource(bottomBorderBg);
+        textThree.setBackgroundResource(bottomBorderBg);
+        textFour.setBackgroundResource(bottomBorderBg);
+        view.setBackgroundResource(whiteBorderBg);
         curPosition = CardPosition.of((String) view.getTag());
         toVisible(cardSelectorBlock);
-    }
-
-    private void changeAllYearState() {
-        if (!stateAllYear) {
-            stateAllYear = true;
-            yearAdapter.clearAll();
-            btnAllYear.setBackground(getResources().getDrawable(R.drawable.blue_dark_radius_border));
-        } else {
-            stateAllYear = false;
-            yearAdapter.selectAll();
-            btnAllYear.setBackground(getResources().getDrawable(R.drawable.blue_radius_active_border));
-        }
-    }
-
-    private void initSpinner() {
-        ArrayAdapter<String> adapterMonth = new ArrayAdapter<>(MainActivityOne.this,
-                R.layout.item_spinner_style_month_drop_down, months);
-        adapterMonth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMonths.setAdapter(adapterMonth);
-    }
-
-    private void changeSpinnerColor(TextView currentText, int position) {
-        if (currentText == null) {
-            return;
-        }
-        if (position != 0) {
-            currentText.setTextColor(colorYellow);
-        } else {
-            currentText.setTextColor(colorLightGray);
-        }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
-        if (parent.getId() != R.id.spinnerMonth && parent.getId() != R.id.spinnerDay) {
-            changeSpinnerColor((TextView) parent.getChildAt(0), i);
-        } else {
-            changeSpinnerColor((TextView) parent.getChildAt(0), 1);
-            if (parent.getId() == R.id.spinnerMonth) {
-                selectDay(i);
-            }
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         presenter.setView(this);
     }
 
@@ -361,8 +647,27 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
     }
 
     @Override
+    public void clearData() {
+        resultAdapter.setData(new ArrayList<>());
+        initDate(firstDate);
+        recyclerView.setBackground(null);
+    }
+
+    @Override
     public Direction getDirection() {
         return null;
+    }
+
+    public List<Integer> getSelectedDays() {
+        if (selectDayType == GENERAL) {
+            return Collections.singletonList(selectedDay);
+        } else {
+            return Arrays.asList(selectedDaysRange);
+        }
+    }
+
+    public Set<Integer> getSelectedMonths() {
+        return selectedMonth;
     }
 
     public List<Integer> getSelectedYears() {
@@ -386,26 +691,26 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
 
     @Override
     public String[] getActiveDate() {
-        String[] dMY = textDate.getText().toString().split("\\.");
-        String result = dMY[0] + "." + dMY[1] + "." + firstDate.substring(6);
-        return new String[]{result};
+        List<String> dates = new ArrayList<>();
+        /*for (Integer day : selectedDay) {
+            for (Integer month : selectedMonth) {
+                for (Integer year : yearAdapter.getArraySelectedYears()) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(day < 10 ? "0" + day : String.valueOf(day));
+                    sb.append(".");
+                    sb.append(month < 10 ? "0" + month : String.valueOf(month));
+                    sb.append(".");
+                    sb.append(year);
+                    dates.add(sb.toString());
+                }
+            }
+        }*/
+        return dates.toArray(new String[0]);
     }
 
     @Override
     public Integer getActiveCountGames() {
         return 0;
-    }
-
-    public void clearData() {
-        resultAdapter.setData(new ArrayList<>());
-        textDate.setText(firstDate);
-        Date date = toDate(firstDate);
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        spinnerMonths.setSelection(c.get(Calendar.MONTH));
-        selectDay(c.get(Calendar.MONTH));
-        spinnerDays.setSelection(c.get(Calendar.DAY_OF_MONTH) - 1);
-        yearAdapter.clearAll();
     }
 
     @Override
@@ -416,6 +721,11 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
     @Override
     public void setCardMatchListToRecycler(List<CardMatch> data) {
         resultAdapter.setData(data);
+        if (data.isEmpty()) {
+            recyclerView.setBackground(null);
+        } else {
+            recyclerView.setBackgroundColor(colorBlack);
+        }
     }
 
     @Override
@@ -454,9 +764,10 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
                     .getString(R.string.error_select_card_one), Toast.LENGTH_LONG).show();
             return false;
         }
-        if (textDate.getText().toString().isEmpty()) {
+        if (selectDayType != GENERAL &&
+                (selectedDaysRange[0] == null || selectedDaysRange[1] == null)) {
             Toast.makeText(MainActivityOne.this, getResources()
-                    .getString(R.string.error_select_date), Toast.LENGTH_LONG).show();
+                    .getString(R.string.error_select_day_range), Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
@@ -486,66 +797,26 @@ public class MainActivityOne extends AppCompatActivity implements AdapterView.On
     }
 
     private void saveDateAction() {
-        String result = "";
+        StringBuilder sb = new StringBuilder();
         List<Integer> years = yearAdapter.getArraySelectedYears();
 
-        result += addZero(spinnerDays.getSelectedItemPosition() + 1) + ".";
-        result += addZero(spinnerMonths.getSelectedItemPosition() + 1) +
-                (years.size() == 1 ? "." + years.get(0) :
-                        years.isEmpty() ? "." + firstDate.substring(6) : "");
+        if (selectDayType == GENERAL) {
+            sb.append(selectedDay);
+            if (selectedMonth.size() == 1) {
+                sb.append("." + (selectedMonth.first() < 10 ? "0" + selectedMonth.first() :
+                        selectedMonth.first()));
 
-        textDate.setText(result);
-        toGone(blockSelectDate);
-    }
+                if (yearAdapter.getAllItemCount() == years.size()) {
+                    sb.append(".");
+                    sb.append(years.get(years.size() - 1));
 
-    private String addZero(int num) {
-        if (num < 10) {
-            return "0" + num;
+                    if (sb.toString().equals(firstDate)) {
+                        textDate.setText(sb.toString());
+                        return;
+                    }
+                }
+            }
         }
-        return num + "";
+        textDate.setText("Дата");
     }
-
-    private void selectDay(int pos) {
-
-        int selection = spinnerDays.getSelectedItemPosition();
-
-        ArrayAdapter<String> adapterDays = new ArrayAdapter<>(MainActivityOne.this,
-                R.layout.item_spinner_style_month_drop_down, generateDaysArray(pos));
-        adapterDays.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDays.setAdapter(adapterDays);
-        spinnerDays.setSelection(selection >= adapterDays.getCount() ? adapterDays.getCount() - 1
-                : selection);
-    }
-
-    private String[] generateDaysArray(int month) {
-        int count = 0;
-        switch (month) {
-            case 0:
-            case 2:
-            case 4:
-            case 6:
-            case 7:
-            case 9:
-            case 11:
-                count = 31;
-                break;
-            case 1:
-                count = 29;
-                break;
-            case 3:
-            case 5:
-            case 8:
-            case 10:
-                count = 30;
-                break;
-        }
-
-        String[] result = new String[count];
-        for (int i = 0; i < count; i++) {
-            result[i] = (i + 1) + "";
-        }
-
-        return result;
-    }
-
 }

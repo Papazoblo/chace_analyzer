@@ -223,9 +223,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void showDialog() {
-        runOnUiThread(() -> {
-            toVisible(blockProgress);
-        });
+        runOnUiThread(() -> toVisible(blockProgress));
     }
 
     public void hideDialog() {

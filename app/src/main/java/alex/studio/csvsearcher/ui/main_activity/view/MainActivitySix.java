@@ -74,6 +74,7 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
     private int colorYellow;
     private int colorWhite;
+    private int colorBlack;
 
     private Direction curDirection;
     int yearCur;
@@ -99,6 +100,7 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
         colorYellow = getResources().getColor(R.color.yellow);
         colorWhite = getResources().getColor(R.color.white);
+        colorBlack = getResources().getColor(R.color.black);
 
         Calendar dateAndTime = Calendar.getInstance();
         yearCur = yearCurTo = dateAndTime.get(Calendar.YEAR);
@@ -348,6 +350,7 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
         toGone(textNotMatch);
         resultAdapterFour.setData(new ArrayList<>());
         launchSearch(TOP);
+        recyclerView.setBackground(null);
     }
 
     @Override
@@ -365,6 +368,9 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
         resultAdapterFour.setData(data);
         if (data.isEmpty()) {
             toVisible(textNotMatch);
+            recyclerView.setBackground(null);
+        } else {
+            recyclerView.setBackgroundColor(colorBlack);
         }
     }
 

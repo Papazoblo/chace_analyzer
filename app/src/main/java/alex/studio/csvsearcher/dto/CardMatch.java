@@ -1,5 +1,7 @@
 package alex.studio.csvsearcher.dto;
 
+import java.util.Calendar;
+
 import alex.studio.csvsearcher.enums.TypeMatch;
 
 public class CardMatch {
@@ -10,6 +12,7 @@ public class CardMatch {
     private TypeMatch type;
     private int year;
     private MatcherPosition matcherPosition;
+    private int month;
 
     public CardMatch(int count, CardSet set, CardSet prevSet, TypeMatch type,
                      MatcherPosition matcherPosition) {
@@ -38,6 +41,12 @@ public class CardMatch {
 
     public int getYear() {
         return year;
+    }
+
+    public int getMonth() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(prevSet.getDate());
+        return c.get(Calendar.MONTH);
     }
 
     public MatcherPosition getMatcherPosition() {

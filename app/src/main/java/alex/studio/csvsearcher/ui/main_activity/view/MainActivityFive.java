@@ -79,6 +79,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
     private CardPosition curPosition;
     private int colorYellow;
     private int colorLightGray;
+    private int colorBlack;
     private Drawable whiteBorderBg;
     private Drawable bottomBorderBg;
 
@@ -102,6 +103,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
 
         colorLightGray = getResources().getColor(R.color.textLightGrayBlue);
         colorYellow = getResources().getColor(R.color.yellow);
+        colorBlack = getResources().getColor(R.color.black);
         cards = getResources().getStringArray(R.array.cards);
         months = getResources().getStringArray(R.array.months);
         whiteBorderBg = getResources().getDrawable(R.drawable.white_active_border);
@@ -350,6 +352,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
 
     public void clearData() {
         resultAdapter.setData(new ArrayList<>(), new ArrayList<>());
+        recyclerView.setBackground(null);
     }
 
     @Override
@@ -370,6 +373,11 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
     @Override
     public void setRecyclerResultData(List<Map<String, ColorMatch>> data, List<List<CardSet>> list) {
         resultAdapter.setData(data, list);
+        if (list.isEmpty()) {
+            recyclerView.setBackground(null);
+        } else {
+            recyclerView.setBackgroundColor(colorBlack);
+        }
     }
 
     @Override

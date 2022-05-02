@@ -3,6 +3,7 @@ package alex.studio.csvsearcher.ui.main_activity.presenter;
 import static alex.studio.csvsearcher.utils.DateUtils.doDateOperation;
 import static alex.studio.csvsearcher.utils.DateUtils.getDateField;
 import static alex.studio.csvsearcher.utils.DateUtils.toDate;
+import static alex.studio.csvsearcher.utils.DateUtils.toDateString;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import alex.studio.csvsearcher.dto.CardMatch;
 import alex.studio.csvsearcher.dto.CardSet;
@@ -44,45 +46,40 @@ public class MainPresenterOne extends MainPresenter {
 
         String[] selectCards = view.getCards();
 
-        String[] selectedDate = view.getActiveDate();
-
+        List<Integer> days = ((MainActivityOne) view).getSelectedDays();
+        Set<Integer> months = ((MainActivityOne) view).getSelectedMonths();
+        List<Integer> years = ((MainActivityOne) view).getSelectedYears();
+        List<Date[]> dateList = createDateArray(days, new ArrayList<>(months),
+                years);
         List<CardSet> workListCard = getWorkList(1);
-        List<Date[]> dates = createDateArray(selectedDate[0]);
 
-        Map<Integer, Map<Date, List<CardMatch>>> matchMap = createWorkList(workListCard, dates, selectCards);
+        Map<Integer, Map<Date, List<CardMatch>>> matchMap = createWorkList(workListCard, dateList,
+                selectCards);
         printOutputData(findResult(matchMap));
     }
 
-    private List<Date[]> createDateArray(String curDateString) {
-        List<Date[]> result = new ArrayList<>();
-        Date curDate = toDate(curDateString);
-        Date minDate = toDate(((CardSet) listCard.get(listCard.size() - 1)).getDateString());
-        Date beforeDate = doDateOperation(curDate, Calendar.DAY_OF_MONTH, -7);
-        Date afterDate = doDateOperation(curDate, Calendar.DAY_OF_MONTH, 7);
-        List<Integer> years = ((MainActivityOne) view).getSelectedYears();
-        do {
-            if (beforeDate.before(minDate) || afterDate.before(minDate)) {
-                break;
+    private List<Date[]> createDateArray(List<Integer> days, List<Integer> months,
+                                         List<Integer> years) {
+        List<Date[]> dates = new ArrayList<>();
+        for (Integer year : years) {
+            for (Integer month : months) {
+                Date date1;
+                Date date2;
+                if (days.size() == 2) {
+                    date1 = toDate(toDateString(days.get(0), month, year));
+                    date2 = toDate(toDateString(days.get(1), month, year));
+                } else {
+                    Date date = toDate(toDateString(days.get(0), month, year));
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(date);
+                    date1 = doDateOperation(date, Calendar.DAY_OF_MONTH, -7);
+                    date2 = doDateOperation(date, Calendar.DAY_OF_MONTH, 7);
+                }
+                dates.add(new Date[]{date1, date2});
             }
-            if (!isYearContains(beforeDate, years)) {
-                beforeDate = doDateOperation(beforeDate, Calendar.YEAR, -1);
-                afterDate = doDateOperation(afterDate, Calendar.YEAR, -1);
-                continue;
-            }
-            result.add(new Date[]{beforeDate, afterDate});
-            beforeDate = doDateOperation(beforeDate, Calendar.YEAR, -1);
-            afterDate = doDateOperation(afterDate, Calendar.YEAR, -1);
-        } while (true);
-        return result;
-    }
-
-    private boolean isYearContains(Date date, List<Integer> years) {
-        if (years.isEmpty()) {
-            return true;
         }
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        return years.contains(c.get(Calendar.YEAR));
+        Collections.sort(dates, (d1, d2) -> d2[0].compareTo(d1[0]));
+        return dates;
     }
 
     private void printOutputData(List<CardMatch> result) {
@@ -127,16 +124,22 @@ public class MainPresenterOne extends MainPresenter {
         for (int i = 0, j = 1; i < dates.size(); i++) {
             Map<Date, List<CardMatch>> mapDate = new HashMap<>();
             for (; j < cardSets.size(); j++) {
+                if (j <= 0) {
+                    j = 1;
+                }
                 CardSet curSet = cardSets.get(j);
                 if (isBetweenDate(curSet, dates.get(i))) {
                     searchMatch(cardSets.get(j - 1), curSet, selectCards, mapDate);
                 } else if (curSet.getDate().before(dates.get(i)[0])) {
+                    j--;
                     break;
                 }
-                if (!mapDate.isEmpty()) {
-                    mapYears.put(getDateField(dates.get(i)[0], Calendar.YEAR), mapDate);
-                }
             }
+            int year = getDateField(dates.get(i)[0], Calendar.YEAR);
+            if (!mapYears.containsKey(year)) {
+                mapYears.put(getDateField(dates.get(i)[0], Calendar.YEAR), new HashMap<>());
+            }
+            mapYears.get(year).putAll(mapDate);
         }
         return mapYears;
     }
@@ -158,7 +161,7 @@ public class MainPresenterOne extends MainPresenter {
             for (int j = selectCards.length - 1; j >= 0; j--) {
                 if (selectCards[i].equals(curCards[j])) {
                     matchedOrder += curCards[j];
-                    matcherPosition.getMatched()[j] = true;
+                    matcherPosition.getMatched()[i] = true;
                     replacePositions(matcherPosition, i, j);
                     curCards[j] = "-";
                     count++;
@@ -173,16 +176,13 @@ public class MainPresenterOne extends MainPresenter {
         }
 
         if (count == 3) {
-            boolean isContain = curSet.toString(true, false).startsWith(selectCards[0] + selectCards[1] + selectCards[2])
-                    || curSet.toString(true, false).endsWith(selectCards[1] + selectCards[2] + selectCards[3])
-                    || (curSet.toString(true, false).startsWith(selectCards[0] + selectCards[1]) && curSet.toString(true, false).endsWith(selectCards[3]))
-                    || (curSet.toString(true, false).startsWith(selectCards[0]) && curSet.toString(true, false).endsWith(selectCards[2] + selectCards[3]));
-            if (isContain && options[THREE_ORIGINAL]) {
+            boolean[] contains = getThreeOriginal(selectCards, curSet);
+            if (contains != null && options[THREE_ORIGINAL]) {
+                matcherPosition.setMatched(contains);
                 matcherPosition.resetPositions();
-                matcherPosition.reverseMatch();
                 resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, TypeMatch.FULL,
                         matcherPosition));
-            } else if (options[THREE_RANDOM]) {
+            } else if (contains == null && options[THREE_RANDOM]) {
                 resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, TypeMatch.ANY,
                         matcherPosition));
             }
@@ -191,10 +191,27 @@ public class MainPresenterOne extends MainPresenter {
             if (isEqual && options[FOUR_ORIGINAL]) {
                 resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, TypeMatch.FULL,
                         matcherPosition));
-            } else if (options[FOUR_RANDOM]) {
+            } else if (!isEqual && options[FOUR_RANDOM]) {
                 resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, TypeMatch.ANY,
                         matcherPosition));
             }
+        }
+    }
+
+    private boolean[] getThreeOriginal(String[] selectCards, CardSet curSet) {
+        String setString = curSet.toString(true, false);
+        if (setString.startsWith(selectCards[0] + selectCards[1] + selectCards[2])) {
+            return new boolean[]{true, true, true, false};
+        } else if (setString.endsWith(selectCards[1] + selectCards[2] + selectCards[3])) {
+            return new boolean[]{false, true, true, true};
+        } else if (setString.startsWith(selectCards[0] + selectCards[1]) &&
+                setString.endsWith(selectCards[3])) {
+            return new boolean[]{true, true, false, true};
+        } else if (setString.startsWith(selectCards[0]) &&
+                setString.endsWith(selectCards[2] + selectCards[3])) {
+            return new boolean[]{true, false, true, true};
+        } else {
+            return null;
         }
     }
 

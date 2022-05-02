@@ -17,6 +17,7 @@
         android:text="@string/app_name"
         android:textColor="@color/opacityGreen"
         android:textSize="@dimen/bigAppNameSize"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
@@ -515,14 +516,16 @@
 
     <include
         android:id="@+id/blockWait"
-        layout="@layout/block_exit"
+        layout="@layout/block_wait"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/blockAskExit"
         layout="@layout/block_exit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

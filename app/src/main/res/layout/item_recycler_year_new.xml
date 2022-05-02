@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:id="@+id/main">
+
+    <TextView
+        android:id="@+id/yearOne"
+        android:layout_width="@dimen/selectCardBlockHeight"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:gravity="center"
+        android:tag="1"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/headTextSize" />
+
+    <TextView
+        android:id="@+id/yearTwo"
+        android:layout_width="@dimen/selectCardBlockHeight"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:gravity="center"
+        android:tag="2"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/headTextSize" />
+
+    <TextView
+        android:id="@+id/yearThree"
+        android:layout_width="@dimen/selectCardBlockHeight"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:gravity="center"
+        android:tag="3"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/headTextSize" />
+
+    <TextView
+        android:id="@+id/yearFour"
+        android:layout_width="@dimen/selectCardBlockHeight"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:gravity="center"
+        android:tag="4"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/headTextSize" />
+
+    <TextView
+        android:id="@+id/yearFive"
+        android:layout_width="@dimen/selectCardBlockHeight"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:gravity="center"
+        android:tag="5"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/headTextSize" />
+
+    <TextView
+        android:id="@+id/yearSix"
+        android:layout_width="@dimen/selectCardBlockHeight"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:gravity="center"
+        android:tag="6"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/headTextSize" />
+
+    <TextView
+        android:id="@+id/yearSeven"
+        android:layout_width="@dimen/selectCardBlockHeight"
+        android:layout_height="@dimen/selectCardBlockHeight"
+        android:gravity="center"
+        android:tag="7"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/headTextSize" />
+</LinearLayout>

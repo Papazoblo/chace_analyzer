@@ -47,6 +47,7 @@
     <string name="month">Месяц</string>
     <string name="year">Год</string>
     <string name="all_year">Все года</string>
+    <string name="all">Все</string>
     <string name="from">от</string>
     <string name="to">до</string>
     <string name="setting">Настройка</string>
@@ -85,13 +86,14 @@
     <string name="pdf_folder">Папка хранения PDF файлов</string>
 
     <string name="select_algorithm">Выберите алгоритм поиска</string>
+    <string name="select">Выбрать</string>
 
     <string name="exit_ask">Вы действительно хотите выйти?</string>
     <string name="download_or_storage">Скачать файл CSV</string>
     <string name="download">Да</string>
     <string name="storage">Нет</string>
     <string name="csv_not_found">CSV файл не найден</string>
-    <string name="cancel">Отмена</string>
+    <string name="cancel">Отменить</string>
     <string name="export_settings">Экспорт настроек</string>
     <string name="import_settings">Импорт настроек</string>
     <string name="close">Закрыть</string>
@@ -105,6 +107,10 @@
     <string name="exact_sequence">Точный порядок</string>
     <string name="error_select_card_with_options">Необходимо указать карты для активных пар</string>
     <string name="error_select_card_one">Необхдимо выбрать четыре карты</string>
+    <string name="error_from_less_then_to">Значение ОТ должно быть меньше, чем ДО(%d)</string>
+    <string name="error_to_less_then_from">Значение ДО должно быть больше, чем ОТ(%d)</string>
+    <string name="error_select_option">Необхдимо выбрать минимум одну опцию</string>
+    <string name="error_select_day_range">Необхдимо указать полный диапазон дней</string>
     <string name="error_select_card">Необхдимо выбрать минимум первые две карты</string>
     <string name="error_card_order">Карты необходимо указать по порядку</string>
     <string name="error_max_limit_rows">Возможно добавить максимум 7 строк</string>

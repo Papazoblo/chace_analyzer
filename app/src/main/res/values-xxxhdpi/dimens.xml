@@ -5,10 +5,12 @@
 
     <dimen name="headHeight">46dp</dimen>
     <dimen name="logoWidth">138dp</dimen>
-    <dimen name="headTextSize">18sp</dimen>
+    <dimen name="headTextSize">16sp</dimen>
     <dimen name="headSecondTextSize">16sp</dimen>
     <dimen name="headThirdTextSize">12sp</dimen>
     <dimen name="selectCardBlockHeight">52dp</dimen>
+    <dimen name="yearSelectSize">300dp</dimen>
+    <dimen name="monthSelectSize">82dp</dimen>
     <dimen name="checkSize">17dp</dimen>
     <dimen name="spinnerHeight">32dp</dimen>
     <dimen name="triangleSize">14dp</dimen>

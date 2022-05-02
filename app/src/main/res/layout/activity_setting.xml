@@ -17,7 +17,7 @@
         android:text="@string/app_name"
         android:textColor="@color/opacityGreen"
         android:textSize="@dimen/bigAppNameSize"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -329,32 +329,18 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:paddingBottom="@dimen/smallPadding">
 
                         <TextView
-                            android:id="@+id/btnExport"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/selectCardBlockHeight"
-                            android:layout_marginRight="@dimen/verySmallPadding"
-                            android:background="@drawable/blue_dark_radius_border"
-                            android:gravity="center"
-                            android:padding="@dimen/smallPadding"
-                            android:text="@string/export_settings"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/headTextSize"
-                            android:layout_weight="1" />
-
-                        <TextView
                             android:id="@+id/btnImport"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/selectCardBlockHeight"
                             android:layout_marginLeft="@dimen/verySmallPadding"
+                            android:layout_marginRight="@dimen/verySmallPadding"
                             android:background="@drawable/blue_dark_radius_border"
                             android:gravity="center"
                             android:padding="@dimen/smallPadding"
@@ -362,7 +348,7 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/headTextSize"
                             android:layout_weight="1" />
-                    </LinearLayout>
+                    </LinearLayout>-->
                 </LinearLayout>
 
                 <TextView

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/opacityBlack"
+    android:paddingTop="@dimen/selectCardBlockHeight">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingTop="@dimen/smallPadding">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="1"
+                android:text="янв"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="2"
+                android:text="фев"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="3"
+                android:text="март"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="4"
+                android:text="апр"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="5"
+                android:text="май"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="6"
+                android:text="июнь"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="7"
+                android:text="июль"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="8"
+                android:text="авг"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="9"
+                android:text="сен"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="10"
+                android:text="окт"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="11"
+                android:text="ноя"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:layout_width="@dimen/monthSelectSize"
+                android:layout_height="@dimen/monthSelectSize"
+                android:tag="12"
+                android:text="дек"
+                android:textSize="@dimen/underAppNameTextSize"
+                android:gravity="center"
+                android:textColor="@color/gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/smallPadding">
+
+            <TextView
+                android:id="@+id/btnResetSelectMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/smallPadding"
+                android:background="@drawable/blue_dark_radius_border"
+                android:gravity="center"
+                android:padding="@dimen/smallPadding"
+                android:text="@string/reset"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headTextSize"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/btnAllSelectMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/smallPadding"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:gravity="center"
+                android:padding="@dimen/smallPadding"
+                android:text="@string/all"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headTextSize" />
+
+            <TextView
+                android:id="@+id/btnSaveSelectMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/smallPadding"
+                android:background="@drawable/blue_dark_radius_border"
+                android:gravity="center"
+                android:padding="@dimen/smallPadding"
+                android:text="@string/select"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headTextSize"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

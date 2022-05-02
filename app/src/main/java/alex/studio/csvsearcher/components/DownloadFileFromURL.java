@@ -1,12 +1,7 @@
 package alex.studio.csvsearcher.components;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -17,8 +12,6 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import alex.studio.csvsearcher.ui.StartActivity;
-
-import static alex.studio.csvsearcher.utils.FileUtil.getFullPathFromTreeUri;
 
 public class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
@@ -46,17 +39,20 @@ public class DownloadFileFromURL extends AsyncTask<String, String, String> {
     protected String doInBackground(String... f_url) {
         int count;
         try {
+
+            File file = new File(urlCsvFolder);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+
             URL url = new URL(f_url[0]);
             URLConnection connection = url.openConnection();
+            connection.setReadTimeout(60000);
+            connection.setConnectTimeout(30000);
             connection.connect();
 
             int lengthOfFile = connection.getContentLength();
-            InputStream input = new BufferedInputStream(url.openStream(),8192);
-
-            File file = new File(urlCsvFolder);
-            if(!file.exists()) {
-                file.mkdirs();
-            }
+            InputStream input = new BufferedInputStream(url.openStream(), 8192);
 
             OutputStream output = new FileOutputStream(urlCsvFolder + "/Chance.csv");
 

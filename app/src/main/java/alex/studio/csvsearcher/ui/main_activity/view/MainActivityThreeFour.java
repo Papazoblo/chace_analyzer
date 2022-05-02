@@ -524,11 +524,17 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
         if (resultAdapterThreeFour != null) {
             resultAdapterThreeFour.clear();
         }
+        recyclerView.setBackground(null);
     }
 
     @Override
     public void setCardGroupListToRecycler(List<CardGroup> data) {
         resultAdapter.setData(data);
+        if (data.isEmpty()) {
+            recyclerView.setBackground(null);
+        } else {
+            recyclerView.setBackgroundColor(colorBlack);
+        }
     }
 
     @Override
@@ -549,6 +555,11 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
     @Override
     public void setMapToRecycler(Map<String, Integer> data) {
         resultAdapterThreeFour.setData(data);
+        if (data.isEmpty()) {
+            recyclerView.setBackground(null);
+        } else {
+            recyclerView.setBackgroundColor(colorBlack);
+        }
     }
 
     @Override

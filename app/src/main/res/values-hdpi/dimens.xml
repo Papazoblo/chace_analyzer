@@ -9,6 +9,8 @@
     <dimen name="headSecondTextSize">12sp</dimen>
     <dimen name="headThirdTextSize">10sp</dimen>
     <dimen name="selectCardBlockHeight">40dp</dimen>
+    <dimen name="yearSelectSize">260dp</dimen>
+    <dimen name="monthSelectSize">70dp</dimen>
     <dimen name="checkSize">16dp</dimen>
     <dimen name="spinnerHeight">20dp</dimen>
     <dimen name="triangleSize">12dp</dimen>

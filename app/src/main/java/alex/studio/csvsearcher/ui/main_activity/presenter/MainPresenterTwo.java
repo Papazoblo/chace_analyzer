@@ -78,10 +78,10 @@ public class MainPresenterTwo extends MainPresenter {
 
     private List<CardSet> preparationToPrint(List<List<Integer>> resultPairs) {
         ArrayList<CardSet> cardSetList = new ArrayList<>(Arrays.asList(
-                new CardSet("#", "IN"),
-                new CardSet("#", "OUT"),
-                new CardSet("#", "IN+1"),
-                new CardSet("#", "OUT+1")));
+                new CardSet("-", "IN"),
+                new CardSet("-", "OUT"),
+                new CardSet("-", "IN+1"),
+                new CardSet("-", "OUT+1")));
         for (int i = 0; i < resultPairs.size(); i++) {
             List<Integer> pair = resultPairs.get(i);
             if (pair == null) {
