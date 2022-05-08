@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/selectCardBlockHeight"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/verySmallPadding"
-        android:paddingRight="@dimen/verySmallPadding"
         android:paddingBottom="@dimen/verySmallPadding"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -65,13 +63,19 @@
         </FrameLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/cardSelectorBlock"
+    <FrameLayout
+        android:id="@+id/outerBlock"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/selectCardBlockHeight"
-        android:layout_marginBottom="1px"
-        android:background="@color/textLightGrayBlue"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/verySmallPadding"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/blockSelectCard"/>
+        app:layout_constraintTop_toBottomOf="@id/blockSelectCard">
+
+        <LinearLayout
+            android:id="@+id/cardSelectorBlock"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/selectCardBlockHeight"
+            android:background="@color/textLightGrayBlue"
+            android:orientation="horizontal" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

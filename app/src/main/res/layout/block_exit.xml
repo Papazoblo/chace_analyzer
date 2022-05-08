@@ -27,8 +27,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/selectCardBlockHeight"
             android:layout_marginTop="@dimen/smallPadding"
+            android:paddingBottom="@dimen/verySmallPadding"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -36,8 +37,6 @@
                 android:id="@+id/btnYes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/verySmallPadding"
-                android:layout_marginRight="@dimen/verySmallPadding"
                 android:layout_weight="1"
                 android:background="@drawable/blue_dark_radius_border"
                 android:breakStrategy="high_quality"
@@ -47,12 +46,14 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/textInBox" />
 
+            <View
+                android:layout_width="@dimen/verySmallPadding"
+                android:layout_height="1px" />
+
             <TextView
                 android:id="@+id/btnNo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/verySmallPadding"
-                android:layout_marginTop="@dimen/verySmallPadding"
                 android:layout_weight="1"
                 android:background="@drawable/blue_dark_radius_border"
                 android:breakStrategy="high_quality"

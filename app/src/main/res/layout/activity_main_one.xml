@@ -31,17 +31,22 @@
         android:paddingBottom="@dimen/verySmallPadding"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/btnResetField"
+        <FrameLayout
+            android:id="@+id/btnEnableNext"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/verySmallPadding"
             android:layout_weight="8"
             android:background="@drawable/blue_dark_radius_border"
-            android:gravity="center"
-            android:text="@string/reset"
-            android:textColor="@color/white"
-            android:textSize="@dimen/headSecondTextSize" />
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageArrow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/top"
+                android:padding="@dimen/verySmallPadding" />
+        </FrameLayout>
 
         <include
             android:id="@+id/cardSelectPanel"
@@ -67,24 +72,26 @@
         android:id="@+id/mainBlock"
         android:layout_width="match_parent"
         android:layout_height="@dimen/selectCardBlockHeight"
-        android:layout_marginTop="@dimen/verySmallPadding"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
-        android:paddingBottom="@dimen/smallPadding"
+        android:paddingBottom="@dimen/verySmallPadding"
         app:layout_constraintTop_toBottomOf="@id/blockSelectCard">
 
         <TextView
             android:id="@+id/btnReset"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/smallPadding"
             android:layout_weight="1"
             android:background="@drawable/blue_dark_radius_border"
             android:gravity="center"
             android:text="@string/reset"
             android:textColor="@color/white"
             android:textSize="@dimen/headSecondTextSize" />
+
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="1px" />
 
         <TextView
             android:id="@+id/textDate"
@@ -102,11 +109,14 @@
             android:textColorHint="@color/textLightGrayBlue"
             android:textSize="@dimen/headTextSize" />
 
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="1px" />
+
         <TextView
             android:id="@+id/btnSettings"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/smallPadding"
             android:layout_weight="1"
             android:background="@drawable/blue_dark_radius_border"
             android:gravity="center"
@@ -174,7 +184,8 @@
                         android:layout_height="@dimen/selectCardBlockHeight"
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/smallPadding"
-                        android:paddingRight="@dimen/smallPadding">
+                        android:paddingRight="@dimen/smallPadding"
+                        android:paddingBottom="@dimen/verySmallPadding">
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -268,7 +279,8 @@
                         android:layout_height="@dimen/selectCardBlockHeight"
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/smallPadding"
-                        android:paddingRight="@dimen/smallPadding">
+                        android:paddingRight="@dimen/smallPadding"
+                        android:paddingBottom="@dimen/verySmallPadding">
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -362,7 +374,8 @@
                         android:layout_height="@dimen/selectCardBlockHeight"
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/smallPadding"
-                        android:paddingRight="@dimen/smallPadding">
+                        android:paddingRight="@dimen/smallPadding"
+                        android:paddingBottom="@dimen/verySmallPadding">
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -437,15 +450,16 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/selectCardBlockHeight"
                     android:layout_marginBottom="@dimen/smallPadding"
                     android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/spinnerHeight">
+                    android:layout_marginTop="@dimen/spinnerHeight"
+                    android:paddingBottom="@dimen/verySmallPadding">
 
                     <TextView
                         android:id="@+id/btnCancel"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/selectCardBlockHeight"
                         android:layout_marginRight="@dimen/smallPadding"
                         android:layout_weight="1"
@@ -459,7 +473,7 @@
                     <TextView
                         android:id="@+id/btnSave"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/smallPadding"
                         android:layout_marginRight="@dimen/selectCardBlockHeight"
                         android:layout_weight="1"
@@ -489,63 +503,84 @@
             android:padding="@dimen/smallPadding">
 
 
-            <TextView
-                android:id="@+id/switchFourOriginal"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/smallPadding"
-                android:layout_marginRight="@dimen/smallPadding"
-                android:layout_marginBottom="@dimen/smallPadding"
-                android:background="@drawable/four_original_active_border"
-                android:gravity="center|center_vertical"
-                android:padding="@dimen/smallPadding"
-                android:text="@string/four_original"
-                android:textColor="@color/black"
-                android:textSize="@dimen/headSecondTextSize" />
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:paddingBottom="@dimen/verySmallPadding"
+                android:layout_marginBottom="@dimen/smallPadding">
 
-            <TextView
-                android:id="@+id/switchFourRandom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/smallPadding"
-                android:layout_marginRight="@dimen/smallPadding"
-                android:layout_marginBottom="@dimen/smallPadding"
-                android:gravity="center|center_vertical"
-                android:padding="@dimen/smallPadding"
-                android:text="@string/four_random"
-                android:textColor="@color/white"
-                android:textSize="@dimen/headSecondTextSize" />
+                <TextView
+                    android:id="@+id/switchFourOriginal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/smallPadding"
+                    android:layout_marginRight="@dimen/smallPadding"
+                    android:background="@drawable/four_original_active_border"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/four_original"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/switchThreeOriginal"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/smallPadding"
-                android:layout_marginRight="@dimen/smallPadding"
-                android:layout_marginBottom="@dimen/smallPadding"
-                android:gravity="center|center_vertical"
-                android:padding="@dimen/smallPadding"
-                android:text="@string/three_original"
-                android:textColor="@color/white"
-                android:textSize="@dimen/headSecondTextSize" />
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:paddingBottom="@dimen/verySmallPadding"
+                android:layout_marginBottom="@dimen/smallPadding">
 
-            <TextView
-                android:id="@+id/switchThreeRandom"
+                <TextView
+                    android:id="@+id/switchFourRandom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/smallPadding"
+                    android:layout_marginRight="@dimen/smallPadding"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/four_random"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/smallPadding"
-                android:layout_marginRight="@dimen/smallPadding"
-                android:layout_marginBottom="@dimen/smallPadding"
-                android:gravity="center|center_vertical"
-                android:padding="@dimen/smallPadding"
-                android:text="@string/three_random"
-                android:textColor="@color/white"
-                android:textSize="@dimen/headSecondTextSize" />
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:paddingBottom="@dimen/verySmallPadding"
+                android:layout_marginBottom="@dimen/smallPadding">
+
+                <TextView
+                    android:id="@+id/switchThreeOriginal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/smallPadding"
+                    android:layout_marginRight="@dimen/smallPadding"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/three_original"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:paddingBottom="@dimen/verySmallPadding"
+                android:layout_marginBottom="@dimen/smallPadding">
+
+                <TextView
+                    android:id="@+id/switchThreeRandom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/smallPadding"
+                    android:layout_marginRight="@dimen/smallPadding"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/three_random"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headSecondTextSize" />
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/selectCardBlockHeight"
                 android:layout_marginBottom="@dimen/smallPadding"
+                android:paddingBottom="@dimen/verySmallPadding"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -557,7 +592,7 @@
                 <TextView
                     android:id="@+id/btnClose"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/blue_dark_radius_border"
                     android:gravity="center"

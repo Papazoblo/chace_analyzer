@@ -44,11 +44,15 @@ public class ResultAdapterThree extends RecyclerView.Adapter<ResultAdapterThree.
         h.textCard2.setText(top == null ? "-" : top.getCard2());
         h.textCard3.setText(top == null ? "-" : top.getCard3());
         h.textCard4.setText(top == null ? "-" : top.getCard4());
+        h.number.setText(top == null ? "-" : top.getNumber());
+        h.year.setText(top == null ? "-" : String.valueOf(top.getYear()));
 
         h.textCard21.setText(bottom == null ? "-" : bottom.getCard1());
         h.textCard22.setText(bottom == null ? "-" : bottom.getCard2());
         h.textCard23.setText(bottom == null ? "-" : bottom.getCard3());
         h.textCard24.setText(bottom == null ? "-" : bottom.getCard4());
+        h.number2.setText(bottom == null ? "-" : bottom.getNumber());
+        h.year2.setText(bottom == null ? "-" : String.valueOf(bottom.getYear()));
 
         changeTextColor(pos % 2 == 0, h.textCard1, h.textCard2, h.textCard3, h.textCard4,
                 h.textCard21, h.textCard22, h.textCard23, h.textCard24);
@@ -79,6 +83,10 @@ public class ResultAdapterThree extends RecyclerView.Adapter<ResultAdapterThree.
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView number;
+        private TextView year;
+        private TextView number2;
+        private TextView year2;
         private TextView textCard1;
         private TextView textCard2;
         private TextView textCard3;
@@ -91,6 +99,10 @@ public class ResultAdapterThree extends RecyclerView.Adapter<ResultAdapterThree.
         public ResultViewHolder(@NonNull View v) {
             super(v);
 
+            number = v.findViewById(R.id.number);
+            number2 = v.findViewById(R.id.number2);
+            year = v.findViewById(R.id.year);
+            year2 = v.findViewById(R.id.year2);
             textCard1 = v.findViewById(R.id.textCard1);
             textCard2 = v.findViewById(R.id.textCard2);
             textCard3 = v.findViewById(R.id.textCard3);

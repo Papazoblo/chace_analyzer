@@ -59,7 +59,7 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
 
         String[] cards = listGroupCards.get(pos);
 
-        cardSelectPanels.add(h.cardSelectorBlock);
+        cardSelectPanels.add(h.outerBlock);
         textViews.add(Arrays.asList(h.textOne, h.textTwo, h.textThree, h.textFour));
 
         h.textOne.setOnClickListener(v -> selectCardClick(h, v, pos));
@@ -117,7 +117,7 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
                 selectTextView.setText(curText);
                 selectTextView.setBackground(bottomBorderBg);
                 changeColor(curText, selectTextView);
-                toGone(h.cardSelectorBlock);
+                toGone(h.outerBlock);
                 curPositions.set(pos, null);
             });
             h.cardSelectorBlock.addView(textView);
@@ -135,7 +135,7 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
         }
     }
 
-    private void selectCardClick(ResultViewHolder h, View view, int pos) {
+    private void closeAll() {
         for (View panel : cardSelectPanels) {
             toGone(panel);
         }
@@ -144,9 +144,13 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
                 tv.setBackground(bottomBorderBg);
             }
         }
+    }
+
+    private void selectCardClick(ResultViewHolder h, View view, int pos) {
+        closeAll();
         view.setBackground(whiteBorderBg);
         curPositions.set(pos, CardPosition.of((String) view.getTag()));
-        toVisible(h.cardSelectorBlock);
+        toVisible(h.outerBlock);
     }
 
     @Override
@@ -159,6 +163,7 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
     }
 
     public void addRow() {
+        closeAll();
         if (listGroupCards.size() < MAX_ROW_COUNT) {
             if(listGroupCards.isEmpty()) {
                 listGroupCards.add(new String[]{"-", "-", "-", "-"});
@@ -199,6 +204,7 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
     }
 
     private void deleteRow(int pos) {
+        closeAll();
         listGroupCards.remove(pos);
         curPositions.remove(pos);
         cardSelectPanels.remove(pos);
@@ -220,6 +226,7 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
         private TextView textFour;
 
         private LinearLayout cardSelectorBlock;
+        private View outerBlock;
 
         private View btnDelete;
         private View btnClear;
@@ -231,6 +238,7 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
             textTwo = v.findViewById(R.id.textTwo);
             textThree = v.findViewById(R.id.textThree);
             textFour = v.findViewById(R.id.textFour);
+            outerBlock = v.findViewById(R.id.outerBlock);
 
             cardSelectorBlock = v.findViewById(R.id.cardSelectorBlock);
 

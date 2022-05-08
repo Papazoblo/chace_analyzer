@@ -121,15 +121,17 @@ public class MainPresenterOne extends MainPresenter {
                                                                     String[] selectCards) {
         Map<Integer, Map<Date, List<CardMatch>>> mapYears = new HashMap<>();
 
-        for (int i = 0, j = 1; i < dates.size(); i++) {
+        for (int i = 0, j = 0; i < dates.size(); i++) {
             Map<Date, List<CardMatch>> mapDate = new HashMap<>();
             for (; j < cardSets.size(); j++) {
-                if (j <= 0) {
-                    j = 1;
+                if (j < 0) {
+                    j = 0;
                 }
                 CardSet curSet = cardSets.get(j);
                 if (isBetweenDate(curSet, dates.get(i))) {
-                    searchMatch(cardSets.get(j - 1), curSet, selectCards, mapDate);
+                    searchMatch(j == 0 ? null : cardSets.get(j - 1),
+                            j == cardSets.size() - 1 ? null : cardSets.get(j + 1),
+                            curSet, selectCards, mapDate);
                 } else if (curSet.getDate().before(dates.get(i)[0])) {
                     j--;
                     break;
@@ -149,7 +151,7 @@ public class MainPresenterOne extends MainPresenter {
                 (curSet.getDate().equals(dates[1]) || curSet.getDate().before(dates[1]));
     }
 
-    private void searchMatch(CardSet prevSet, CardSet curSet, String[] selectCards,
+    private void searchMatch(CardSet prevSet, CardSet nextSet, CardSet curSet, String[] selectCards,
                              Map<Date, List<CardMatch>> resultMap) {
 
         String[] curCards = curSet.getCards();
@@ -180,20 +182,20 @@ public class MainPresenterOne extends MainPresenter {
             if (contains != null && options[THREE_ORIGINAL]) {
                 matcherPosition.setMatched(contains);
                 matcherPosition.resetPositions();
-                resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, TypeMatch.FULL,
-                        matcherPosition));
+                resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, nextSet,
+                        TypeMatch.FULL, matcherPosition));
             } else if (contains == null && options[THREE_RANDOM]) {
-                resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, TypeMatch.ANY,
-                        matcherPosition));
+                resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, nextSet,
+                        TypeMatch.ANY, matcherPosition));
             }
         } else if (count == 4) {
             boolean isEqual = curSet.toString(true, false).equals(matchedOrder);
             if (isEqual && options[FOUR_ORIGINAL]) {
-                resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, TypeMatch.FULL,
-                        matcherPosition));
+                resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, nextSet,
+                        TypeMatch.FULL, matcherPosition));
             } else if (!isEqual && options[FOUR_RANDOM]) {
-                resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, TypeMatch.ANY,
-                        matcherPosition));
+                resultMap.get(curDate).add(new CardMatch(count, curSet, prevSet, nextSet,
+                        TypeMatch.ANY, matcherPosition));
             }
         }
     }

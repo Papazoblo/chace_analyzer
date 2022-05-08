@@ -5,214 +5,221 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".ui.StartActivity"
-    android:padding="@dimen/smallPadding">
+    android:padding="@dimen/smallPadding"
+    tools:context=".ui.StartActivity">
 
     <TextView
         android:id="@+id/appName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/smallPadding"
+        android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/green"
         android:textSize="@dimen/appNameTextSize"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/smallPadding"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textSelectAlgorithm"/>
+        app:layout_constraintBottom_toTopOf="@id/textSelectAlgorithm"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textSelectAlgorithm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/smallPadding"
+        android:gravity="center"
         android:text="@string/select_algorithm"
         android:textColor="@color/green"
         android:textSize="@dimen/underAppNameTextSize"
-        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@id/blockButton"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="@dimen/smallPadding"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <LinearLayout
         android:id="@+id/blockButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/textSelectAlgorithm"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/smallPadding"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/textSelectAlgorithm"
         app:layout_constraintRight_toRightOf="@id/textSelectAlgorithm"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/textSelectAlgorithm"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/blockBtnTop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/btnAlgorithmOne"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginRight="@dimen/verySmallPadding"
                 android:layout_marginBottom="@dimen/verySmallPadding"
-                android:textSize="@dimen/textInBox"
-                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:breakStrategy="simple"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="simple"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/textInBox" />
 
             <TextView
                 android:id="@+id/btnAlgorithmTwo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginLeft="@dimen/verySmallPadding"
                 android:layout_marginBottom="@dimen/verySmallPadding"
-                android:textSize="@dimen/textInBox"
-                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:breakStrategy="simple"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="simple"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/textInBox" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/blockBtnMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/verySmallPadding"
             android:layout_weight="1"
-            android:layout_marginTop="@dimen/verySmallPadding">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/btnAlgorithmThree"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginRight="@dimen/verySmallPadding"
                 android:layout_marginBottom="@dimen/verySmallPadding"
-                android:textSize="@dimen/textInBox"
-                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:breakStrategy="simple"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="simple"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/textInBox" />
 
             <TextView
                 android:id="@+id/btnAlgorithmFour"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginLeft="@dimen/verySmallPadding"
                 android:layout_marginBottom="@dimen/verySmallPadding"
-                android:textSize="@dimen/textInBox"
-                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:breakStrategy="simple"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="simple"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/textInBox" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/blockBtnBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/verySmallPadding"
             android:layout_weight="1"
-            android:layout_marginBottom="@dimen/verySmallPadding">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/btnAlgorithmFive"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/verySmallPadding"
+                android:layout_marginRight="@dimen/verySmallPadding"
                 android:layout_weight="1"
                 android:background="@drawable/blue_dark_radius_border"
-                android:layout_marginRight="@dimen/verySmallPadding"
-                android:layout_marginTop="@dimen/verySmallPadding"
-                android:textSize="@dimen/textInBox"
-                android:textColor="@color/white"
+                android:breakStrategy="simple"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="simple"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/textInBox" />
 
             <TextView
                 android:id="@+id/btnAlgorithmSix"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/blue_dark_radius_border"
                 android:layout_marginLeft="@dimen/verySmallPadding"
                 android:layout_marginTop="@dimen/verySmallPadding"
-                android:textSize="@dimen/textInBox"
-                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:background="@drawable/blue_dark_radius_border"
+                android:breakStrategy="simple"
                 android:gravity="center"
                 android:padding="@dimen/paddingInBox"
-                android:breakStrategy="simple"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/textInBox" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/btnSettings"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/setting"
-            android:textColor="@color/white"
-            android:textSize="@dimen/underAppNameTextSize"
-            android:background="@drawable/green_radius_bottom_border"
-            android:gravity="center"
-            android:padding="@dimen/verySmallPadding"
-            android:layout_marginTop="@dimen/verySmallPadding"
-            app:layout_constraintTop_toBottomOf="@id/blockButton" />
+            android:layout_height="@dimen/selectCardBlockHeight"
+            android:paddingBottom="@dimen/verySmallPadding">
+
+            <TextView
+                android:id="@+id/btnSettings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/verySmallPadding"
+                android:background="@drawable/green_radius_bottom_border"
+                android:gravity="center"
+                android:text="@string/setting"
+                android:textColor="@color/white"
+                android:textSize="@dimen/underAppNameTextSize"
+                app:layout_constraintTop_toBottomOf="@id/blockButton" />
+        </FrameLayout>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/blockAsk"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="@color/black"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/welcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallPadding"
+            android:gravity="center"
             android:text="@string/welcome_app_name"
             android:textColor="@color/green"
             android:textSize="@dimen/appNameTextSize"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/smallPadding"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/centerBlock"/>
+            app:layout_constraintBottom_toTopOf="@id/centerBlock"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/centerBlock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingRight="@dimen/smallPadding"
             android:paddingLeft="@dimen/smallPadding"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:paddingRight="@dimen/smallPadding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textAsk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/smallPadding"
+                android:gravity="center"
                 android:text="@string/download_or_storage"
                 android:textColor="@color/green"
-                android:textSize="@dimen/underAppNameTextSize"
-                android:gravity="center"
-                android:layout_marginBottom="@dimen/smallPadding"/>
+                android:textSize="@dimen/underAppNameTextSize" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_height="@dimen/selectCardBlockHeight"
+                android:layout_marginTop="@dimen/smallPadding"
                 android:layout_weight="1"
-                android:layout_marginTop="@dimen/smallPadding">
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/verySmallPadding">
 
                 <TextView
                     android:id="@+id/btnDowndload"
@@ -220,14 +227,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/blue_dark_radius_border"
-                    android:layout_marginRight="@dimen/verySmallPadding"
-                    android:layout_marginTop="@dimen/verySmallPadding"
-                    android:text="@string/download"
-                    android:textSize="@dimen/textInBox"
-                    android:textColor="@color/white"
+                    android:breakStrategy="high_quality"
                     android:gravity="center"
-                    android:padding="@dimen/paddingInBox"
-                    android:breakStrategy="high_quality"/>
+                    android:text="@string/download"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textInBox" />
+
+                <View
+                    android:layout_width="@dimen/verySmallPadding"
+                    android:layout_height="1px" />
 
                 <TextView
                     android:id="@+id/btnStorage"
@@ -235,23 +243,32 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/blue_dark_radius_border"
-                    android:layout_marginLeft="@dimen/verySmallPadding"
-                    android:layout_marginTop="@dimen/verySmallPadding"
-                    android:text="@string/storage"
-                    android:textSize="@dimen/textInBox"
-                    android:textColor="@color/white"
+                    android:breakStrategy="high_quality"
                     android:gravity="center"
-                    android:padding="@dimen/paddingInBox"
-                    android:breakStrategy="high_quality"/>
+                    android:text="@string/storage"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textInBox" />
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallPadding"
+            android:gravity="center"
+            android:text="@string/version"
+            android:textColor="@color/green"
+            android:textSize="@dimen/underAppNameTextSize"
+            app:layout_constraintTop_toBottomOf="@id/centerBlock"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
         android:id="@+id/blockAskExit"
+        layout="@layout/block_exit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        layout="@layout/block_exit"
         android:visibility="gone" />
 
     <FrameLayout
@@ -264,31 +281,31 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
 
             <ProgressBar
                 android:layout_width="@dimen/selectCardBlockHeight"
                 android:layout_height="@dimen/selectCardBlockHeight"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
                 android:text="@string/download_file"
                 android:textColor="@color/green"
-                android:textSize="@dimen/underAppNameTextSize"
-                android:layout_gravity="bottom|center_horizontal"/>
+                android:textSize="@dimen/underAppNameTextSize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="@dimen/headHeight"
                 android:text="@string/pls_wait"
                 android:textColor="@color/green"
-                android:textSize="@dimen/underAppNameTextSize"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginBottom="@dimen/headHeight"/>
+                android:textSize="@dimen/underAppNameTextSize" />
         </LinearLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

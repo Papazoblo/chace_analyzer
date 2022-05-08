@@ -17,26 +17,24 @@ import java.util.List;
 
 import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardMatch;
+import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.enums.TypeMatch;
 
 public class ResultAdapterOne extends RecyclerView.Adapter<ResultAdapterOne.ResultViewHolder> {
 
     private List<CardMatch> cardSetList = new ArrayList<>();
     private Context context;
-    private int colorFourOriginal;
-    private int colorFourRandom;
-    private int colorThreeOriginal;
-    private int colorThreeRandom;
+    private int colorOriginal;
+    private int colorRandom;
     private int colorGray;
     private String[] months;
+    private boolean blockNext;
 
     public ResultAdapterOne(Context context) {
         this.context = context;
         colorGray = context.getResources().getColor(R.color.lightGrayBlue);
-        colorFourOriginal = context.getResources().getColor(R.color.white);
-        colorFourRandom = context.getResources().getColor(R.color.bld1);
-        colorThreeOriginal = context.getResources().getColor(R.color.td2);
-        colorThreeRandom = context.getResources().getColor(R.color.tld1);
+        colorOriginal = context.getResources().getColor(R.color.original);
+        colorRandom = context.getResources().getColor(R.color.random);
         months = context.getResources().getStringArray(R.array.months);
     }
 
@@ -65,18 +63,20 @@ public class ResultAdapterOne extends RecyclerView.Adapter<ResultAdapterOne.Resu
             }
         }
 
+        CardSet prevSet = blockNext ? match.getNextSet() : match.getPrevSet();
+
         h.textYear.setText(String.valueOf(match.getYear()));
-        h.textNumber.setText(match.getPrevSet().getNumber());
-        h.textCard4.setText(match.getPrevSet().getCardByPos(match.getMatcherPosition().getPositions()[0]));
+        h.textNumber.setText(prevSet.getNumber());
+        h.textCard4.setText(prevSet.getCardByPos(match.getMatcherPosition().getPositions()[0]));
         h.textCard4.setTextColor(getColor(match.getMatcherPosition().getMatched()[0], match));
 
-        h.textCard3.setText(match.getPrevSet().getCardByPos(match.getMatcherPosition().getPositions()[1]));
+        h.textCard3.setText(prevSet.getCardByPos(match.getMatcherPosition().getPositions()[1]));
         h.textCard3.setTextColor(getColor(match.getMatcherPosition().getMatched()[1], match));
 
-        h.textCard2.setText(match.getPrevSet().getCardByPos(match.getMatcherPosition().getPositions()[2]));
+        h.textCard2.setText(prevSet.getCardByPos(match.getMatcherPosition().getPositions()[2]));
         h.textCard2.setTextColor(getColor(match.getMatcherPosition().getMatched()[2], match));
 
-        h.textCard1.setText(match.getPrevSet().getCardByPos(match.getMatcherPosition().getPositions()[3]));
+        h.textCard1.setText(prevSet.getCardByPos(match.getMatcherPosition().getPositions()[3]));
         h.textCard1.setTextColor(getColor(match.getMatcherPosition().getMatched()[3], match));
     }
 
@@ -85,25 +85,25 @@ public class ResultAdapterOne extends RecyclerView.Adapter<ResultAdapterOne.Resu
         return cardSetList.size();
     }
 
-    public void setData(List<CardMatch> cardSets) {
-        this.cardSetList = cardSets;
+    public void setData(List<CardMatch> cardSets, boolean blockNext) {
+        List<CardMatch> res = new ArrayList<>();
+        for (CardMatch item : cardSets) {
+            if ((blockNext && item.getNextSet() != null) ||
+                    (!blockNext && item.getPrevSet() != null)) {
+                res.add(item);
+            }
+        }
+        this.cardSetList = res;
+        this.blockNext = blockNext;
         notifyDataSetChanged();
     }
 
     private int getColor(boolean flag, CardMatch match) {
         int color;
-        if (match.getCount() == 4) {
-            if (match.getType() == TypeMatch.ANY) {
-                color = colorFourRandom;
-            } else {
-                color = colorFourOriginal;
-            }
+        if (match.getType() == TypeMatch.ANY) {
+            color = colorRandom;
         } else {
-            if (match.getType() == TypeMatch.ANY) {
-                color = colorThreeRandom;
-            } else {
-                color = colorThreeOriginal;
-            }
+            color = colorOriginal;
         }
         return flag ? color : colorGray;
     }

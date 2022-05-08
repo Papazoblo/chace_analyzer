@@ -32,4 +32,7 @@
     <color name="bld1">#FF6600</color>
     <color name="bld2">#FFE500</color>
     <color name="intersection">#00FFEA</color>
+
+    <color name="random">#FF6600</color>
+    <color name="original">#FFFFFF</color>
 </resources>

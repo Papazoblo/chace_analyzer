@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingLeft="@dimen/smallPadding"
-    android:paddingRight="@dimen/smallPadding">
+    android:paddingRight="@dimen/smallPadding"
+    android:paddingBottom="@dimen/smallPadding">
 
     <TextView
         android:id="@+id/monthName"

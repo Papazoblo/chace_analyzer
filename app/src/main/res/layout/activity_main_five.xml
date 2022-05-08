@@ -279,18 +279,25 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
-                            <TextView
-                                android:id="@+id/btnAllYear"
+                            <FrameLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_margin="@dimen/smallPadding"
-                                android:background="@drawable/blue_dark_radius_border"
-                                android:gravity="center"
-                                android:padding="@dimen/smallPadding"
-                                android:text="@string/all_year"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/headTextSize" />
+                                android:layout_height="@dimen/selectCardBlockHeight"
+                                android:paddingBottom="@dimen/verySmallPadding"
+                                android:layout_gravity="center">
+
+                                <TextView
+                                    android:id="@+id/btnAllYear"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginLeft="@dimen/smallPadding"
+                                    android:layout_marginRight="@dimen/smallPadding"
+                                    android:background="@drawable/blue_dark_radius_border"
+                                    android:gravity="center"
+                                    android:text="@string/all_year"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/headTextSize" />
+                            </FrameLayout>
                         </FrameLayout>
                     </LinearLayout>
 
@@ -322,14 +329,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/selectCardBlockHeight"
                     android:layout_marginBottom="@dimen/smallPadding"
+                    android:paddingBottom="@dimen/verySmallPadding"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/btnCancel"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/selectCardBlockHeight"
                         android:layout_marginRight="@dimen/smallPadding"
                         android:layout_weight="1"
@@ -343,7 +351,7 @@
                     <TextView
                         android:id="@+id/btnSave"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/smallPadding"
                         android:layout_marginRight="@dimen/selectCardBlockHeight"
                         android:layout_weight="1"

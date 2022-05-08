@@ -8,7 +8,7 @@ android {
         applicationId "alex.studio.csvsearcher"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
+        versionCode 2
         versionName "3.13.22"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

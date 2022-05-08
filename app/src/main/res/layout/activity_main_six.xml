@@ -50,8 +50,11 @@
             android:textSize="@dimen/headSecondTextSize"
             android:gravity="center"
             android:background="@drawable/blue_dark_radius_border"
-            android:layout_weight="1"
-            android:layout_marginRight="@dimen/smallPadding"/>
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="1px" />
 
         <TextView
             android:id="@+id/btnCountGames"
@@ -64,8 +67,11 @@
             android:background="@drawable/blue_dark_radius_border"
             android:layout_weight="1"
             android:paddingLeft="@dimen/verySmallPadding"
-            android:paddingRight="@dimen/verySmallPadding"
-            android:layout_marginRight="@dimen/verySmallPadding"/>
+            android:paddingRight="@dimen/verySmallPadding" />
+
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="1px" />
 
         <TextView
             android:id="@+id/btnByDate"
@@ -79,7 +85,11 @@
             android:layout_weight="1"
             android:background="@drawable/blue_dark_radius_border"
             android:paddingLeft="@dimen/verySmallPadding"
-            android:paddingRight="@dimen/verySmallPadding"/>
+            android:paddingRight="@dimen/verySmallPadding" />
+
+        <View
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="1px" />
 
         <TextView
             android:id="@+id/btnSearch"
@@ -90,8 +100,7 @@
             android:textSize="@dimen/headSecondTextSize"
             android:gravity="center"
             android:background="@drawable/blue_dark_radius_border"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/smallPadding"/>
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -294,7 +303,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/selectCardBlockHeight"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/verySmallPadding"
+        android:paddingBottom="@dimen/verySmallPadding"
         app:layout_constraintTop_toBottomOf="@id/mainBlock">
 
         <ImageView

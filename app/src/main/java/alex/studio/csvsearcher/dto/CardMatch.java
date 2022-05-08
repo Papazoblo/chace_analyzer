@@ -9,16 +9,18 @@ public class CardMatch {
     private int count;
     private CardSet set;
     private CardSet prevSet;
+    private CardSet nextSet;
     private TypeMatch type;
     private int year;
     private MatcherPosition matcherPosition;
     private int month;
 
-    public CardMatch(int count, CardSet set, CardSet prevSet, TypeMatch type,
+    public CardMatch(int count, CardSet set, CardSet prevSet, CardSet nextSet, TypeMatch type,
                      MatcherPosition matcherPosition) {
         this.count = count;
         this.set = set;
         this.prevSet = prevSet;
+        this.nextSet = nextSet;
         this.type = type;
         this.matcherPosition = matcherPosition;
     }
@@ -35,6 +37,10 @@ public class CardMatch {
         return prevSet;
     }
 
+    public CardSet getNextSet() {
+        return nextSet;
+    }
+
     public TypeMatch getType() {
         return type;
     }
@@ -45,7 +51,7 @@ public class CardMatch {
 
     public int getMonth() {
         Calendar c = Calendar.getInstance();
-        c.setTime(prevSet.getDate());
+        c.setTime(set.getDate());
         return c.get(Calendar.MONTH);
     }
 

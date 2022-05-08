@@ -11,9 +11,12 @@ import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
 import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,8 +52,9 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
 
     private Main.Presenter presenter;
 
+    private ImageView imageArrow;
     private View btnSave;
-    private View btnResetField;
+    private View btnEnableNext;
     private View btnReset;
     private View btnSearch;
     private View btnYes;
@@ -125,7 +129,7 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
     private int bottomBorderBg;
 
     private boolean[] optionsState = new boolean[]{true, false, false, false};
-    private boolean stateAllYear = true;
+    private boolean enableNext = false;
 
     private String[] cards;
     private String[] months;
@@ -158,10 +162,11 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
     }
 
     private void initView() {
+        imageArrow = findViewById(R.id.imageArrow);
         btnCancel = findViewById(R.id.btnCancel);
         btnResetDate = findViewById(R.id.btnResetDate);
         btnSave = findViewById(R.id.btnSave);
-        btnResetField = findViewById(R.id.btnResetField);
+        btnEnableNext = findViewById(R.id.btnEnableNext);
         btnReset = findViewById(R.id.btnReset);
         btnSetting = findViewById(R.id.btnSettings);
         btnSearch = findViewById(R.id.btnSearch);
@@ -223,6 +228,8 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
             });
             cardSelectorBlock.addView(textView);
         }
+
+        imageArrow.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
         initAction();
         initDayPicker();
@@ -576,7 +583,12 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
 
         btnCancel.setOnClickListener(v -> btnSave.performClick());
 
-        btnResetField.setOnClickListener(v -> resetCards());
+        btnEnableNext.setOnClickListener(v -> {
+            enableNext = enableNext ? false : true;
+            imageArrow.setRotation(enableNext ? 180 : 0);
+            imageArrow.setColorFilter(enableNext ? Color.YELLOW : Color.WHITE,
+                    PorterDuff.Mode.SRC_ATOP);
+        });
 
         btnReset.setOnClickListener(v -> clearData());
 
@@ -608,8 +620,9 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
         switchFourRandom.setOnClickListener(v -> changeEnableState(1, v, colorWhite,
                 colorWhite, R.drawable.four_random_active_border));
 
-        switchThreeOriginal.setOnClickListener(v -> changeEnableState(2, v, colorWhite,
-                colorWhite, R.drawable.three_original_active_border));
+        switchThreeOriginal.setOnClickListener(v -> changeEnableState(2, v,
+                getResources().getColor(R.color.black), colorWhite,
+                R.drawable.three_original_active_border));
 
         switchThreeRandom.setOnClickListener(v -> changeEnableState(3, v, colorWhite,
                 colorWhite, R.drawable.three_random_active_border));
@@ -648,8 +661,7 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
 
     @Override
     public void clearData() {
-        resultAdapter.setData(new ArrayList<>());
-        initDate(firstDate);
+        resultAdapter.setData(new ArrayList<>(), enableNext);
         recyclerView.setBackground(null);
     }
 
@@ -720,7 +732,7 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
 
     @Override
     public void setCardMatchListToRecycler(List<CardMatch> data) {
-        resultAdapter.setData(data);
+        resultAdapter.setData(data, enableNext);
         if (data.isEmpty()) {
             recyclerView.setBackground(null);
         } else {

@@ -2,6 +2,7 @@ package alex.studio.csvsearcher.dto;
 
 import static alex.studio.csvsearcher.utils.DateUtils.toDate;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class CardSet {
@@ -58,6 +59,12 @@ public class CardSet {
 
     public Date getDate() {
         return toDate(this.date);
+    }
+
+    public long getYear() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(toDate(this.date));
+        return c.get(Calendar.YEAR);
     }
 
     public String getNumber() {

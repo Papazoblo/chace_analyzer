@@ -20,7 +20,9 @@ public class ViewUtils {
     }
 
     public static boolean toGone(View view) {
-        view.setVisibility(View.GONE);
+        if (view != null) {
+            view.setVisibility(View.GONE);
+        }
         return false;
     }
 

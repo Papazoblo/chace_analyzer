@@ -8,7 +8,7 @@ import alex.studio.csvsearcher.R;
 public enum Properties {
 
     CSV_LINK("csv_link", "https://www.pais.co.il/chance/chance_resultsDownload.aspx", 0),
-    CSV_FOLDER("csv_folder", Environment.getExternalStorageDirectory() + "/Chance Analyzer", 0),
+    CSV_FOLDER("csv_folder", Environment.getExternalStorageDirectory() + "/ChanceAnalyzer", 0),
     PDF_FOLDER("pdf_folder", null, 0),
     FIRST_LAUNCH("first_launch", null, 0),
     ALGO_1("algorithm_1_name", null, R.string.algo_name_1_set_val),

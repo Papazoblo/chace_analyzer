@@ -20,26 +20,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/textSelectCards"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="@dimen/smallPadding"
-        android:text="@string/select_card"
-        android:textColor="@color/textLightGrayBlue"
-        android:textSize="@dimen/headTextSize"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/blockSelectCard"
         android:layout_width="match_parent"
         android:layout_height="@dimen/selectCardBlockHeight"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/smallPadding"
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
         android:paddingBottom="@dimen/verySmallPadding"
-        app:layout_constraintTop_toBottomOf="@id/textSelectCards">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/btnReset"
@@ -80,22 +71,23 @@
         android:orientation="horizontal"
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
-        android:paddingBottom="@dimen/smallPadding"
+        android:paddingBottom="@dimen/verySmallPadding"
         app:layout_constraintTop_toBottomOf="@id/blockSelectCard">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="8">
 
             <TextView
                 android:id="@+id/btnCountGames"
-                android:layout_width="50dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/blue_dark_radius_border"
                 android:gravity="center"
                 android:paddingLeft="@dimen/verySmallPadding"
                 android:paddingRight="@dimen/verySmallPadding"
+                android:layout_marginRight="@dimen/verySmallPadding"
                 android:text="@string/count_game"
                 android:textColor="@color/white"
                 android:textSize="@dimen/headThirdTextSize" />
@@ -104,25 +96,26 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="1px"
+            android:layout_weight="4">
 
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="8">
 
             <TextView
                 android:id="@+id/btnByDate"
-                android:layout_width="50dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:background="@drawable/blue_dark_radius_border"
                 android:gravity="center"
                 android:paddingLeft="@dimen/verySmallPadding"
                 android:paddingRight="@dimen/verySmallPadding"
+                android:layout_marginLeft="@dimen/verySmallPadding"
                 android:text="@string/by_date"
                 android:textColor="@color/white"
                 android:textSize="@dimen/headSecondTextSize" />
@@ -148,7 +141,8 @@
         android:id="@+id/blockArrow"
         android:layout_width="match_parent"
         android:layout_height="@dimen/selectCardBlockHeight"
-        android:background="@color/darkBlue"
+        android:paddingLeft="@dimen/verySmallPadding"
+        android:paddingRight="@dimen/verySmallPadding"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/blockBtnOptions">
 
@@ -156,7 +150,8 @@
             android:id="@+id/btnRight"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/arrowRight"
@@ -168,15 +163,15 @@
         </FrameLayout>
 
         <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="match_parent" />
 
         <FrameLayout
             android:id="@+id/btnLeft"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/arrowLeft"
@@ -188,15 +183,15 @@
         </FrameLayout>
 
         <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="match_parent" />
 
         <FrameLayout
             android:id="@+id/btnTop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/arrowTop"
@@ -208,15 +203,15 @@
         </FrameLayout>
 
         <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="match_parent" />
 
         <FrameLayout
             android:id="@+id/btnBottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/arrowBottom"
@@ -228,15 +223,15 @@
         </FrameLayout>
 
         <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="match_parent" />
 
         <FrameLayout
             android:id="@+id/btnTopLeft"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/arrowTopLeft"
@@ -248,15 +243,15 @@
         </FrameLayout>
 
         <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="match_parent" />
 
         <FrameLayout
             android:id="@+id/btnBottomLeft"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/arrowBottomLeft"
@@ -268,15 +263,15 @@
         </FrameLayout>
 
         <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="match_parent" />
 
         <FrameLayout
             android:id="@+id/btnBottomRight"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/arrowBottomRight"
@@ -288,15 +283,15 @@
         </FrameLayout>
 
         <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="@color/white" />
+            android:layout_width="@dimen/verySmallPadding"
+            android:layout_height="match_parent" />
 
         <FrameLayout
             android:id="@+id/btnTopRight"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/arrowTopRight"
@@ -397,7 +392,7 @@
                         android:padding="@dimen/verySmallPadding"
                         android:text="@string/reset"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/headThirdTextSize" />
+                        android:textSize="@dimen/headSecondTextSize" />
                 </FrameLayout>
 
                 <TextView
@@ -425,7 +420,7 @@
                         android:padding="@dimen/verySmallPadding"
                         android:text="@string/reset"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/headThirdTextSize" />
+                        android:textSize="@dimen/headSecondTextSize" />
                 </FrameLayout>
             </LinearLayout>
 
