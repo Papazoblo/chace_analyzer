@@ -52,11 +52,12 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
 
     private Main.Presenter presenter;
 
-    private ImageView imageArrow;
+    private ImageView imageArrowTop;
+    private ImageView imageArrowBottom;
+    private View btnFindTop;
+    private View btnFindBottom;
     private View btnSave;
-    private View btnEnableNext;
     private View btnReset;
-    private View btnSearch;
     private View btnYes;
     private View btnNo;
     private View blockAskExit;
@@ -162,14 +163,15 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
     }
 
     private void initView() {
-        imageArrow = findViewById(R.id.imageArrow);
+        imageArrowTop = findViewById(R.id.imageArrowTop);
+        imageArrowBottom = findViewById(R.id.imageArrowBottom);
         btnCancel = findViewById(R.id.btnCancel);
         btnResetDate = findViewById(R.id.btnResetDate);
         btnSave = findViewById(R.id.btnSave);
-        btnEnableNext = findViewById(R.id.btnEnableNext);
+        btnFindTop = findViewById(R.id.btnFindTop);
+        btnFindBottom = findViewById(R.id.btnFindBottom);
         btnReset = findViewById(R.id.btnReset);
         btnSetting = findViewById(R.id.btnSettings);
-        btnSearch = findViewById(R.id.btnSearch);
         btnYes = findViewById(R.id.btnYes);
         btnNo = findViewById(R.id.btnNo);
         btnClose = findViewById(R.id.btnClose);
@@ -229,7 +231,8 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
             cardSelectorBlock.addView(textView);
         }
 
-        imageArrow.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        imageArrowTop.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        imageArrowBottom.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
         initAction();
         initDayPicker();
@@ -583,16 +586,21 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
 
         btnCancel.setOnClickListener(v -> btnSave.performClick());
 
-        btnEnableNext.setOnClickListener(v -> {
-            enableNext = enableNext ? false : true;
-            imageArrow.setRotation(enableNext ? 180 : 0);
-            imageArrow.setColorFilter(enableNext ? Color.YELLOW : Color.WHITE,
-                    PorterDuff.Mode.SRC_ATOP);
-        });
-
         btnReset.setOnClickListener(v -> clearData());
 
-        btnSearch.setOnClickListener(v -> presenter.launchSearch());
+        btnFindTop.setOnClickListener(v -> {
+            imageArrowTop.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+            imageArrowBottom.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            enableNext = false;
+            presenter.launchSearch();
+        });
+
+        btnFindBottom.setOnClickListener(v -> {
+            imageArrowTop.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            imageArrowBottom.setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+            enableNext = true;
+            presenter.launchSearch();
+        });
 
         btnSetting.setOnClickListener(v -> toVisible(blockOptions));
 

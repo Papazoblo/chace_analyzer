@@ -17,18 +17,7 @@
         android:text="@string/app_name"
         android:textColor="@color/opacityGreen"
         android:textSize="@dimen/bigAppNameSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <TextView
-        android:id="@+id/textSelectCards"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="@dimen/smallPadding"
-        android:text="@string/select_card"
-        android:textColor="@color/textLightGrayBlue"
-        android:textSize="@dimen/headTextSize"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
@@ -39,14 +28,15 @@
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
         android:paddingBottom="@dimen/verySmallPadding"
-        app:layout_constraintTop_toBottomOf="@id/textSelectCards">
+        android:layout_marginTop="@dimen/verySmallPadding"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/btnReset"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/verySmallPadding"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:background="@drawable/blue_dark_radius_border"
             android:gravity="center"
             android:text="@string/reset"
@@ -65,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/verySmallPadding"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:background="@drawable/blue_dark_radius_border"
             android:gravity="center"
             android:text="@string/launch"
@@ -73,48 +63,28 @@
             android:textSize="@dimen/headSecondTextSize" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/mainBlock"
+    <FrameLayout
+        android:id="@+id/blockByDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/verySmallPadding"
-        android:background="@color/grayBlue"
+        android:background="@color/darkBlue"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/blockSelectCard">
 
-        <LinearLayout
-            android:id="@+id/blockByDate"
+        <TextView
+            android:id="@+id/textDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:ellipsize="end"
+            android:gravity="center"
+            android:hint="@string/dateFormat"
+            android:padding="@dimen/smallPadding"
+            android:singleLine="true"
+            android:textColor="@color/yellow"
+            android:textColorHint="@color/textLightGrayBlue"
+            android:textSize="@dimen/textDateSize" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/select_date"
-                android:textColor="@color/white"
-                android:textSize="@dimen/headTextSize" />
-
-            <TextView
-                android:id="@+id/textDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/smallPadding"
-                android:background="@drawable/bottom_left_right_border"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:hint="@string/dateFormat"
-                android:paddingLeft="@dimen/smallPadding"
-                android:paddingRight="@dimen/smallPadding"
-                android:singleLine="true"
-                android:textColor="@color/yellow"
-                android:textColorHint="@color/textLightGrayBlue"
-                android:textSize="@dimen/headTextSize" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerResult"
@@ -122,7 +92,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/smallPadding"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainBlock" />
+        app:layout_constraintTop_toBottomOf="@id/blockByDate" />
 
     <LinearLayout
         android:id="@+id/cardSelectorBlock"
@@ -282,8 +252,8 @@
                             <FrameLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/selectCardBlockHeight"
-                                android:paddingBottom="@dimen/verySmallPadding"
-                                android:layout_gravity="center">
+                                android:layout_gravity="center"
+                                android:paddingBottom="@dimen/verySmallPadding">
 
                                 <TextView
                                     android:id="@+id/btnAllYear"
@@ -331,8 +301,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/selectCardBlockHeight"
                     android:layout_marginBottom="@dimen/smallPadding"
-                    android:paddingBottom="@dimen/verySmallPadding"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/verySmallPadding">
 
                     <TextView
                         android:id="@+id/btnCancel"
@@ -384,10 +354,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/smallPadding"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:padding="@dimen/verySmallPadding"
-                android:layout_marginBottom="@dimen/smallPadding">
+                android:padding="@dimen/verySmallPadding">
 
                 <Switch
                     android:id="@+id/switchFourOriginal"
@@ -410,10 +380,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/smallPadding"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:padding="@dimen/verySmallPadding"
-                android:layout_marginBottom="@dimen/smallPadding">
+                android:padding="@dimen/verySmallPadding">
 
                 <Switch
                     android:id="@+id/switchFourRandom"
@@ -436,10 +406,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/smallPadding"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:padding="@dimen/verySmallPadding"
-                android:layout_marginBottom="@dimen/smallPadding">
+                android:padding="@dimen/verySmallPadding">
 
                 <Switch
                     android:id="@+id/switchThreeOriginal"
@@ -462,10 +432,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/smallPadding"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:padding="@dimen/verySmallPadding"
-                android:layout_marginBottom="@dimen/smallPadding">
+                android:padding="@dimen/verySmallPadding">
 
                 <Switch
                     android:id="@+id/switchThreeRandom"

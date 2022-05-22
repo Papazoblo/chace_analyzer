@@ -4,6 +4,7 @@ import static alex.studio.csvsearcher.utils.DateUtils.toDate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,11 @@ public class MainPresenterFive extends MainPresenter {
 
     @Override
     public void initializationData(Consumer<List<CardSet>> action) {
-        throw new UnsupportedOperationException();
+        if (listCard.isEmpty()) {
+            initReadFile(action);
+        } else {
+            action.accept(Collections.singletonList((CardSet) listCard.get(0)));
+        }
     }
 
     @Override

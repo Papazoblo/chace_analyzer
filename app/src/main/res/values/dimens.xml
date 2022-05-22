@@ -6,6 +6,7 @@
     <dimen name="headHeight">36dp</dimen>
     <dimen name="logoWidth">108dp</dimen>
     <dimen name="headTextSize">14sp</dimen>
+    <dimen name="textDateSize">18sp</dimen>
     <dimen name="headSecondTextSize">12sp</dimen>
     <dimen name="headThirdTextSize">10sp</dimen>
     <dimen name="selectCardBlockHeight">40dp</dimen>
@@ -17,7 +18,7 @@
 
     <dimen name="bigAppNameSize">50sp</dimen>
     <dimen name="appNameTextSize">36sp</dimen>
-    <dimen name="underAppNameTextSize">20sp</dimen>
-    <dimen name="textInBox">14sp</dimen>
+    <dimen name="underAppNameTextSize">22sp</dimen>
+    <dimen name="textInBox">12sp</dimen>
     <dimen name="paddingInBox">8dp</dimen>
 </resources>

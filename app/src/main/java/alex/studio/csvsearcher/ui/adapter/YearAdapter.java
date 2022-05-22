@@ -99,6 +99,16 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
         notifyDataSetChanged();
     }
 
+    public int getPositionByYear(int year) {
+        int i = 0;
+        for (; i < listYear.size(); i++) {
+            if (Integer.parseInt(listYear.get(i).getYear()) == year) {
+                return i;
+            }
+        }
+        return i;
+    }
+
     public void clearAll() {
         changeStateAll(false);
     }
@@ -127,16 +137,21 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.ResultViewHold
     public String getSelectYears() {
         String result = "";
 
-        for (YearDto year : listYear) {
-            if (year.isMark()) {
-                if (!result.isEmpty()) {
-                    result += ",";
+        int selectCount = getSelectedCount();
+
+        if (selectCount == 1) {
+            for (YearDto year : listYear) {
+                if (year.isMark()) {
+                    result = year.getYear();
                 }
-                result += year.getYear();
             }
+        } else if (selectCount == listYear.size()) {
+            result = "все года";
+        } else {
+            result = "несколько лет";
         }
 
-        return result.length() <= 4 ? result : "[" + result + "]";
+        return result;
     }
 
     public List<Integer> getArraySelectedYears() {

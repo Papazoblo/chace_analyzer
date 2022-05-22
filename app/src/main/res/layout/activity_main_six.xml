@@ -20,16 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
-        android:id="@+id/textSelectCards"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/search_by_type_without_space"
-        android:textSize="@dimen/underAppNameTextSize"
-        android:gravity="center"
-        android:textColor="@color/green"
-        app:layout_constraintTop_toTopOf="parent"/>
-    
     <LinearLayout
         android:id="@+id/blockSelectCard"
         android:layout_width="match_parent"
@@ -39,7 +29,7 @@
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
         android:layout_marginTop="@dimen/verySmallPadding"
-        app:layout_constraintTop_toBottomOf="@id/textSelectCards">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/btnReset"

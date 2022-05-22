@@ -2,13 +2,13 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#000</color>
-    <color name="colorAccent">#4286f5</color>
+    <color name="colorAccent">#FFC800</color>
     <color name="opacityBlack">#EB000000</color>
 
     <color name="orange">#FF6433</color>
     <color name="darkBlue">#104AAA</color>
     <color name="blue">#4286f5</color>
-    <color name="yellow">#fcff02</color>
+    <color name="yellow">#FFC800</color>
     <color name="darkYellow">#FFC800</color>
     <color name="gray">#717171</color>
     <color name="grayBlue">#445a65</color>
@@ -30,7 +30,7 @@
     <color name="tld1">#007A00</color>
     <color name="tld2">#57FF57</color>
     <color name="bld1">#FF6600</color>
-    <color name="bld2">#FFE500</color>
+    <color name="bld2">#FFC800</color>
     <color name="intersection">#00FFEA</color>
 
     <color name="random">#FF6600</color>

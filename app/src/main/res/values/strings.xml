@@ -35,7 +35,7 @@
     <string name="reset">Очистить</string>
     <string name="view_next">Вывод следующего</string>
     <string name="launch">Поиск</string>
-    <string name="count_game">Кол-во розыгрышей</string>
+    <string name="count_game">Количество розыгрышей</string>
     <string name="enter_number">Введите число</string>
     <string name="search_type">Тип поиска</string>
     <string name="select_search_type">Выберите тип поиска</string>

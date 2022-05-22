@@ -10,14 +10,12 @@ import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,14 +59,6 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
     private View btnBottomLeft;
     private View btnTopRight;
     private View btnBottomRight;
-    private ImageView arrowRight;
-    private ImageView arrowLeft;
-    private ImageView arrowTop;
-    private ImageView arrowBottom;
-    private ImageView arrowTopLeft;
-    private ImageView arrowBottomLeft;
-    private ImageView arrowTopRight;
-    private ImageView arrowBottomRight;
     private View btnFrom;
     private View btnTo;
     private View btnYes;
@@ -86,7 +76,6 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
     private TextView textDateTo;
     private TextView btnCountGames;
     private TextView btnByDate;
-    private TextView textAppNameSmall;
 
     private EditText editCount1;
 
@@ -164,14 +153,6 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
         btnBottomLeft = findViewById(R.id.btnBottomLeft);
         btnTopRight = findViewById(R.id.btnTopRight);
         btnBottomRight = findViewById(R.id.btnBottomRight);
-        arrowRight = findViewById(R.id.arrowRight);
-        arrowLeft = findViewById(R.id.arrowLeft);
-        arrowTop = findViewById(R.id.arrowTop);
-        arrowBottom = findViewById(R.id.arrowBottom);
-        arrowTopLeft = findViewById(R.id.arrowTopLeft);
-        arrowBottomLeft = findViewById(R.id.arrowBottomLeft);
-        arrowTopRight = findViewById(R.id.arrowTopRight);
-        arrowBottomRight = findViewById(R.id.arrowBottomRight);
         btnFrom = findViewById(R.id.btnFrom);
         btnTo = findViewById(R.id.btnTo);
         btnYes = findViewById(R.id.btnYes);
@@ -184,7 +165,6 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
         secondSelectCardBlock = findViewById(R.id.secondSelectCardBlock);
         cardSelectPanel = findViewById(R.id.cardSelectPanel);
 
-        textAppNameSmall = findViewById(R.id.textAppNameSmall);
         textDateFrom = findViewById(R.id.textDateFrom);
         textDateTo = findViewById(R.id.textDateTo);
         btnCountGames = findViewById(R.id.btnCountGames);
@@ -249,7 +229,6 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
             cardSelectorBlock.addView(textView);
         }
 
-        initEquipment();
         initAction();
     }
 
@@ -271,15 +250,15 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
 
         btnReset.setOnClickListener(v -> {
             clearData();
-            unselectAllColor(arrowTop, arrowBottom, arrowLeft, arrowRight, arrowBottomLeft,
-                    arrowBottomRight, arrowTopLeft, arrowTopRight);
+            unselectAllColor(btnTop, btnBottom, btnLeft, btnRight, btnBottomLeft,
+                    btnBottomRight, btnTopLeft, btnTopRight);
         });
 
         btnSearch.setOnClickListener(v -> {
             curDirection = Direction.FULL;
             presenter.launchSearch();
-            unselectAllColor(arrowTop, arrowBottom, arrowLeft, arrowRight, arrowBottomLeft,
-                    arrowBottomRight, arrowTopLeft, arrowTopRight);
+            unselectAllColor(btnTop, btnBottom, btnLeft, btnRight, btnBottomLeft,
+                    btnBottomRight, btnTopLeft, btnTopRight);
         });
 
         btnCountGames.setOnClickListener(v -> changeStateOption(btnCountGames, 1,
@@ -288,21 +267,21 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
         btnByDate.setOnClickListener(v -> changeStateOption(btnByDate, 3, blockByDate,
                 blockCountGames));
 
-        btnRight.setOnClickListener(v -> selectArrow(arrowRight));
+        btnRight.setOnClickListener(this::selectArrow);
 
-        btnLeft.setOnClickListener(v -> selectArrow(arrowLeft));
+        btnLeft.setOnClickListener(this::selectArrow);
 
-        btnTop.setOnClickListener(v -> selectArrow(arrowTop));
+        btnTop.setOnClickListener(this::selectArrow);
 
-        btnBottom.setOnClickListener(v -> selectArrow(arrowBottom));
+        btnBottom.setOnClickListener(this::selectArrow);
 
-        btnTopLeft.setOnClickListener(v -> selectArrow(arrowTopLeft));
+        btnTopLeft.setOnClickListener(this::selectArrow);
 
-        btnBottomLeft.setOnClickListener(v -> selectArrow(arrowBottomLeft));
+        btnBottomLeft.setOnClickListener(this::selectArrow);
 
-        btnTopRight.setOnClickListener(v -> selectArrow(arrowTopRight));
+        btnTopRight.setOnClickListener(this::selectArrow);
 
-        btnBottomRight.setOnClickListener(v -> selectArrow(arrowBottomRight));
+        btnBottomRight.setOnClickListener(this::selectArrow);
 
         btnFrom.setOnClickListener(v -> initDatePickerDialog(true));
 
@@ -328,28 +307,6 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
         view.setBackground(whiteBorderBg);
         curPosition = CardPosition.of((String) view.getTag());
         toVisible(cardSelectorBlock);
-    }
-
-    private void initEquipment() {
-
-        switch (Properties.valueOf(getIntent().getStringExtra("type"))) {
-            case ALGO_3:
-                initEquipmentOne();
-                break;
-            case ALGO_4:
-                initEquipmentTwo();
-                break;
-        }
-    }
-
-    private void initEquipmentOne() {
-        textAppNameSmall.setText("");
-        toVisible(textAppNameSmall);
-    }
-
-    private void initEquipmentTwo() {
-        textAppNameSmall.setText(getResources().getString(R.string.search_dropped_after_the_given_without_enter));
-        toVisible(textAppNameSmall);
     }
 
     private void changeStateOption(TextView btn, int btnType, View mainBlock, View... blocks) {
@@ -436,22 +393,22 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
         datePickerDialog.show();
     }
 
-    private void selectArrow(ImageView view) {
+    private void selectArrow(View view) {
         selectCurrentArrow(view);
         curDirection = Direction.of((String) view.getTag());
         presenter.launchSearch();
     }
 
-    private void selectCurrentArrow(ImageView view) {
-        unselectAllColor(arrowTop, arrowBottom, arrowLeft, arrowRight, arrowBottomLeft,
-                arrowBottomRight, arrowTopLeft, arrowTopRight);
+    private void selectCurrentArrow(View view) {
+        unselectAllColor(btnTop, btnBottom, btnLeft, btnRight, btnBottomLeft,
+                btnBottomRight, btnTopLeft, btnTopRight);
 
-        view.setColorFilter(colorYellow, PorterDuff.Mode.SRC_ATOP);
+        view.setBackgroundResource(R.drawable.yellow_radius_border);
     }
 
-    private void unselectAllColor(ImageView... views) {
-        for (ImageView v : views) {
-            v.setColorFilter(colorBlack, PorterDuff.Mode.SRC_ATOP);
+    private void unselectAllColor(View... views) {
+        for (View v : views) {
+            v.setBackgroundResource(R.drawable.white_radius_border);
         }
     }
 

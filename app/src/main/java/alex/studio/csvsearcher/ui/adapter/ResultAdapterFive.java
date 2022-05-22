@@ -42,7 +42,7 @@ public class ResultAdapterFive extends RecyclerView.Adapter<ResultAdapterFive.Re
 
         int newPos = cardSetList.size() - pos - 1;
 
-        ResultAdapterInnerThree adapter = new ResultAdapterInnerThree(context);
+        ResultAdapterInnerFive adapter = new ResultAdapterInnerFive(context);
         h.recyclerView.setAdapter(adapter);
         adapter.setData(colorMatchMap.get(newPos), cardSetList.get(newPos));
 

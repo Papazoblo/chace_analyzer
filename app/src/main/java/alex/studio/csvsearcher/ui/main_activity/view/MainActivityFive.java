@@ -1,5 +1,7 @@
 package alex.studio.csvsearcher.ui.main_activity.view;
 
+import static alex.studio.csvsearcher.utils.DateUtils.getDateField;
+import static alex.studio.csvsearcher.utils.DateUtils.toDate;
 import static alex.studio.csvsearcher.utils.ViewUtils.changeVisible;
 import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
 import static alex.studio.csvsearcher.utils.ViewUtils.isVisible;
@@ -24,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -185,6 +188,7 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
 
         initSpinner();
         initAction();
+        textDate.post(this::initializationData);
     }
 
     private void initAction() {
@@ -227,6 +231,29 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
         });
 
         blockByDate.setOnClickListener(v -> toVisible(blockSelectDate));
+    }
+
+    private void initializationData() {
+        presenter.initializationData((List<CardSet> list) -> {
+            CardSet val = list.get(0);
+            textOne.setText(val.getCard1());
+            textTwo.setText(val.getCard2());
+            textThree.setText(val.getCard3());
+            textFour.setText(val.getCard4());
+            initDate(val.getDateString());
+        });
+    }
+
+    private void initDate(String date) {
+        textDate.setText(date);
+        Calendar c = Calendar.getInstance();
+        c.setTime(toDate(date));
+        spinnerMonths.setSelection(getDateField(c.getTime(), Calendar.MONTH));
+        selectDay(getDateField(c.getTime(), Calendar.MONTH));
+        spinnerDays.setSelection(getDateField(c.getTime(), Calendar.DAY_OF_MONTH) - 1);
+        yearAdapter.selectYear(getDateField(c.getTime(), Calendar.YEAR));
+        recyclerYear.scrollToPosition(yearAdapter.getPositionByYear(
+                getDateField(c.getTime(), Calendar.YEAR)));
     }
 
     private void selectCardClick(View view) {
@@ -335,12 +362,11 @@ public class MainActivityFive extends AppCompatActivity implements AdapterView.O
     @Override
     public String[] getActiveDate() {
         String[] dMY = textDate.getText().toString().split("\\.");
-        dMY[2] = dMY[2].replace("[", "");
-        dMY[2] = dMY[2].replace("]", "");
-        String[] year = dMY[2].split(",");
-        String[] dates = new String[year.length];
-        for(int i = 0 ; i < year.length ; i++) {
-            dates[i] = dMY[0] + "." + dMY[1] + "." + year[i];
+
+        List<Integer> years = yearAdapter.getArraySelectedYears();
+        String[] dates = new String[years.size()];
+        for (int i = 0; i < years.size(); i++) {
+            dates[i] = dMY[0] + "." + dMY[1] + "." + years.get(i);
         }
         return dates;
     }

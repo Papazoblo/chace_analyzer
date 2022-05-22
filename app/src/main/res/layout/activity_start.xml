@@ -62,7 +62,7 @@
                 android:background="@drawable/blue_dark_radius_border"
                 android:breakStrategy="simple"
                 android:gravity="center"
-                android:padding="@dimen/paddingInBox"
+                android:padding="@dimen/verySmallPadding"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textInBox" />
 
@@ -76,7 +76,7 @@
                 android:background="@drawable/blue_dark_radius_border"
                 android:breakStrategy="simple"
                 android:gravity="center"
-                android:padding="@dimen/paddingInBox"
+                android:padding="@dimen/verySmallPadding"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textInBox" />
         </LinearLayout>
@@ -99,7 +99,7 @@
                 android:background="@drawable/blue_dark_radius_border"
                 android:breakStrategy="simple"
                 android:gravity="center"
-                android:padding="@dimen/paddingInBox"
+                android:padding="@dimen/verySmallPadding"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textInBox" />
 
@@ -113,7 +113,7 @@
                 android:background="@drawable/blue_dark_radius_border"
                 android:breakStrategy="simple"
                 android:gravity="center"
-                android:padding="@dimen/paddingInBox"
+                android:padding="@dimen/verySmallPadding"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textInBox" />
         </LinearLayout>
@@ -136,7 +136,7 @@
                 android:background="@drawable/blue_dark_radius_border"
                 android:breakStrategy="simple"
                 android:gravity="center"
-                android:padding="@dimen/paddingInBox"
+                android:padding="@dimen/verySmallPadding"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textInBox" />
 
@@ -150,7 +150,7 @@
                 android:background="@drawable/blue_dark_radius_border"
                 android:breakStrategy="simple"
                 android:gravity="center"
-                android:padding="@dimen/paddingInBox"
+                android:padding="@dimen/verySmallPadding"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textInBox" />
         </LinearLayout>

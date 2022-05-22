@@ -18,14 +18,14 @@ import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardSet;
 import alex.studio.csvsearcher.dto.ColorMatch;
 
-public class ResultAdapterInnerThree extends RecyclerView.Adapter<ResultAdapterInnerThree.ResultViewHolder> {
+public class ResultAdapterInnerFive extends RecyclerView.Adapter<ResultAdapterInnerFive.ResultViewHolder> {
 
     private List<CardSet> cardSetList = new ArrayList<>();
     private Map<String, ColorMatch> colorMatchMap = new HashMap<>();
     private Context context;
     private int colorWhite;
 
-    public ResultAdapterInnerThree(Context context) {
+    public ResultAdapterInnerFive(Context context) {
         this.context = context;
         this.colorWhite = context.getResources().getColor(R.color.white);
     }
@@ -51,6 +51,7 @@ public class ResultAdapterInnerThree extends RecyclerView.Adapter<ResultAdapterI
         h.textCard2.setText(set.getCard2());
         h.textCard3.setText(set.getCard3());
         h.textCard4.setText(set.getCard4());
+        h.number.setText(set.getNumber());
 
         h.textCard1.setTextColor(match1 == null ? colorWhite : match1.getColor());
         h.textCard2.setTextColor(match2 == null ? colorWhite : match2.getColor());
@@ -75,6 +76,7 @@ public class ResultAdapterInnerThree extends RecyclerView.Adapter<ResultAdapterI
         private TextView textCard2;
         private TextView textCard3;
         private TextView textCard4;
+        private TextView number;
 
         public ResultViewHolder(@NonNull View v) {
             super(v);
@@ -83,6 +85,7 @@ public class ResultAdapterInnerThree extends RecyclerView.Adapter<ResultAdapterI
             textCard2 = v.findViewById(R.id.textCard2);
             textCard3 = v.findViewById(R.id.textCard3);
             textCard4 = v.findViewById(R.id.textCard4);
+            number = v.findViewById(R.id.number);
         }
     }
 }

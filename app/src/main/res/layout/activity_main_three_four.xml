@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/verySmallPadding"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:background="@drawable/blue_dark_radius_border"
             android:gravity="center"
             android:text="@string/reset"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/verySmallPadding"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:background="@drawable/blue_dark_radius_border"
             android:gravity="center"
             android:text="@string/launch"
@@ -77,7 +77,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="8">
+            android:layout_weight="7">
 
             <TextView
                 android:id="@+id/btnCountGames"
@@ -104,7 +104,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="8">
+            android:layout_weight="7">
 
             <TextView
                 android:id="@+id/btnByDate"
@@ -122,21 +122,6 @@
         </FrameLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textAppNameSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/smallPadding"
-        android:gravity="center"
-        android:text="@string/search_dropped_after_the_given_without_enter"
-        android:textColor="@color/green"
-        android:textSize="@dimen/headTextSize"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/blockBtnOptions"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/blockBtnOptions" />
-
     <LinearLayout
         android:id="@+id/blockArrow"
         android:layout_width="match_parent"
@@ -151,15 +136,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:tag="right"
+            android:background="@drawable/white_radius_border">
 
             <ImageView
                 android:id="@+id/arrowRight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/verySmallPadding"
-                android:src="@drawable/right"
-                android:tag="right" />
+                android:src="@drawable/right" />
         </FrameLayout>
 
         <View
@@ -171,15 +156,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:tag="left"
+            android:background="@drawable/white_radius_border">
 
             <ImageView
                 android:id="@+id/arrowLeft"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/verySmallPadding"
-                android:src="@drawable/left"
-                android:tag="left" />
+                android:src="@drawable/left" />
         </FrameLayout>
 
         <View
@@ -191,15 +176,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:tag="top"
+            android:background="@drawable/white_radius_border">
 
             <ImageView
                 android:id="@+id/arrowTop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/verySmallPadding"
-                android:src="@drawable/top"
-                android:tag="top" />
+                android:src="@drawable/top" />
         </FrameLayout>
 
         <View
@@ -211,15 +196,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:tag="bottom"
+            android:background="@drawable/white_radius_border">
 
             <ImageView
                 android:id="@+id/arrowBottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/verySmallPadding"
-                android:src="@drawable/bottom"
-                android:tag="bottom" />
+                android:src="@drawable/bottom" />
         </FrameLayout>
 
         <View
@@ -231,15 +216,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:tag="topLeft"
+            android:background="@drawable/white_radius_border">
 
             <ImageView
                 android:id="@+id/arrowTopLeft"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/verySmallPadding"
-                android:src="@drawable/top_left"
-                android:tag="topLeft" />
+                android:src="@drawable/top_left" />
         </FrameLayout>
 
         <View
@@ -251,15 +236,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:tag="bottomLeft"
+            android:background="@drawable/white_radius_border">
 
             <ImageView
                 android:id="@+id/arrowBottomLeft"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/verySmallPadding"
-                android:src="@drawable/bottom_left"
-                android:tag="bottomLeft" />
+                android:src="@drawable/bottom_left" />
         </FrameLayout>
 
         <View
@@ -271,15 +256,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:tag="bottomRight"
+            android:background="@drawable/white_radius_border">
 
             <ImageView
                 android:id="@+id/arrowBottomRight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/verySmallPadding"
-                android:src="@drawable/bottom_right"
-                android:tag="bottomRight" />
+                android:src="@drawable/bottom_right" />
         </FrameLayout>
 
         <View
@@ -291,15 +276,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/white">
+            android:tag="topRight"
+            android:background="@drawable/white_radius_border">
 
             <ImageView
                 android:id="@+id/arrowTopRight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/verySmallPadding"
-                android:src="@drawable/top_right"
-                android:tag="topRight" />
+                android:src="@drawable/top_right" />
         </FrameLayout>
 
     </LinearLayout>

@@ -32,20 +32,21 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
-            android:id="@+id/btnEnableNext"
+            android:id="@+id/btnFindBottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/verySmallPadding"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:background="@drawable/blue_dark_radius_border"
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/imageArrow"
+                android:id="@+id/imageArrowBottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/top"
-                android:padding="@dimen/verySmallPadding" />
+                android:padding="@dimen/verySmallPadding"
+                android:rotation="180" />
         </FrameLayout>
 
         <include
@@ -55,17 +56,22 @@
             android:layout_height="match_parent"
             android:layout_weight="4" />
 
-        <TextView
-            android:id="@+id/btnSearch"
+        <FrameLayout
+            android:id="@+id/btnFindTop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/verySmallPadding"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:background="@drawable/blue_dark_radius_border"
-            android:gravity="center"
-            android:text="@string/launch"
-            android:textColor="@color/white"
-            android:textSize="@dimen/headSecondTextSize" />
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageArrowTop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/top"
+                android:padding="@dimen/verySmallPadding" />
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
