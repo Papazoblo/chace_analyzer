@@ -5,10 +5,12 @@ import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
 import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 import android.Manifest;
+import android.animation.Animator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,8 @@ public class StartActivity extends AppCompatActivity {
     private View blockAsk;
     private View blockProgress;
     private View blockAskExit;
+    private View animationBlock;
+    private ImageView animationImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,8 @@ public class StartActivity extends AppCompatActivity {
         blockAsk = findViewById(R.id.blockAsk);
         blockProgress = findViewById(R.id.blockProgress);
         blockAskExit = findViewById(R.id.blockAskExit);
+        animationBlock = findViewById(R.id.animationBlock);
+        animationImage = findViewById(R.id.animationImage);
 
         btnAlgorithmFour.post(() -> {
             int h = btnAlgorithmFour.getWidth();
@@ -91,6 +97,36 @@ public class StartActivity extends AppCompatActivity {
         btnAlgorithmFour.setText(storageManager.read(Properties.ALGO_4));
         btnAlgorithmFive.setText(storageManager.read(Properties.ALGO_5));
         btnAlgorithmSix.setText(storageManager.read(Properties.ALGO_6));
+
+        animationImage.animate()
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
+                        toVisible(animationImage);
+                        toVisible(animationBlock);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        toGone(animationBlock);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
+
+                    }
+                })
+                .scaleX(20)
+                .scaleY(20)
+                .alpha(0)
+                .setDuration(1000)
+                .start();
+
 
         initAction();
     }

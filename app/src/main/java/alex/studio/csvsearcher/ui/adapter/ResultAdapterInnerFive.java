@@ -34,7 +34,7 @@ public class ResultAdapterInnerFive extends RecyclerView.Adapter<ResultAdapterIn
     @Override
     public ResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ResultViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.item_result_style_6, parent, false));
+                .inflate(R.layout.item_result_style_5_inner, parent, false));
     }
 
     @Override
@@ -52,6 +52,7 @@ public class ResultAdapterInnerFive extends RecyclerView.Adapter<ResultAdapterIn
         h.textCard3.setText(set.getCard3());
         h.textCard4.setText(set.getCard4());
         h.number.setText(set.getNumber());
+        h.textDate.setText(pos != 0 ? "" : set.getDateString());
 
         h.textCard1.setTextColor(match1 == null ? colorWhite : match1.getColor());
         h.textCard2.setTextColor(match2 == null ? colorWhite : match2.getColor());
@@ -77,6 +78,7 @@ public class ResultAdapterInnerFive extends RecyclerView.Adapter<ResultAdapterIn
         private TextView textCard3;
         private TextView textCard4;
         private TextView number;
+        private TextView textDate;
 
         public ResultViewHolder(@NonNull View v) {
             super(v);
@@ -85,6 +87,7 @@ public class ResultAdapterInnerFive extends RecyclerView.Adapter<ResultAdapterIn
             textCard2 = v.findViewById(R.id.textCard2);
             textCard3 = v.findViewById(R.id.textCard3);
             textCard4 = v.findViewById(R.id.textCard4);
+            textDate = v.findViewById(R.id.textDate);
             number = v.findViewById(R.id.number);
         }
     }

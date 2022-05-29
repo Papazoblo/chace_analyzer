@@ -22,6 +22,7 @@ import java.util.List;
 
 import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.enums.CardPosition;
+import alex.studio.csvsearcher.ui.main_activity.view.MainActivitySix;
 
 public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultViewHolder> {
 
@@ -45,13 +46,14 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
         this.cardArray = context.getResources().getStringArray(R.array.cards);
         whiteBorderBg = context.getResources().getDrawable(R.drawable.white_active_border);
         bottomBorderBg = context.getResources().getDrawable(R.drawable.bottom_border);
+        addRow();
     }
 
     @NonNull
     @Override
     public ResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ResultViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.item_recycler_4, parent, false));
+                .inflate(R.layout.item_recycler_6, parent, false));
     }
 
     @Override
@@ -165,12 +167,13 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
     public void addRow() {
         closeAll();
         if (listGroupCards.size() < MAX_ROW_COUNT) {
-            if(listGroupCards.isEmpty()) {
+            if (listGroupCards.isEmpty()) {
                 listGroupCards.add(new String[]{"-", "-", "-", "-"});
                 curPositions.add(null);
             }
             listGroupCards.add(new String[]{"-", "-", "-", "-"});
             curPositions.add(null);
+            ((MainActivitySix) context).toGoneTextAppName();
             notifyDataSetChanged();
         } else {
             Toast.makeText(context, context.getResources().getString(R.string.error_max_limit_rows),
@@ -181,8 +184,8 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
     public boolean isHasCardInRow() {
         String[] pattern = listGroupCards.get(0);
 
-        for(String card : pattern) {
-            if(!card.equals(cardArray[0])) {
+        for (String card : pattern) {
+            if (!card.equals(cardArray[0])) {
                 return true;
             }
         }
@@ -193,8 +196,8 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
         String[] pattern = listGroupCards.get(0);
 
         for (int i = 1; i < listGroupCards.size(); i++) {
-            for(int j = 0 ; j < pattern.length ; j++) {
-                if(pattern[j].equals(cardArray[0]) && !listGroupCards.get(i)[j].equals(cardArray[0]) ||
+            for (int j = 0; j < pattern.length; j++) {
+                if (pattern[j].equals(cardArray[0]) && !listGroupCards.get(i)[j].equals(cardArray[0]) ||
                         !pattern[j].equals(cardArray[0]) && listGroupCards.get(i)[j].equals(cardArray[0])) {
                     return false;
                 }
@@ -204,15 +207,20 @@ public class CardAdapterSix extends RecyclerView.Adapter<CardAdapterSix.ResultVi
     }
 
     private void deleteRow(int pos) {
+        ((MainActivitySix) context).clearData();
         closeAll();
         listGroupCards.remove(pos);
         curPositions.remove(pos);
         cardSelectPanels.remove(pos);
+        if (listGroupCards.isEmpty()) {
+            ((MainActivitySix) context).toVisibleTextAppName();
+        }
         notifyDataSetChanged();
     }
 
     private void clearRow(int pos) {
-        for(int i = 0 ; i < 4 ; i++) {
+        ((MainActivitySix) context).clearData();
+        for (int i = 0; i < 4; i++) {
             listGroupCards.get(pos)[i] = "-";
         }
         notifyDataSetChanged();

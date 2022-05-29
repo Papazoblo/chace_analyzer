@@ -11,36 +11,36 @@
         android:id="@+id/textAppName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/opacityGreen"
-        android:textSize="@dimen/bigAppNameSize"
         android:gravity="center"
         android:paddingLeft="@dimen/smallPadding"
         android:paddingRight="@dimen/smallPadding"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:text="@string/app_name"
+        android:textColor="@color/opacityGreen"
+        android:textSize="@dimen/bigAppNameSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/blockSelectCard"
         android:layout_width="match_parent"
         android:layout_height="@dimen/selectCardBlockHeight"
+        android:layout_marginTop="@dimen/verySmallPadding"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/verySmallPadding"
         android:paddingLeft="@dimen/verySmallPadding"
         android:paddingRight="@dimen/verySmallPadding"
-        android:layout_marginTop="@dimen/verySmallPadding"
+        android:paddingBottom="@dimen/verySmallPadding"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/btnReset"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/blue_dark_radius_border"
+            android:gravity="center"
             android:text="@string/reset"
             android:textColor="@color/white"
-            android:textSize="@dimen/headSecondTextSize"
-            android:gravity="center"
-            android:background="@drawable/blue_dark_radius_border"
-            android:layout_weight="1" />
+            android:textSize="@dimen/headSecondTextSize" />
 
         <View
             android:layout_width="@dimen/verySmallPadding"
@@ -50,14 +50,14 @@
             android:id="@+id/btnCountGames"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/blue_dark_radius_border"
+            android:gravity="center"
+            android:paddingLeft="@dimen/verySmallPadding"
+            android:paddingRight="@dimen/verySmallPadding"
             android:text="@string/count_game"
             android:textColor="@color/white"
-            android:textSize="@dimen/headThirdTextSize"
-            android:gravity="center"
-            android:background="@drawable/blue_dark_radius_border"
-            android:layout_weight="1"
-            android:paddingLeft="@dimen/verySmallPadding"
-            android:paddingRight="@dimen/verySmallPadding" />
+            android:textSize="@dimen/headThirdTextSize" />
 
         <View
             android:layout_width="@dimen/verySmallPadding"
@@ -67,15 +67,15 @@
             android:id="@+id/btnByDate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/by_date"
-            android:textColor="@color/white"
-            android:textSize="@dimen/headSecondTextSize"
-            android:gravity="center"
             android:layout_gravity="right"
             android:layout_weight="1"
             android:background="@drawable/blue_dark_radius_border"
+            android:gravity="center"
             android:paddingLeft="@dimen/verySmallPadding"
-            android:paddingRight="@dimen/verySmallPadding" />
+            android:paddingRight="@dimen/verySmallPadding"
+            android:text="@string/by_date"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headSecondTextSize" />
 
         <View
             android:layout_width="@dimen/verySmallPadding"
@@ -85,39 +85,39 @@
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/blue_dark_radius_border"
+            android:gravity="center"
             android:text="@string/launch"
             android:textColor="@color/white"
-            android:textSize="@dimen/headSecondTextSize"
-            android:gravity="center"
-            android:background="@drawable/blue_dark_radius_border"
-            android:layout_weight="1" />
+            android:textSize="@dimen/headSecondTextSize" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/mainBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/grayBlue"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/blockSelectCard"
-        android:background="@color/grayBlue">
+        app:layout_constraintTop_toBottomOf="@id/blockSelectCard">
 
         <LinearLayout
             android:id="@+id/blockCountGames"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:paddingBottom="@dimen/verySmallPadding">
+            android:paddingBottom="@dimen/verySmallPadding"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/enter_number"
-                android:textSize="@dimen/headTextSize"
-                android:textColor="@color/white"
+                android:gravity="center"
                 android:paddingTop="@dimen/smallPadding"
                 android:paddingBottom="@dimen/smallPadding"
-                android:gravity="center"/>
+                android:text="@string/enter_number"
+                android:textColor="@color/white"
+                android:textSize="@dimen/headTextSize" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,17 +130,16 @@
                     android:id="@+id/editCount1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/headTextSize"
-                    android:textColor="@color/yellow"
-                    android:background="@drawable/bottom_left_right_border"
-                    android:layout_weight="1"
-                    android:layout_marginRight="@dimen/verySmallPadding"
                     android:layout_marginLeft="@dimen/verySmallPadding"
+                    android:layout_marginRight="@dimen/verySmallPadding"
+                    android:layout_weight="1"
+                    android:background="@drawable/bottom_left_right_border"
                     android:gravity="center"
                     android:inputType="number"
-                    android:singleLine="true"
                     android:maxLength="7"
-                    />
+                    android:singleLine="true"
+                    android:textColor="@color/yellow"
+                    android:textSize="@dimen/headTextSize" />
             </LinearLayout>
         </LinearLayout>
 
@@ -165,24 +164,24 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/reset"
-                        android:textSize="@dimen/headThirdTextSize"
-                        android:textColor="@color/white"
                         android:layout_gravity="center"
+                        android:background="@drawable/blue_dark_radius_border"
                         android:gravity="center_horizontal|bottom"
                         android:padding="@dimen/verySmallPadding"
-                        android:background="@drawable/blue_dark_radius_border"/>
+                        android:text="@string/reset"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/headThirdTextSize" />
                 </FrameLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/select_date"
-                    android:textSize="@dimen/headTextSize"
-                    android:textColor="@color/white"
+                    android:gravity="center"
                     android:paddingTop="@dimen/smallPadding"
                     android:paddingBottom="@dimen/smallPadding"
-                    android:gravity="center"/>
+                    android:text="@string/select_date"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/headTextSize" />
 
                 <FrameLayout
                     android:id="@+id/btnResetDateTo"
@@ -193,55 +192,55 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/reset"
-                        android:textSize="@dimen/headThirdTextSize"
-                        android:textColor="@color/white"
                         android:layout_gravity="center"
+                        android:background="@drawable/blue_dark_radius_border"
                         android:gravity="center_horizontal|bottom"
                         android:padding="@dimen/verySmallPadding"
-                        android:background="@drawable/blue_dark_radius_border"/>
+                        android:text="@string/reset"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/headThirdTextSize" />
                 </FrameLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/verySmallPadding"
-                android:paddingRight="@dimen/verySmallPadding"
-                android:gravity="center">
+                android:paddingRight="@dimen/verySmallPadding">
 
                 <LinearLayout
                     android:id="@+id/btnFrom"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center"
                     android:layout_weight="1"
-                    android:paddingBottom="@dimen/smallPadding"
-                    android:paddingTop="@dimen/smallPadding">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/smallPadding"
+                    android:paddingBottom="@dimen/smallPadding">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/from"
-                        android:textSize="@dimen/headThirdTextSize"
-                        android:textColor="@color/textLightGrayBlue"
                         android:layout_gravity="center_vertical"
-                        android:paddingRight="@dimen/verySmallPadding"/>
+                        android:paddingRight="@dimen/verySmallPadding"
+                        android:text="@string/from"
+                        android:textColor="@color/textLightGrayBlue"
+                        android:textSize="@dimen/headThirdTextSize" />
 
                     <TextView
                         android:id="@+id/textDateFrom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="@string/dateFormat"
-                        android:textColorHint="@color/textLightGrayBlue"
-                        android:textSize="@dimen/headSecondTextSize"
-                        android:textColor="@color/yellow"
-                        android:gravity="center_vertical"
                         android:background="@drawable/bottom_left_right_border"
+                        android:gravity="center_vertical"
+                        android:hint="@string/dateFormat"
                         android:paddingLeft="@dimen/verySmallPadding"
-                        android:paddingRight="@dimen/verySmallPadding"/>
+                        android:paddingRight="@dimen/verySmallPadding"
+                        android:textColor="@color/yellow"
+                        android:textColorHint="@color/textLightGrayBlue"
+                        android:textSize="@dimen/headSecondTextSize" />
                 </LinearLayout>
 
                 <TextView
@@ -249,39 +248,39 @@
                     android:layout_height="match_parent"
                     android:text="@string/select_date"
                     android:textSize="@dimen/headTextSize"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
 
                 <LinearLayout
                     android:id="@+id/btnTo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center"
                     android:layout_weight="1"
-                    android:paddingBottom="@dimen/smallPadding"
-                    android:paddingTop="@dimen/smallPadding">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/smallPadding"
+                    android:paddingBottom="@dimen/smallPadding">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/to"
-                        android:textSize="@dimen/headThirdTextSize"
-                        android:textColor="@color/textLightGrayBlue"
                         android:layout_gravity="center_vertical"
-                        android:paddingRight="@dimen/verySmallPadding"/>
+                        android:paddingRight="@dimen/verySmallPadding"
+                        android:text="@string/to"
+                        android:textColor="@color/textLightGrayBlue"
+                        android:textSize="@dimen/headThirdTextSize" />
 
                     <TextView
                         android:id="@+id/textDateTo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="@string/dateFormat"
-                        android:textColorHint="@color/textLightGrayBlue"
-                        android:textSize="@dimen/headSecondTextSize"
-                        android:textColor="@color/yellow"
-                        android:gravity="center_vertical"
                         android:background="@drawable/bottom_left_right_border"
+                        android:gravity="center_vertical"
+                        android:hint="@string/dateFormat"
                         android:paddingLeft="@dimen/verySmallPadding"
-                        android:paddingRight="@dimen/verySmallPadding"/>
+                        android:paddingRight="@dimen/verySmallPadding"
+                        android:textColor="@color/yellow"
+                        android:textColorHint="@color/textLightGrayBlue"
+                        android:textSize="@dimen/headSecondTextSize" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -300,51 +299,105 @@
             android:id="@+id/btnTop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/top_white"
-            android:layout_weight="4"
             android:layout_marginLeft="@dimen/verySmallPadding"
+            android:layout_weight="4"
+            android:background="@drawable/blue_dark_radius_border"
             android:padding="@dimen/verySmallPadding"
-            android:background="@drawable/blue_dark_radius_border"/>
+            android:src="@drawable/top_white" />
 
         <TextView
             android:id="@+id/btnAddRow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/add_row"
-            android:textColor="@color/white"
-            android:textSize="@dimen/headTextSize"
-            android:gravity="center"
+            android:layout_marginLeft="@dimen/verySmallPadding"
+            android:layout_marginRight="@dimen/verySmallPadding"
             android:layout_weight="2"
             android:background="@drawable/blue_dark_radius_border"
-            android:layout_marginLeft="@dimen/verySmallPadding"
-            android:layout_marginRight="@dimen/verySmallPadding"/>
+            android:gravity="center"
+            android:text="@string/add_row"
+            android:textColor="@color/white"
+            android:textSize="@dimen/headTextSize" />
 
         <ImageView
             android:id="@+id/btnBottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/bottom_white"
-            android:layout_weight="4"
             android:layout_marginRight="@dimen/verySmallPadding"
+            android:layout_weight="4"
+            android:background="@drawable/blue_dark_radius_border"
             android:padding="@dimen/verySmallPadding"
-            android:background="@drawable/blue_dark_radius_border"/>
+            android:src="@drawable/bottom_white" />
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerRow"
+    <LinearLayout
+        android:id="@+id/selectCardBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/smallPadding"
-        app:layout_constraintTop_toBottomOf="@id/blockArrow"/>
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/blockArrow">
+
+        <LinearLayout
+            android:id="@+id/topLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/smallPadding">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@color/darkYellow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/bottomLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/smallPadding">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:background="@color/darkYellow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7" />
+        </LinearLayout>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerResult"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/recyclerRow"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/smallPadding"/>
+        app:layout_constraintTop_toBottomOf="@id/selectCardBlock" />
 
     <TextView
         android:id="@+id/textNotMatch"
@@ -354,10 +407,10 @@
         android:text="@string/not_match"
         android:textColor="@color/green"
         android:textSize="@dimen/underAppNameTextSize"
-        app:layout_constraintTop_toBottomOf="@id/recyclerRow"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@id/selectCardBlock" />
 
     <include
         android:id="@+id/blockWait"
@@ -368,9 +421,9 @@
 
     <include
         android:id="@+id/blockAskExit"
+        layout="@layout/block_exit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        layout="@layout/block_exit"
         android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

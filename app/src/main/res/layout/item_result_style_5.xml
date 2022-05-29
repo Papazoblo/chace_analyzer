@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/underAppNameTextSize"
         android:textColor="@color/green"
-        android:gravity="right"
+        android:gravity="center"
         android:paddingTop="@dimen/smallPadding"
         android:visibility="visible" />
 

@@ -53,6 +53,10 @@ public class CardSet {
         card4 = infoArray[CARD_4];
     }
 
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public String getDateString() {
         return date;
     }
@@ -133,17 +137,13 @@ public class CardSet {
         return withSpace ? result : result.replace(" ", "");
     }
 
-    public static CardSet stringToCardSet(String str) {
+    public void stringToCardSet(String str) {
         String[] array = str.split(" ");
 
         if (array.length == 4) {
-            CardSet result = new CardSet();
             for (int i = 0; i < array.length; i++) {
-                result.setCardByPos(i, array[i]);
+                setCardByPos(i, array[i]);
             }
-            return result;
-        } else {
-            return new CardSet();
         }
     }
 }

@@ -1,6 +1,7 @@
 package alex.studio.csvsearcher.ui.main_activity.presenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import alex.studio.csvsearcher.dto.CardGroup;
@@ -12,7 +13,11 @@ public class MainPresenterThree extends MainPresenter {
 
     @Override
     public void initializationData(Consumer<List<CardSet>> action) {
-        throw new UnsupportedOperationException();
+        if (listCard.isEmpty()) {
+            initReadFile(action);
+        } else {
+            action.accept(Collections.singletonList((CardSet) listCard.get(0)));
+        }
     }
 
     @Override

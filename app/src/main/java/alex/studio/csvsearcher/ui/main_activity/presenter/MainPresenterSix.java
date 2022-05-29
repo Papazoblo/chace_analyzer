@@ -1,15 +1,14 @@
 package alex.studio.csvsearcher.ui.main_activity.presenter;
 
-import static alex.studio.csvsearcher.dto.CardSet.stringToCardSet;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import alex.studio.csvsearcher.dto.CardSet;
+import alex.studio.csvsearcher.dto.CardSetSix;
 import alex.studio.csvsearcher.functions.Consumer;
 import alex.studio.csvsearcher.ui.main_activity.view.MainActivitySix;
 
@@ -41,13 +40,13 @@ public class MainPresenterSix extends MainPresenter {
         switch (view.getDirection()) {
             case TOP:
                 searchTopDirection(workListCard, dates, selectCards);
-                searchTopLeftDirection(workListCard, dates, selectCards);
-                searchTopRightDirection(workListCard, dates, selectCards);
+                //searchTopLeftDirection(workListCard, dates, selectCards);
+                //searchTopRightDirection(workListCard, dates, selectCards);
                 break;
             case BOTTOM:
                 searchBottomDirection(workListCard, dates, selectCards);
-                searchBottomLeftDirection(workListCard, dates, selectCards);
-                searchBottomRightDirection(workListCard, dates, selectCards);
+                //searchBottomLeftDirection(workListCard, dates, selectCards);
+                //searchBottomRightDirection(workListCard, dates, selectCards);
                 break;
         }
 
@@ -355,9 +354,9 @@ public class MainPresenterSix extends MainPresenter {
         return true;
     }
 
-    private void outputData(List<CardSet> result) {
+    private void outputData(List<CardSetSix> result) {
         ((MainActivitySix) view.getContext()).runOnUiThread(() -> {
-            view.setCardSetListToRecycler(result);
+            view.setCardSetSixListToRecycler(result);
             view.changeVisibleBlockWait(false);
         });
     }
@@ -366,6 +365,7 @@ public class MainPresenterSix extends MainPresenter {
         CardSet resultCardSet = new CardSet();
         for (int i = 0; i < pattern.length; i++) {
             resultCardSet.setCardByPos(i, pattern[i].equals("-") ? "-" : cardSet.getCardByPos(i));
+            resultCardSet.setNumber(cardSet.getNumber());
         }
         result.add(resultCardSet);
     }
@@ -381,10 +381,12 @@ public class MainPresenterSix extends MainPresenter {
                     case "TR":
                         resultCardSet.setCardByPos(i, pattern[i].equals("-") ? "-" : cardSet.get(j + 3 - i)
                                 .getCardByPos(i));
+                        resultCardSet.setNumber(cardSet.get(j + 3 - i).getNumber());
                         break;
                     case "BR":
                         resultCardSet.setCardByPos(i, pattern[i].equals("-") ? "-" : cardSet.get(j + i)
                                 .getCardByPos(i));
+                        resultCardSet.setNumber(cardSet.get(j + i).getNumber());
                         break;
 
                 }
@@ -393,56 +395,30 @@ public class MainPresenterSix extends MainPresenter {
         }
     }
 
-    private List<CardSet> sortedResult(List<CardSet> result) {
-        Map<String, Integer> groupMap = new HashMap<>();
+    private List<CardSetSix> sortedResult(List<CardSet> result) {
+        Map<String, CardSetSix> groupMap = new HashMap<>();
         for (CardSet cardSet : result) {
-            Integer val;
+            CardSetSix val;
             if ((val = groupMap.get(cardSet.toString())) != null) {
-                groupMap.put(cardSet.toString(), val + 1);
+                val.addGameNumber(Long.valueOf(cardSet.getNumber()));
+                groupMap.put(cardSet.toString(), val);
             } else {
-                groupMap.put(cardSet.toString(), 1);
+                CardSetSix set = new CardSetSix();
+                set.stringToCardSet(cardSet.toString());
+                set.addGameNumber(Long.valueOf(cardSet.getNumber()));
+                groupMap.put(cardSet.toString(), set);
             }
         }
 
-        ValueComparator bvc = new ValueComparator(groupMap);
-        TreeMap<String, Integer> sortedMap = new TreeMap<>(bvc);
-        sortedMap.putAll(groupMap);
+        List<CardSetSix> list = new ArrayList<>(groupMap.values());
+        Collections.sort(list, (e1, e2) -> Integer.compare(e2.getCount(), e1.getCount()));
 
-        List<CardSet> resToOutput = new ArrayList<>();
-
-        if (!sortedMap.isEmpty()) {
-            int maxVal = 0;
-            int i = 0;
-            Object[] array = sortedMap.values().toArray();
-            for (String key : sortedMap.keySet()) {
-                Integer curVal = (Integer) array[i];
-                if (i == 0) {
-                    maxVal = curVal;
-                } else if (maxVal != curVal) {
-                    break;
-                }
-                resToOutput.add(stringToCardSet(key));
-                i++;
+        /*for(int i = 0 ; i < list.size() ; i++) {
+            if(i == 0) {
+                continue;
             }
-            return resToOutput;
-        } else {
-            return resToOutput;
-        }
-    }
-
-    static class ValueComparator implements Comparator<String> {
-        private Map<String, Integer> base;
-
-        public ValueComparator(Map<String, Integer> base) {
-            this.base = base;
-        }
-
-        public int compare(String a, String b) {
-            if (base.get(a) >= base.get(b)) {
-                return -1;
-            } else {
-                return 1;
-            }
-        }
+            list.get(0).getGamesNumber().addAll(list.get(i).getGamesNumber());
+        }*/
+        return list;
     }
 }

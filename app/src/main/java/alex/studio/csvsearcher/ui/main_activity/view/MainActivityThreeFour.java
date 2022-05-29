@@ -33,6 +33,7 @@ import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardMatch;
 import alex.studio.csvsearcher.dto.CardSet;
+import alex.studio.csvsearcher.dto.CardSetSix;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.CardPosition;
 import alex.studio.csvsearcher.enums.Direction;
@@ -184,6 +185,7 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
             case ALGO_3:
                 resultAdapter = new ResultAdapterThree(MainActivityThreeFour.this);
                 recyclerView.setAdapter(resultAdapter);
+                textFour.post(this::initializationData);
                 break;
             case ALGO_4:
                 resultAdapterThreeFour = new ResultAdapterFour(MainActivityThreeFour.this);
@@ -230,6 +232,16 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
         }
 
         initAction();
+    }
+
+    private void initializationData() {
+        presenter.initializationData((List<CardSet> list) -> {
+            CardSet val = list.get(0);
+            textOne.setText(val.getCard1());
+            textTwo.setText(val.getCard2());
+            textThree.setText(val.getCard3());
+            textFour.setText(val.getCard4());
+        });
     }
 
     private void initAction() {
@@ -501,6 +513,11 @@ public class MainActivityThreeFour extends AppCompatActivity implements Main.Vie
 
     @Override
     public void setCardSetListToRecycler(List<CardSet> data) {
+
+    }
+
+    @Override
+    public void setCardSetSixListToRecycler(List<CardSetSix> data) {
 
     }
 

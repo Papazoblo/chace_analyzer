@@ -18,7 +18,8 @@
 
     <dimen name="bigAppNameSize">56sp</dimen>
     <dimen name="appNameTextSize">40sp</dimen>
-    <dimen name="underAppNameTextSize">24sp</dimen>
+    <dimen name="mainUnderAppNameTextSize">24sp</dimen>
+    <dimen name="underAppNameTextSize">18sp</dimen>
     <dimen name="textInBox">12sp</dimen>
     <dimen name="paddingInBox">8dp</dimen>
 </resources>

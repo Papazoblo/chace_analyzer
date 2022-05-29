@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    android:padding="@dimen/smallPadding"
     tools:context=".ui.StartActivity">
 
     <TextView
@@ -28,7 +27,7 @@
         android:gravity="center"
         android:text="@string/select_algorithm"
         android:textColor="@color/green"
-        android:textSize="@dimen/underAppNameTextSize"
+        android:textSize="@dimen/mainUnderAppNameTextSize"
         app:layout_constraintBottom_toTopOf="@id/blockButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -157,7 +156,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/selectCardBlockHeight"
+            android:layout_height="wrap_content"
             android:paddingBottom="@dimen/verySmallPadding">
 
             <TextView
@@ -168,6 +167,7 @@
                 android:background="@drawable/green_radius_bottom_border"
                 android:gravity="center"
                 android:text="@string/setting"
+                android:padding="@dimen/smallPadding"
                 android:textColor="@color/white"
                 android:textSize="@dimen/underAppNameTextSize"
                 app:layout_constraintTop_toBottomOf="@id/blockButton" />
@@ -263,6 +263,26 @@
             app:layout_constraintTop_toBottomOf="@id/centerBlock"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/animationBlock"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        android:visibility="visible"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:id="@+id/animationImage"
+            android:layout_width="@dimen/selectCardBlockHeight"
+            android:layout_height="@dimen/selectCardBlockHeight"
+            android:src="@drawable/chanse_analyzer"
+            android:visibility="visible" />
+    </RelativeLayout>
 
     <include
         android:id="@+id/blockAskExit"

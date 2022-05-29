@@ -39,6 +39,7 @@ import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardMatch;
 import alex.studio.csvsearcher.dto.CardSet;
+import alex.studio.csvsearcher.dto.CardSetSix;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.CardPosition;
 import alex.studio.csvsearcher.enums.Direction;
@@ -750,6 +751,11 @@ public class MainActivityOne extends AppCompatActivity implements Main.View {
 
     @Override
     public void setCardSetListToRecycler(List<CardSet> data) {
+
+    }
+
+    @Override
+    public void setCardSetSixListToRecycler(List<CardSetSix> data) {
 
     }
 

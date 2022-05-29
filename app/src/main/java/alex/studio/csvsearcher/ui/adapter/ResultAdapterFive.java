@@ -47,7 +47,7 @@ public class ResultAdapterFive extends RecyclerView.Adapter<ResultAdapterFive.Re
         adapter.setData(colorMatchMap.get(newPos), cardSetList.get(newPos));
 
         if (!cardSetList.get(newPos).isEmpty()) {
-            h.textDate.setText(cardSetList.get(newPos).get(0).getDateString());
+            h.textDate.setText("");//String.valueOf(cardSetList.get(newPos).get(0).getYear()));
         }
 
     }

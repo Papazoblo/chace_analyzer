@@ -7,6 +7,7 @@ import static alex.studio.csvsearcher.utils.ViewUtils.getTextFrom;
 import static alex.studio.csvsearcher.utils.ViewUtils.isAnyVisible;
 import static alex.studio.csvsearcher.utils.ViewUtils.isEmpty;
 import static alex.studio.csvsearcher.utils.ViewUtils.toGone;
+import static alex.studio.csvsearcher.utils.ViewUtils.toInvisible;
 import static alex.studio.csvsearcher.utils.ViewUtils.toVisible;
 
 import android.app.DatePickerDialog;
@@ -32,6 +33,7 @@ import alex.studio.csvsearcher.R;
 import alex.studio.csvsearcher.dto.CardGroup;
 import alex.studio.csvsearcher.dto.CardMatch;
 import alex.studio.csvsearcher.dto.CardSet;
+import alex.studio.csvsearcher.dto.CardSetSix;
 import alex.studio.csvsearcher.dto.ColorMatch;
 import alex.studio.csvsearcher.enums.Direction;
 import alex.studio.csvsearcher.ui.adapter.CardAdapterSix;
@@ -58,18 +60,21 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
     private View blockCountGames;
     private View blockByDate;
     private View blockWait;
+    private View bottomLine;
+    private View topLine;
 
     private TextView textDateFrom;
     private TextView textDateTo;
     private TextView btnCountGames;
     private TextView btnByDate;
     private TextView textNotMatch;
+    private TextView textAppName;
 
     private EditText editCount1;
 
     private RecyclerView recyclerRow;
     private RecyclerView recyclerView;
-    private ResultAdapterSix resultAdapterFour;
+    private ResultAdapterSix resultAdapterSix;
     private CardAdapterSix cardAdapterSix;
 
     private int colorYellow;
@@ -77,12 +82,12 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
     private int colorBlack;
 
     private Direction curDirection;
-    int yearCur;
-    int monthCur;
-    int dayCur;
-    int yearCurTo;
-    int monthCurTo;
-    int dayCurTo;
+    private int yearCur;
+    private int monthCur;
+    private int dayCur;
+    private int yearCurTo;
+    private int monthCurTo;
+    private int dayCurTo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +129,10 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
         blockCountGames = findViewById(R.id.blockCountGames);
         blockByDate = findViewById(R.id.blockByDate);
         blockWait = findViewById(R.id.blockWait);
+        bottomLine = findViewById(R.id.bottomLine);
+        topLine = findViewById(R.id.topLine);
 
+        textAppName = findViewById(R.id.textAppName);
         textNotMatch = findViewById(R.id.textNotMatch);
         textDateFrom = findViewById(R.id.textDateFrom);
         textDateTo = findViewById(R.id.textDateTo);
@@ -135,8 +143,8 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
         recyclerView = findViewById(R.id.recyclerResult);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        resultAdapterFour = new ResultAdapterSix(MainActivitySix.this);
-        recyclerView.setAdapter(resultAdapterFour);
+        resultAdapterSix = new ResultAdapterSix(MainActivitySix.this);
+        recyclerView.setAdapter(resultAdapterSix);
         recyclerRow = findViewById(R.id.recyclerRow);
         recyclerRow.setLayoutManager(new LinearLayoutManager(this));
         cardAdapterSix = new CardAdapterSix(MainActivitySix.this);
@@ -155,7 +163,8 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
         btnNo.setOnClickListener(v -> toGone(blockAskExit));
 
-        blockAskExit.setOnClickListener(v -> {});
+        blockAskExit.setOnClickListener(v -> {
+        });
 
         btnAddRow.setOnClickListener(v -> cardAdapterSix.addRow());
 
@@ -166,7 +175,7 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
         btnReset.setOnClickListener(v -> clearData());
 
         btnSearch.setOnClickListener(v -> {
-            if(curDirection != null) {
+            if (curDirection != null) {
                 toGone(textNotMatch);
                 presenter.launchSearch();
             }
@@ -195,10 +204,15 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
         unselectArrows((ImageView) btnBottom, (ImageView) btnTop);
 
         if (type == TOP) {
+            toVisible(topLine);
+            toInvisible(bottomLine);
             changeColor((ImageView) btnTop, colorYellow);
         } else {
+            toInvisible(topLine);
+            toVisible(bottomLine);
             changeColor((ImageView) btnBottom, colorYellow);
         }
+        btnSearch.callOnClick();
     }
 
     private void unselectArrows(ImageView... images) {
@@ -348,8 +362,7 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
     public void clearData() {
         toGone(textNotMatch);
-        resultAdapterFour.setData(new ArrayList<>());
-        launchSearch(TOP);
+        resultAdapterSix.setData(new ArrayList<>());
         recyclerView.setBackground(null);
     }
 
@@ -365,13 +378,26 @@ public class MainActivitySix extends AppCompatActivity implements Main.View {
 
     @Override
     public void setCardSetListToRecycler(List<CardSet> data) {
-        resultAdapterFour.setData(data);
+    }
+
+    @Override
+    public void setCardSetSixListToRecycler(List<CardSetSix> data) {
+        resultAdapterSix.setData(data);
         if (data.isEmpty()) {
             toVisible(textNotMatch);
             recyclerView.setBackground(null);
         } else {
             recyclerView.setBackgroundColor(colorBlack);
         }
+        toGoneTextAppName();
+    }
+
+    public void toGoneTextAppName() {
+        toGone(textAppName);
+    }
+
+    public void toVisibleTextAppName() {
+        toVisible(textAppName);
     }
 
     @Override
